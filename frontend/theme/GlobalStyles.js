@@ -89,7 +89,20 @@ const GlobalStyles = createGlobalStyle`
 /* ========== */
 
   button {
+    border-radius: 0.625rem;
+    border: none;
     font-family: "Jost", --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 700;
+    font-size: 0.8125rem;
+    cursor: pointer;
+
+    padding: 0.65625rem 1rem;
+
+    &.purple {
+      color: var(--white);
+      background: #AD1FEA;
+    }
+  
   }
 `;
 
