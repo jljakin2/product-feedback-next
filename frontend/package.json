@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "product-feedback-frontend",
   "private": true,
   "scripts": {
     "dev": "next -p 7777",
@@ -8,12 +8,23 @@
     "test": "NODE_ENV=test jest --watch"
   },
   "dependencies": {
+    "@apollo/client": "^3.5.5",
+    "graphql": "^16.0.1",
     "next": "12.0.4",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
     "eslint": "7.32.0",
     "eslint-config-next": "12.0.4"
-  }
+  },
+  "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "author": "jeff jakinovich",
+  "license": "ISC"
 }
