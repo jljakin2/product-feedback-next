@@ -16,6 +16,7 @@ const HomeStyles = styled.div`
 export default function Home() {
   const products = data?.productRequests;
   const renderedProducts =
+    // if products exist, render them, otherwise render the empty state
     products &&
     products.map((product, index) => (
       <SuggestionCard product={product} key={index} />
