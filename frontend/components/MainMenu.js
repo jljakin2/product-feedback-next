@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
-import Plus from "./Icons/Plus";
+import AddFeedbackBtn from "./Buttons/AddFeedbackBtn";
+import FilterBtn from "./Buttons/FilterBtn";
 
 const MainMenuStyles = styled.div`
   background: var(--darkBlue);
@@ -10,10 +11,11 @@ const MainMenuStyles = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  padding: 1rem 1.5rem;
+  padding: 0.5rem 1.5rem;
 
   div {
     display: flex;
+    align-items: center;
   }
 
   p {
@@ -26,12 +28,9 @@ export default function MainMenu() {
     <MainMenuStyles>
       <div>
         <p>Sort by:</p>
-        <strong>Most Upvotes</strong>
+        <FilterBtn />
       </div>
-      <button className="purple">
-        <Plus />
-        Add Feedback
-      </button>
+      <AddFeedbackBtn />
     </MainMenuStyles>
   );
 }

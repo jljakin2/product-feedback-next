@@ -1,4 +1,4 @@
-export default function EmptyState() {
+export default function EmptyStateIcon() {
   return (
     <svg width="102" height="108" xmlns="http://www.w3.org/2000/svg">
       <g fillRule="nonzero" fill="none" opacity=".5">
