@@ -5,7 +5,7 @@
     "dev": "next -p 7777",
     "build": "next build",
     "start": "next start -p 7777",
-    "test": "NODE_ENV=test jest --watch"
+    "test": "jest"
   },
   "dependencies": {
     "@apollo/client": "^3.5.5",
@@ -17,15 +17,21 @@
   },
   "devDependencies": {
     "@apollo/react-testing": "^4.0.0",
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-react": "^7.16.0",
     "@testing-library/jest-dom": "^5.16.0",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "babel-jest": "^27.4.2",
     "eslint": "7.32.0",
     "eslint-config-next": "12.0.4",
     "jest": "^27.4.3"
   },
   "jest": {
-    "setupFilesAfterEnv": ["./jest.setup.js"]
+    "setupFilesAfterEnv": [
+      "./jest.setup.js"
+    ]
   },
   "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
   "version": "1.0.0",

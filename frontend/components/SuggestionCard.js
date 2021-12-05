@@ -10,10 +10,10 @@ const SuggestionCardStyles = styled.div`
 
   display: grid;
   grid:
-    "main main" 2fr
+    "main main" 3fr
     "upvotes comments" 1fr
     / 1fr 1fr;
-  grid-row-gap: 0.5rem;
+  grid-row-gap: 1rem;
 
   padding: 1.5rem;
   margin-top: 1rem;
@@ -33,12 +33,12 @@ const SuggestionCardStyles = styled.div`
 
   .upvotes {
     grid-area: upvotes;
-    align-self: end;
+    align-self: center;
   }
 
   .comments {
     grid-area: comments;
-    align-self: end;
+    align-self: center;
     justify-self: end;
   }
 

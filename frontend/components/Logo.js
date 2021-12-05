@@ -7,7 +7,6 @@ const LogoStyles = styled.div`
   background-image: url(${backgroundMobile.src});
   background-size: cover;
   background-repeat: no-repeat;
-  /* background: red; */
   color: var(--white);
 
   display: flex;
@@ -23,7 +22,7 @@ const LogoStyles = styled.div`
 
 export default function Logo() {
   return (
-    <LogoStyles>
+    <LogoStyles data-testid="logo">
       <div>
         <h3>Frontend Mentor</h3>
         <p>Feedback Board</p>

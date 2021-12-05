@@ -1,3 +1,5 @@
+import React from "react";
+
 import styled from "styled-components";
 
 import AddFeedbackBtn from "./Buttons/AddFeedbackBtn";
@@ -25,7 +27,7 @@ const MainMenuStyles = styled.div`
 
 export default function MainMenu() {
   return (
-    <MainMenuStyles>
+    <MainMenuStyles data-testid="menu">
       <div>
         <p>Sort by:</p>
         <FilterBtn />
