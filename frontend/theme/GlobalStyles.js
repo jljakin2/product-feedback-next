@@ -104,22 +104,36 @@ const GlobalStyles = createGlobalStyle`
     &.btn {
       border-radius: 0.625rem;
       padding: 0.65625rem 1rem;
+
+      &.full {
+          display: flex;
+          justify-content: center;
+
+          width: 100%;
+        }
       
       &.purple {
         color: var(--white);
         background: var(--purple);
 
-        &.full {
-          width: 100%;
-        }
+        
       }
 
       &.blue {
         color: var(--white);
         background: var(--blue);
       }
+
+      &.cancel {
+        background: var(--darkBlue);
+        color: var(--white);
+      }
     }
   
+  }
+
+  textarea {
+    font-family: "Jost", --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 `;
 

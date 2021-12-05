@@ -2,7 +2,7 @@ import Head from "next/head";
 import styled from "styled-components";
 
 import GoBackBtn from "../components/Buttons/GoBackBtn";
-import EditFeedbackBtn from "../components/Buttons/EditFeedbackBtn";
+import CreateNewSuggestion from "../components/CreateNewSuggestion";
 
 const PageStyles = styled.div`
   padding: 1.5rem 1.5rem;
@@ -20,7 +20,9 @@ export default function CreatePage() {
         <GoBackBtn />
       </header>
 
-      <main>create new</main>
+      <main>
+        <CreateNewSuggestion />
+      </main>
     </PageStyles>
   );
 }
