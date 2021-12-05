@@ -24,7 +24,7 @@ export default function Home() {
   return (
     <HomeStyles>
       <Head>
-        <title>Product Feedback</title>
+        <title>Product Feedback | Home</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

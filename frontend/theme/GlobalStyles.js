@@ -90,9 +90,13 @@ const GlobalStyles = createGlobalStyle`
 /* ========== */
 
   button {
+    background: transparent;
     border: none;
     font-family: "Jost", --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     
+    display: flex;
+    align-items: center;
+
     font-weight: 700;
     font-size: 0.8125rem;
     cursor: pointer;
@@ -103,7 +107,16 @@ const GlobalStyles = createGlobalStyle`
       
       &.purple {
         color: var(--white);
-        background: #AD1FEA;
+        background: var(--purple);
+
+        &.full {
+          width: 100%;
+        }
+      }
+
+      &.blue {
+        color: var(--white);
+        background: var(--blue);
       }
     }
   
