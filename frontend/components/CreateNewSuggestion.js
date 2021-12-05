@@ -1,14 +1,6 @@
-import styled from "styled-components";
 import AddFeedbackBtn from "./Buttons/AddFeedbackBtn";
 import CancelBtn from "./Buttons/CancelBtn";
-
-const FormStyles = styled.form`
-  background: var(--white);
-  border-radius: 0.625rem;
-
-  margin-top: 3.5rem;
-  padding: 2.75rem 1.5rem 1.5rem 1.5rem;
-`;
+import FormStyles from "./styles/FormStyles";
 
 export default function CreateNewSuggestion() {
   // TODO: change disabled fieldset attribute to equal loading state
@@ -19,13 +11,13 @@ export default function CreateNewSuggestion() {
         <div className="form-control">
           <label htmlFor="title">Feedback Title</label>
           <small>Add a short, descriptive headline</small>
-          <input type="text" />
+          <input type="text" className="input" />
         </div>
 
         <div className="form-control">
           <label htmlFor="category">Category</label>
           <small>Choose a category for your feedback</small>
-          <select>
+          <select className="input">
             <option value="feature">Feature</option>
             <option value="UI">UI</option>
             <option value="UX">UX</option>
@@ -40,7 +32,13 @@ export default function CreateNewSuggestion() {
             Include any specific comments on what should be improved, added,
             etc.
           </small>
-          <textarea id="details" />
+          <textarea
+            id="details"
+            className="input"
+            name="details"
+            rows="4"
+            cols="50"
+          />
         </div>
       </fieldset>
       <div>

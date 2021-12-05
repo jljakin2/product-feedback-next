@@ -1,8 +1,29 @@
+import Head from "next/head";
+import styled from "styled-components";
 import { useRouter } from "next/router";
 
-export default function IssueEditPage() {
+import GoBackBtn from "../../components/Buttons/GoBackBtn";
+
+const PageStyles = styled.div`
+  padding: 1.5rem 1.5rem;
+`;
+
+export default function CreatePage() {
   const router = useRouter();
   const { id } = router.query;
 
-  return <p>specific issue edit page: {id}</p>;
+  return (
+    <PageStyles>
+      <Head>
+        <title>Product Feedback | Edit Suggestion</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <header>
+        <GoBackBtn />
+      </header>
+
+      <main>edit</main>
+    </PageStyles>
+  );
 }
