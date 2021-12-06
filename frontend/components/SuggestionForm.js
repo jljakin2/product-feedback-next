@@ -1,8 +1,10 @@
 import AddFeedbackBtn from "./Buttons/AddFeedbackBtn";
 import CancelBtn from "./Buttons/CancelBtn";
+import DeleteBtn from "./Buttons/DeleteBtn";
+
 import FormStyles from "./styles/FormStyles";
 
-export default function CreateNewSuggestion() {
+export default function SuggestionForm({ edit }) {
   // TODO: change disabled fieldset attribute to equal loading state
   return (
     <FormStyles>
@@ -26,6 +28,18 @@ export default function CreateNewSuggestion() {
           </select>
         </div>
 
+        {edit && (
+          <div className="form-control">
+            <label htmlFor="status">Status</label>
+            <small>Change feature state</small>
+            <select className="input">
+              <option value="planned">Planned</option>
+              <option value="in-progress">In-Progress</option>
+              <option value="live">Live</option>
+            </select>
+          </div>
+        )}
+
         <div className="form-control">
           <label htmlFor="details">Feedback Detail</label>
           <small>
@@ -36,7 +50,7 @@ export default function CreateNewSuggestion() {
             id="details"
             className="input"
             name="details"
-            rows="4"
+            rows="6"
             cols="50"
           />
         </div>
@@ -44,7 +58,12 @@ export default function CreateNewSuggestion() {
       <div>
         <AddFeedbackBtn full />
         <CancelBtn />
+        {edit && <DeleteBtn />}
       </div>
     </FormStyles>
   );
 }
+
+SuggestionForm.defaultProps = {
+  edit: false,
+};

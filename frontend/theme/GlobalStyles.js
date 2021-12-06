@@ -12,9 +12,9 @@ const GlobalStyles = createGlobalStyle`
     --lightgrey: #F7F8FD;
     --orange: #F49F85;
     --text: #3a4374;
+    --delete: #D73737;
 
     --bs: 0 0.625rem 2.5rem -0.4375rem rgba(55,63,104,0.35);
-    --innerPad: 0 1.5rem;
   }
   
   html {
@@ -115,8 +115,6 @@ const GlobalStyles = createGlobalStyle`
       &.purple {
         color: var(--white);
         background: var(--purple);
-
-        
       }
 
       &.blue {
@@ -126,6 +124,11 @@ const GlobalStyles = createGlobalStyle`
 
       &.cancel {
         background: var(--darkBlue);
+        color: var(--white);
+      }
+
+      &.delete {
+        background: var(--delete);
         color: var(--white);
       }
     }

@@ -1,3 +1,14 @@
+import { useRouter } from "next/router";
+
 export default function CancelBtn() {
-  return <button className="btn full cancel">Cancel</button>;
+  const router = useRouter();
+
+  return (
+    <button
+      className="btn full cancel"
+      type="button"
+      onClick={() => router.back()}>
+      Cancel
+    </button>
+  );
 }

@@ -1,8 +1,9 @@
 import Head from "next/head";
 import styled from "styled-components";
+import Link from "next/link";
 
 import GoBackBtn from "../components/Buttons/GoBackBtn";
-import CreateNewSuggestion from "../components/CreateNewSuggestion";
+import SuggestionForm from "../components/SuggestionForm";
 
 const PageStyles = styled.div`
   padding: 1.5rem 1.5rem;
@@ -21,7 +22,7 @@ export default function CreatePage() {
       </header>
 
       <main>
-        <CreateNewSuggestion />
+        <SuggestionForm />
       </main>
     </PageStyles>
   );

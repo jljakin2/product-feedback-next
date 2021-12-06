@@ -1,17 +1,22 @@
+import Link from "next/link";
 import PropTypes from "prop-types";
 import Plus from "../Icons/Plus";
 
-export default function AddFeedbackBtn({ full }) {
+// using submit prop to eventually use multiple onSubmit functions conditionally
+export default function AddFeedbackBtn({ full, submit }) {
   return (
-    <button className={`btn purple ${full && "full"}`}>
-      <Plus />
-      Add Feedback
-    </button>
+    <Link href="/create" passHref>
+      <button className={`btn purple ${full && "full"}`}>
+        <Plus />
+        Add Feedback
+      </button>
+    </Link>
   );
 }
 
 AddFeedbackBtn.defaultProps = {
   full: false,
+  submit: false,
 };
 
 AddFeedbackBtn.prototypes = {

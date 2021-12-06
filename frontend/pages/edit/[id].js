@@ -2,6 +2,7 @@ import Head from "next/head";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 
+import SuggestionForm from "../../components/SuggestionForm";
 import GoBackBtn from "../../components/Buttons/GoBackBtn";
 
 const PageStyles = styled.div`
@@ -23,7 +24,9 @@ export default function CreatePage() {
         <GoBackBtn />
       </header>
 
-      <main>edit</main>
+      <main>
+        <SuggestionForm edit />
+      </main>
     </PageStyles>
   );
 }
