@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import UpVoteBtn from "./Buttons/UpVoteBtn";
+import PropTypes from "prop-types";
 
+import UpVoteBtn from "./Buttons/UpVoteBtn";
 import Tag from "./Tag";
 import CommentsBtn from "./Buttons/CommentsBtn";
 import capitalize from "../lib/capitalize";
@@ -84,12 +85,16 @@ export default function SuggestionCard({ product, roadmap, statusView }) {
       roadmap={roadmap}
       statusView={statusView}
       colors={colors}>
-      <div className="top-border" />
+      {roadmap && <div className="top-border" />}
+
       <div className="main">
-        <div className="status-container">
-          <div className="dot" />
-          <p className="body-2">{capitalize(product.status)}</p>
-        </div>
+        {roadmap && (
+          <div className="status-container">
+            <div className="dot" />
+            <p className="body-2">{capitalize(product.status)}</p>
+          </div>
+        )}
+
         <h4>{product.title}</h4>
         <p className="body-1">{product.description}</p>
         <Tag category={product.category} />
@@ -105,3 +110,14 @@ export default function SuggestionCard({ product, roadmap, statusView }) {
     </SuggestionCardStyles>
   );
 }
+
+SuggestionCard.defaultProps = {
+  roadmap: false,
+  statusView: "",
+};
+
+SuggestionCard.propTypes = {
+  product: PropTypes.object,
+  roadmap: PropTypes.bool,
+  statusView: PropTypes.string,
+};

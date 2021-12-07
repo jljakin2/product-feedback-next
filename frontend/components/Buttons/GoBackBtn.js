@@ -6,6 +6,7 @@ import ArrowLeft from "../Icons/ArrowLeft";
 
 const BtnStyles = styled.button`
   p {
+    color: ${({ light }) => (light ? "var(--white)" : "var(--text)")};
     margin-left: 1rem;
   }
 `;
@@ -14,11 +15,9 @@ export default function GoBackBtn({ light }) {
   const router = useRouter();
 
   return (
-    <BtnStyles onClick={() => router.back()}>
+    <BtnStyles onClick={() => router.back()} light={light}>
       <ArrowLeft light={light} />
-      <p className="body-3" style={light && { color: "var(--white)" }}>
-        Go Back
-      </p>
+      <p className="body-3">Go Back</p>
     </BtnStyles>
   );
 }

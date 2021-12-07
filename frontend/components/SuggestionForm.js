@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import AddFeedbackBtn from "./Buttons/AddFeedbackBtn";
 import CancelBtn from "./Buttons/CancelBtn";
 import DeleteBtn from "./Buttons/DeleteBtn";
@@ -66,4 +68,8 @@ export default function SuggestionForm({ edit }) {
 
 SuggestionForm.defaultProps = {
   edit: false,
+};
+
+SuggestionForm.propTypes = {
+  edit: PropTypes.bool,
 };

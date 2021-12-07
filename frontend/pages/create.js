@@ -1,6 +1,5 @@
 import Head from "next/head";
 import styled from "styled-components";
-import Link from "next/link";
 
 import GoBackBtn from "../components/Buttons/GoBackBtn";
 import SuggestionForm from "../components/SuggestionForm";
