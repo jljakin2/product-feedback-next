@@ -3,12 +3,15 @@ import UpVoteBtn from "./Buttons/UpVoteBtn";
 
 import Tag from "./Tag";
 import CommentsBtn from "./Buttons/CommentsBtn";
+import capitalize from "../lib/capitalize";
 
 const SuggestionCardStyles = styled.div`
   background: var(--white);
   border-radius: 0.625rem;
+  overflow: hidden;
 
   display: grid;
+  position: relative;
   grid:
     "main main" 3fr
     "upvotes comments" 1fr
@@ -18,6 +21,16 @@ const SuggestionCardStyles = styled.div`
   padding: 1.5rem;
   margin-top: 1rem;
   width: 100%;
+
+  .top-border {
+    background: ${({ statusView, colors }) => `${colors[statusView]}`};
+
+    position: absolute;
+    top: 0;
+
+    width: 100%;
+    height: 0.375rem;
+  }
 
   h4 {
     margin-bottom: 1rem;
@@ -42,19 +55,41 @@ const SuggestionCardStyles = styled.div`
     justify-self: end;
   }
 
-  /* .footer {
+  .status-container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
 
-    margin-top: 1rem;
-  } */
+    margin-bottom: 1rem;
+  }
+
+  .dot {
+    background: ${({ statusView, colors }) => `${colors[statusView]}`};
+    border-radius: 50%;
+
+    margin-right: 0.5rem;
+    width: 0.5rem;
+    height: 0.5rem;
+  }
 `;
 
-export default function SuggestionCard({ product }) {
+export default function SuggestionCard({ product, roadmap, statusView }) {
+  const colors = {
+    planned: "var(--orange)",
+    inProgress: "var(--purple)",
+    live: "var(--lightBlue)",
+  };
+
   return (
-    <SuggestionCardStyles>
+    <SuggestionCardStyles
+      roadmap={roadmap}
+      statusView={statusView}
+      colors={colors}>
+      <div className="top-border" />
       <div className="main">
+        <div className="status-container">
+          <div className="dot" />
+          <p className="body-2">{capitalize(product.status)}</p>
+        </div>
         <h4>{product.title}</h4>
         <p className="body-1">{product.description}</p>
         <Tag category={product.category} />
