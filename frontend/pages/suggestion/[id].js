@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 import GoBackBtn from "../../components/Buttons/GoBackBtn";
 import EditFeedbackBtn from "../../components/Buttons/EditFeedbackBtn";
-import Comments from "../../components/Comments";
+import CommentsContainer from "../../components/Comments/CommentsContainer";
 
 import data from "../../lib/data.json";
 import SuggestionCard from "../../components/SuggestionCard";
@@ -42,7 +42,7 @@ export default function SuggestionPage() {
 
       <main>
         {product && <SuggestionCard product={product} />}
-        {product && <Comments comments={product.comments} />}
+        {product && <CommentsContainer comments={product.comments} />}
       </main>
     </PageStyles>
   );
