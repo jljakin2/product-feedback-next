@@ -49,7 +49,11 @@ const FormStyles = styled.form`
   textarea {
     resize: none;
 
-    margin-bottom: 2.5rem;
+    padding: 1.5rem;
+  }
+
+  .button-container {
+    margin-top: 2.5rem;
   }
 
   button:not(:last-child) {

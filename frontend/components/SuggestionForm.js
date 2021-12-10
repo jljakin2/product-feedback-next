@@ -57,7 +57,7 @@ export default function SuggestionForm({ edit }) {
           />
         </div>
       </fieldset>
-      <div>
+      <div className="button-container">
         <AddFeedbackBtn full />
         <CancelBtn />
         {edit && <DeleteBtn />}

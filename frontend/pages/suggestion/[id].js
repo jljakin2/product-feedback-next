@@ -8,6 +8,7 @@ import CommentsContainer from "../../components/Comments/CommentsContainer";
 
 import data from "../../lib/data.json";
 import SuggestionCard from "../../components/SuggestionCard";
+import AddCommentForm from "../../components/Comments/AddCommentForm";
 
 const PageStyles = styled.div`
   padding: 1.5rem 1.5rem;
@@ -41,8 +42,10 @@ export default function SuggestionPage() {
       </header>
 
       <main>
+        {/* TODO: do we need the "product" conditional? */}
         {product && <SuggestionCard product={product} />}
         {product && <CommentsContainer comments={product.comments} />}
+        {product && <AddCommentForm />}
       </main>
     </PageStyles>
   );

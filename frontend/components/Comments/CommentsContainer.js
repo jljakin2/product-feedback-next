@@ -6,7 +6,7 @@ const CommentsContainerStyles = styled.div`
   background: var(--white);
   border-radius: 0.625rem;
 
-  margin-top: 1.5rem;
+  margin: 1.5rem 0 -1.5rem 0;
   padding: 1.5rem;
 `;
 
