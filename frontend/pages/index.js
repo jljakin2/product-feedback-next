@@ -45,6 +45,7 @@ export default function Home() {
     products.map((product, index) => (
       <SuggestionCard product={product} key={index} />
     ));
+
   return (
     <HomeStyles>
       <Head>
@@ -54,12 +55,12 @@ export default function Home() {
 
       <header>
         <Logo />
-        <div className="mobile-menu">
+        {/* <div className="mobile-menu">
           <div className="tags">
             <FilterTags />
           </div>
           <RoadmapMenu />
-        </div>
+        </div> */}
         <MainMenu />
       </header>
 
