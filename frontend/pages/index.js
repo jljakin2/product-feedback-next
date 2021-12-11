@@ -6,10 +6,34 @@ import styled from "styled-components";
 
 import data from "../lib/data.json";
 import EmptyState from "../components/EmptyState";
+import FilterTags from "../components/FilterTags";
+import RoadmapMenu from "../components/RoadmapMenu";
 
 const HomeStyles = styled.div`
+  header {
+    position: relative;
+  }
+
   main {
     padding: 1rem 1.5rem;
+  }
+
+  .mobile-menu {
+    background: var(--grey);
+
+    position: absolute;
+    top: 4.6rem;
+    right: 0;
+
+    width: 65vw;
+    height: 100vh;
+    padding: 1.5rem;
+
+    z-index: 1000;
+
+    & .tags {
+      margin-bottom: 1.5rem;
+    }
   }
 `;
 
@@ -30,6 +54,12 @@ export default function Home() {
 
       <header>
         <Logo />
+        <div className="mobile-menu">
+          <div className="tags">
+            <FilterTags />
+          </div>
+          <RoadmapMenu />
+        </div>
         <MainMenu />
       </header>
 

@@ -27,6 +27,7 @@ export default function Logo() {
         <h3>Frontend Mentor</h3>
         <p>Feedback Board</p>
       </div>
+
       <Hamburger />
     </LogoStyles>
   );

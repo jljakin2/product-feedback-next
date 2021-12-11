@@ -6,6 +6,7 @@ import SuggestionCard from "../components/SuggestionCard";
 import GoBackBtn from "../components/Buttons/GoBackBtn";
 import AddFeedbackBtn from "../components/Buttons/AddFeedbackBtn";
 
+import roadmapColors from "../lib/roadmapColors";
 import data from "../lib/data.json";
 
 const RoadMapStyles = styled.div`

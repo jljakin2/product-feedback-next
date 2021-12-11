@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import capitalize from "../lib/capitalize";
@@ -20,3 +21,11 @@ const Tag = ({ category }) => {
 };
 
 export default Tag;
+
+Tag.defaultProps = {
+  category: "",
+};
+
+Tag.propTypes = {
+  category: PropTypes.string,
+};

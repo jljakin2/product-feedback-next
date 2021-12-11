@@ -4,7 +4,10 @@ import PropTypes from "prop-types";
 import UpVoteBtn from "./Buttons/UpVoteBtn";
 import Tag from "./Tag";
 import CommentsBtn from "./Buttons/CommentsBtn";
+import Dot from "./Dot";
+
 import capitalize from "../lib/capitalize";
+import roadmapColors from "../lib/roadmapColors";
 
 const SuggestionCardStyles = styled.div`
   background: var(--white);
@@ -61,36 +64,25 @@ const SuggestionCardStyles = styled.div`
     align-items: center;
 
     margin-bottom: 1rem;
-  }
 
-  .dot {
-    background: ${({ statusView, colors }) => `${colors[statusView]}`};
-    border-radius: 50%;
-
-    margin-right: 0.5rem;
-    width: 0.5rem;
-    height: 0.5rem;
+    & p {
+      margin-left: 0.5rem;
+    }
   }
 `;
 
 export default function SuggestionCard({ product, roadmap, statusView }) {
-  const colors = {
-    planned: "var(--orange)",
-    inProgress: "var(--purple)",
-    live: "var(--lightBlue)",
-  };
-
   return (
     <SuggestionCardStyles
       roadmap={roadmap}
       statusView={statusView}
-      colors={colors}>
+      colors={roadmapColors}>
       {roadmap && <div className="top-border" />}
 
       <div className="main">
         {roadmap && (
           <div className="status-container">
-            <div className="dot" />
+            <Dot statusView={statusView} />
             <p className="body-2">{capitalize(product.status)}</p>
           </div>
         )}
