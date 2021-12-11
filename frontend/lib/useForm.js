@@ -5,7 +5,7 @@ export default function useForm(initial = {}) {
   const [inputs, setInputs] = useState(initial);
 
   function handleChange(e) {
-    let { value, name, type } = e.target;
+    let { value, name } = e.target;
 
     setInputs({
       // copy existing state
@@ -16,9 +16,15 @@ export default function useForm(initial = {}) {
     });
   }
 
+  // reset the form. we will use this after the form is submitted
+  function resetForm() {
+    setInputs(initial);
+  }
+
   // return the things we want to surface from this custom hook
   return {
     inputs,
     handleChange,
+    resetForm,
   };
 }
