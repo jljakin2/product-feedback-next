@@ -9,10 +9,14 @@ const adapterConfig = {
   mongoUri: process.env.DATABASE_URL,
 };
 
+const SuggestionSchema = require("./lists/Suggestion");
+
 const keystone = new Keystone({
   adapter: new Adapter(adapterConfig),
   cookieSecret: process.env.COOKIE_SECRET,
 });
+
+keystone.createList("Suggestion", SuggestionSchema);
 
 module.exports = {
   keystone,
