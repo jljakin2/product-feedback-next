@@ -1,10 +1,11 @@
 import Head from "next/head";
+
 import Logo from "../components/Logo";
 import MainMenu from "../components/MainMenu";
 import SuggestionCard from "../components/SuggestionCard";
 import styled from "styled-components";
+import useSuggestions from "../lib/hooks/useSuggestions";
 
-import data from "../lib/data.json";
 import EmptyState from "../components/EmptyState";
 import FilterTags from "../components/FilterTags";
 import RoadmapMenu from "../components/RoadmapMenu";
@@ -38,12 +39,16 @@ const HomeStyles = styled.div`
 `;
 
 export default function Home() {
-  const products = data?.productRequests;
+  const { data, error, loading } = useSuggestions();
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Oops, something went wrong {error.message}</p>;
+
+  const products = data?.allSuggestions;
   const renderedProducts =
-    // if products exist, render them, otherwise render the empty state
     products &&
-    products.map((product, index) => (
-      <SuggestionCard product={product} key={index} />
+    products.map(product => (
+      <SuggestionCard product={product} key={product.id} />
     ));
 
   return (
@@ -63,7 +68,7 @@ export default function Home() {
         </div> */}
         <MainMenu />
       </header>
-
+      {/* // if products exist, render them, otherwise render the empty state */}
       <main>{products ? renderedProducts : <EmptyState />}</main>
     </HomeStyles>
   );

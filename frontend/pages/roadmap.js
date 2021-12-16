@@ -5,6 +5,7 @@ import styled from "styled-components";
 import SuggestionCard from "../components/SuggestionCard";
 import GoBackBtn from "../components/Buttons/GoBackBtn";
 import AddFeedbackBtn from "../components/Buttons/AddFeedbackBtn";
+import useSuggestions from "../lib/hooks/useSuggestions";
 
 import roadmapColors from "../lib/roadmapColors";
 import data from "../lib/data.json";
@@ -75,7 +76,16 @@ export default function Home() {
   };
 
   // TODO: change the connection to the data file to graphql useQuery
-  const products = data?.productRequests;
+  const { data, loading, error } = useSuggestions();
+
+  {
+    loading && <p>Loading...</p>;
+  }
+  {
+    error && <p>something went wrong...{error.message}</p>;
+  }
+
+  const products = data?.allSuggestions;
   const renderedProducts =
     // if products exist, render them, otherwise render the empty state
     products &&

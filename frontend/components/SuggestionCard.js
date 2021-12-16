@@ -94,9 +94,11 @@ export default function SuggestionCard({ product, roadmap, statusView }) {
       <div className="upvotes">
         <UpVoteBtn votes={product.upvotes} />
       </div>
+
       <div className="comments">
         <CommentsBtn
           numOfComments={product.comments ? product.comments.length : 0} // check if comments exist, if not, hard code 0
+          id={product.id}
         />
       </div>
     </SuggestionCardStyles>

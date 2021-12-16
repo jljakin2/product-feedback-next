@@ -1,6 +1,6 @@
-// import NProgress from "nprogress";
-import Router from "next/router";
+// import Router from "next/router";
 import { ApolloProvider } from "@apollo/client";
+import apolloClient from "../lib/apollo";
 import Page from "../components/Page";
 
 // import "../components/styles/nprogress.css";
@@ -11,13 +11,13 @@ import Page from "../components/Page";
 // Router.events.on("routeChangeError", () => NProgress.done());
 
 // This _app file is what will be used for the layout template for all of the other pages. The content for what goes in the template comes from the Page component
-function MyApp({ Component, pageProps, apollo }) {
+function MyApp({ Component, pageProps }) {
   return (
-    // <ApolloProvider client={apollo}>
-    <Page>
-      <Component {...pageProps} />
-    </Page>
-    // </ApolloProvider>
+    <ApolloProvider client={apolloClient}>
+      <Page>
+        <Component {...pageProps} />
+      </Page>
+    </ApolloProvider>
   );
 }
 

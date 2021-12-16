@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import Link from "next/link";
+
 import CommentsIcon from "../Icons/CommentsIcon";
 
 const BtnStyles = styled.button`
@@ -12,11 +14,13 @@ const BtnStyles = styled.button`
   }
 `;
 
-export default function CommentsBtn({ numOfComments }) {
+export default function CommentsBtn({ numOfComments, id }) {
   return (
-    <BtnStyles>
-      <CommentsIcon />
-      <p>{numOfComments}</p>
-    </BtnStyles>
+    <Link href={`/suggestion/${id}`} passHref>
+      <BtnStyles>
+        <CommentsIcon />
+        <p>{numOfComments}</p>
+      </BtnStyles>
+    </Link>
   );
 }
