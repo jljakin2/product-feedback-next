@@ -1,6 +1,6 @@
 const { Text, Select, Integer, Relationship } = require("@keystonejs/fields");
 
-const postFields = {
+const suggestionFields = {
   fields: {
     title: {
       type: Text,
@@ -8,7 +8,11 @@ const postFields = {
     },
     category: {
       type: Select,
-      options: [{ value: "published", label: "Published" }],
+      options: [
+        { value: "enhancement", label: "Enhancement" },
+        { value: "feature", label: "Feature" },
+        { value: "bug", label: "Bug" },
+      ],
       defaultView: "published",
     },
     upvotes: {
@@ -16,17 +20,25 @@ const postFields = {
     },
     status: {
       type: Select,
-      options: [{ value: "published", label: "Published" }],
-      defaultView: "published",
+      options: [
+        { value: "suggestion", label: "Suggestion" },
+        { value: "planned", label: "Planned" },
+        { value: "inProgress", label: "In-Progress" },
+        { value: "published", label: "Published" },
+        { value: "live", label: "Live" },
+      ],
+      defaultView: "suggestion",
     },
     description: {
       type: Text,
       isMultiline: true,
     },
     comments: {
-      type: Text,
+      type: Relationship,
+      ref: "Comment",
+      many: true,
     },
   },
 };
 
-module.exports = postFields;
+module.exports = suggestionFields;
