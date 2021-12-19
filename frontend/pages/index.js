@@ -7,7 +7,7 @@ import styled from "styled-components";
 import useSuggestions from "../lib/hooks/useSuggestions";
 
 import EmptyState from "../components/EmptyState";
-import FilterTags from "../components/FilterTags";
+import TagMenu from "../components/TagMenu";
 import RoadmapMenu from "../components/RoadmapMenu";
 import { useMobileMenu } from "../lib/mobileMenuState";
 import { useEffect } from "react";
@@ -69,15 +69,15 @@ export default function Home() {
   const renderedProducts =
     products &&
     products.map(product => (
-      <SuggestionCard product={product} key={product.id} />
+      <SuggestionCard product={product} key={product.id} id={product.id} />
     ));
   const mobileMenu = menuIsOpen && (
     <div className="black-out">
       <div className="mobile-menu">
         <div className="tags">
-          <FilterTags />
+          <TagMenu productRequests={products} />
         </div>
-        <RoadmapMenu />
+        <RoadmapMenu productRequests={products} />
       </div>
     </div>
   );

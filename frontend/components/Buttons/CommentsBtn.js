@@ -10,6 +10,7 @@ const BtnStyles = styled.button`
   align-items: center;
 
   p {
+    opacity: ${({ numOfComments }) => (numOfComments === 0 ? "0.5" : "1")};
     margin-left: 0.5rem;
   }
 `;
@@ -17,7 +18,7 @@ const BtnStyles = styled.button`
 export default function CommentsBtn({ numOfComments, id }) {
   return (
     <Link href={`/suggestion/${id}`} passHref>
-      <BtnStyles>
+      <BtnStyles numOfComments={numOfComments}>
         <CommentsIcon />
         <p>{numOfComments}</p>
       </BtnStyles>

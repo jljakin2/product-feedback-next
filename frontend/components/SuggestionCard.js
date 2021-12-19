@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import Link from "next/link";
 
 import UpVoteBtn from "./Buttons/UpVoteBtn";
 import Tag from "./Tag";
@@ -12,6 +13,7 @@ import roadmapColors from "../lib/roadmapColors";
 const SuggestionCardStyles = styled.div`
   background: var(--white);
   border-radius: 0.625rem;
+  cursor: pointer;
   overflow: hidden;
 
   display: grid;
@@ -25,6 +27,10 @@ const SuggestionCardStyles = styled.div`
   padding: 1.5rem;
   margin-top: 1rem;
   width: 100%;
+
+  &:hover h4 {
+    color: var(--blue);
+  }
 
   .top-border {
     background: ${({ statusView, colors }) => `${colors[statusView]}`};
@@ -70,8 +76,10 @@ const SuggestionCardStyles = styled.div`
     }
   }
 `;
-
-export default function SuggestionCard({ product, roadmap, statusView }) {
+{
+  /* <Link href={`/suggestion/${id}`} passHref></Link> */
+}
+export default function SuggestionCard({ product, roadmap, statusView, id }) {
   return (
     <SuggestionCardStyles
       roadmap={roadmap}

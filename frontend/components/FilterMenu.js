@@ -30,6 +30,10 @@ const FilterMenuStyles = styled.div`
     &:not(:last-child) {
       border-bottom: 1px solid var(--grey);
     }
+
+    & p:hover {
+      color: var(--purple);
+    }
   }
 `;
 

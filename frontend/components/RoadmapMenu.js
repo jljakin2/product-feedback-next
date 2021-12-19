@@ -6,6 +6,7 @@ import Dot from "./Dot";
 import capitalize from "../lib/capitalize";
 import roadmapColors from "../lib/roadmapColors";
 import data from "../lib/data.json";
+import useSuggestions from "../lib/hooks/useSuggestions";
 
 const RoadmapMenuStyles = styled.div`
   background: var(--white);
@@ -47,13 +48,14 @@ const RoadmapMenuStyles = styled.div`
     font-weight: 600;
     text-decoration: underline;
     cursor: pointer;
+
+    &:hover {
+      color: var(--lightBlue);
+    }
   }
 `;
 
-export default function RoadmapMenu() {
-  // TODO: replace data from json file with data from database. useQuery()
-  const { productRequests } = data;
-
+export default function RoadmapMenu({ productRequests }) {
   function getNumOfStatus(products, status) {
     // take all products and find the total number of suggestions that match the given status
     return products.filter(product => product.status === status).length;

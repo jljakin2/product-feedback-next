@@ -18,12 +18,25 @@ const BtnStyles = styled.button`
   width: fit-content;
   padding: 0.5rem 1rem;
 
+  &:hover {
+    background: var(--greyBlueLight2);
+  }
+
+  &.active {
+    background: var(--purple);
+    color: var(--white);
+  }
+
   p {
     margin-left: 0.5rem;
   }
 `;
 
 export default function UpVoteBtn({ votes }) {
+  /**
+   * !TODO: add logic to add "active" class to button when the user has already clicked on the upvote button.
+   * will probably just need to keep track of the upvotes in the user config file as an array or something like that
+   */
   return (
     <BtnStyles>
       <ArrowUp />
