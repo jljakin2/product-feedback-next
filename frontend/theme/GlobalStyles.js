@@ -31,6 +31,7 @@ const GlobalStyles = createGlobalStyle`
   } 
 
   body {
+    overflow: ${({ menuIsOpen }) => (menuIsOpen ? "hidden" : "visible")};
     background: var(--lightgrey);
     color: var(--text);
     font-family: "Jost", --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;

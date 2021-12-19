@@ -12,8 +12,13 @@ function MobileMenuStateProvider({ children }) {
     setMenuIsOpen(!menuIsOpen);
   }
 
+  function closeMobileMenu() {
+    setMenuIsOpen(false);
+  }
+
   return (
-    <LocalStateProvider value={{ menuIsOpen, toggleMobileMenu }}>
+    <LocalStateProvider
+      value={{ menuIsOpen, toggleMobileMenu, closeMobileMenu }}>
       {children}
     </LocalStateProvider>
   );

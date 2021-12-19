@@ -14,8 +14,11 @@ const LogoStyles = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 
   padding: 1rem 1.5rem;
+
+  z-index: 1000;
 
   h3 {
     margin-bottom: 0.25rem;

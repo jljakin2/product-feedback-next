@@ -10,6 +10,7 @@ import EmptyState from "../components/EmptyState";
 import FilterTags from "../components/FilterTags";
 import RoadmapMenu from "../components/RoadmapMenu";
 import { useMobileMenu } from "../lib/mobileMenuState";
+import { useEffect } from "react";
 
 const HomeStyles = styled.div`
   header {
@@ -20,12 +21,23 @@ const HomeStyles = styled.div`
     padding: 1rem 1.5rem;
   }
 
-  .mobile-menu {
-    background: var(--grey);
+  .black-out {
+    background: rgba(0, 0, 0, 0.5);
 
+    display: flex;
+    justify-content: flex-end;
     position: absolute;
     top: 4.6rem;
     right: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    z-index: 100;
+  }
+
+  .mobile-menu {
+    background: var(--grey);
 
     width: 65vw;
     height: 100vh;
@@ -40,7 +52,14 @@ const HomeStyles = styled.div`
 `;
 
 export default function Home() {
-  const { menuIsOpen, toggleMobileMenu } = useMobileMenu();
+  const { menuIsOpen, closeMobileMenu } = useMobileMenu();
+
+  useEffect(() => {
+    return function cleanup() {
+      closeMobileMenu();
+    };
+  }, []);
+
   const { data, error, loading } = useSuggestions();
 
   if (loading) return <p>Loading...</p>;
@@ -53,11 +72,13 @@ export default function Home() {
       <SuggestionCard product={product} key={product.id} />
     ));
   const mobileMenu = menuIsOpen && (
-    <div className="mobile-menu">
-      <div className="tags">
-        <FilterTags />
+    <div className="black-out">
+      <div className="mobile-menu">
+        <div className="tags">
+          <FilterTags />
+        </div>
+        <RoadmapMenu />
       </div>
-      <RoadmapMenu />
     </div>
   );
 
