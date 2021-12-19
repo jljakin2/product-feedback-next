@@ -17,7 +17,7 @@ export default function Reply({ reply }) {
     <ReplyStyles>
       <CommentHeader comment={reply} />
       <p className="body-2">
-        <span>{`@${reply.replyingTo} `}</span>
+        <span>{`@${reply.replyingTo.username} `}</span>
         {reply.content}
       </p>
     </ReplyStyles>

@@ -9,6 +9,7 @@ import useSuggestions from "../lib/hooks/useSuggestions";
 import EmptyState from "../components/EmptyState";
 import FilterTags from "../components/FilterTags";
 import RoadmapMenu from "../components/RoadmapMenu";
+import { useMobileMenu } from "../lib/mobileMenuState";
 
 const HomeStyles = styled.div`
   header {
@@ -39,6 +40,7 @@ const HomeStyles = styled.div`
 `;
 
 export default function Home() {
+  const { menuIsOpen, toggleMobileMenu } = useMobileMenu();
   const { data, error, loading } = useSuggestions();
 
   if (loading) return <p>Loading...</p>;
@@ -50,6 +52,14 @@ export default function Home() {
     products.map(product => (
       <SuggestionCard product={product} key={product.id} />
     ));
+  const mobileMenu = menuIsOpen && (
+    <div className="mobile-menu">
+      <div className="tags">
+        <FilterTags />
+      </div>
+      <RoadmapMenu />
+    </div>
+  );
 
   return (
     <HomeStyles>
@@ -60,12 +70,7 @@ export default function Home() {
 
       <header>
         <Logo />
-        {/* <div className="mobile-menu">
-          <div className="tags">
-            <FilterTags />
-          </div>
-          <RoadmapMenu />
-        </div> */}
+        {mobileMenu}
         <MainMenu />
       </header>
       {/* // if products exist, render them, otherwise render the empty state */}

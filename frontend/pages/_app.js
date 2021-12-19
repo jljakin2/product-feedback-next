@@ -2,6 +2,7 @@
 import { ApolloProvider } from "@apollo/client";
 import apolloClient from "../lib/apollo";
 import Page from "../components/Page";
+import { MobileMenuStateProvider } from "../lib/mobileMenuState";
 
 // import "../components/styles/nprogress.css";
 // import withData from "../lib/withData";
@@ -14,9 +15,11 @@ import Page from "../components/Page";
 function MyApp({ Component, pageProps }) {
   return (
     <ApolloProvider client={apolloClient}>
-      <Page>
-        <Component {...pageProps} />
-      </Page>
+      <MobileMenuStateProvider>
+        <Page>
+          <Component {...pageProps} />
+        </Page>
+      </MobileMenuStateProvider>
     </ApolloProvider>
   );
 }

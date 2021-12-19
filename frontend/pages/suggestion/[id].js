@@ -40,6 +40,7 @@ export default function SuggestionPage() {
   }
 
   const product = data?.Suggestion;
+  console.log(product);
 
   return (
     <PageStyles>
@@ -56,7 +57,7 @@ export default function SuggestionPage() {
       <main>
         {/* TODO: do we need the "product" conditional? AND connect graphql query with comment data */}
         {product && <SuggestionCard product={product} />}
-        {/* {product && <CommentsContainer comments={product.comments} />} */}
+        {product && <CommentsContainer comments={product.comments} />}
         {product && <AddCommentForm />}
       </main>
     </PageStyles>

@@ -11,6 +11,24 @@ const GET_SINGLE_SUGGESTION = gql`
       description
       comments {
         id
+        content
+        user {
+          image
+          name
+          username
+        }
+        replies {
+          content
+          replyingTo {
+            image
+            username
+          }
+          user {
+            image
+            name
+            username
+          }
+        }
       }
     }
   }
