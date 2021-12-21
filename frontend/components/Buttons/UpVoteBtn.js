@@ -35,10 +35,16 @@ const BtnStyles = styled.button`
 export default function UpVoteBtn({ votes }) {
   /**
    * !TODO: add logic to add "active" class to button when the user has already clicked on the upvote button.
-   * will probably just need to keep track of the upvotes in the user config file as an array or something like that
+   * ! will probably just need to keep track of the upvotes in the user config file as an array or something like that
    */
+  function handleUpvote(e) {
+    e.stopPropagation(); // since button sits inside linked div, we have to make sure when the user clicks this button they don't get taken to the link first
+    // TODO: write logic for handling when user clicks to up vote something
+    console.log("we in this");
+  }
+
   return (
-    <BtnStyles>
+    <BtnStyles onClick={handleUpvote}>
       <ArrowUp />
       <p>{votes}</p>
     </BtnStyles>

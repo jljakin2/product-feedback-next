@@ -7,7 +7,6 @@ import EditFeedbackBtn from "../../components/Buttons/EditFeedbackBtn";
 import CommentsContainer from "../../components/Comments/CommentsContainer";
 import useSingleSuggestion from "../../lib/hooks/useSingleSuggestion";
 
-import data from "../../lib/data.json";
 import SuggestionCard from "../../components/SuggestionCard";
 import AddCommentForm from "../../components/Comments/AddCommentForm";
 
@@ -25,11 +24,6 @@ export default function SuggestionPage() {
   const router = useRouter();
   let { id } = router.query;
 
-  // const products = data.productRequests;
-  // const product = products.filter(item => {
-  //   return item.id == id;
-  // })[0];
-
   const { data, loading, error } = useSingleSuggestion(id);
 
   {
@@ -40,18 +34,17 @@ export default function SuggestionPage() {
   }
 
   const product = data?.Suggestion;
-  console.log(product);
 
   return (
     <PageStyles>
       <Head>
-        <title>Product Feedback | Suggestion: {id}</title>
+        <title>Product Feedback {product && `| ${product.title}`}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <header>
         <GoBackBtn />
-        <EditFeedbackBtn />
+        <EditFeedbackBtn id={product?.id} />
       </header>
 
       <main>

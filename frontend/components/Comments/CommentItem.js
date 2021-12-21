@@ -1,7 +1,9 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 import CommentHeader from "./CommentHeader";
 import Reply from "./Reply";
+import AddReplyForm from "./AddReplyForm";
 
 const CommentItemStyles = styled.div`
   width: 100%;
@@ -18,18 +20,32 @@ const CommentItemStyles = styled.div`
 `;
 
 export default function CommentItem({ comment }) {
-  // TODO: change the Image component to be more dynamic by using cloudinary links when backend is set up
+  //!Figure out best way to implement "add reply" to comments and replies!!!!!!!!!!!!!!!!!!
+  const [isReplyingComment, setIsReplyingComment] = useState(false);
+  const [isReplyingReply, setIsReplyingReply] = useState(false);
 
   const renderedReplies =
     comment.replies &&
     comment.replies.map(reply => {
-      return <Reply key={reply.id} reply={reply} />;
+      return (
+        <Reply
+          key={reply.id}
+          reply={reply}
+          isReplyingReply={isReplyingReply}
+          setIsReplyingReply={setIsReplyingReply}
+        />
+      );
     });
 
   return (
     <CommentItemStyles>
-      <CommentHeader comment={comment} />
+      <CommentHeader
+        comment={comment}
+        isReplyingComment={isReplyingComment}
+        setIsReplyingComment={setIsReplyingComment}
+      />
       <p className="body-2">{comment.content}</p>
+      {isReplyingComment && <AddReplyForm />}
       {renderedReplies}
     </CommentItemStyles>
   );

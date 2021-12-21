@@ -7,14 +7,15 @@ import DeleteBtn from "./Buttons/DeleteBtn";
 import useForm from "../lib/useForm";
 import FormStyles from "./styles/FormStyles";
 
-export default function SuggestionForm({ edit }) {
+export default function SuggestionForm({ edit, product }) {
   // TODO: change disabled fieldset attribute to equal loading state
 
   const { inputs, handleChange, resetForm } = useForm({
-    title: "",
-    category: "",
-    status: "",
-    details: "",
+    // if this is being used for the "Edit" page, check to see if there is existing data and set it to the initial state
+    title: edit ? product?.title : "",
+    category: edit ? product?.category : "",
+    status: edit ? product?.status : "",
+    details: edit ? product?.description : "",
   });
 
   function handleFeedbackForm(e) {
@@ -26,7 +27,7 @@ export default function SuggestionForm({ edit }) {
 
   return (
     <FormStyles onSubmit={handleFeedbackForm}>
-      <h2>Create New Feedback</h2>
+      <h2>{edit ? `Editing '${product?.title}'` : "Create New Feedback"}</h2>
       <fieldset disabled={false}>
         <div className="form-control">
           <label htmlFor="title">Feedback Title</label>

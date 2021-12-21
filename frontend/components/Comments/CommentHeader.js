@@ -31,10 +31,27 @@ const CommentHeaderStyles = styled.div`
     cursor: pointer;
 
     margin-left: auto;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;
 
-export default function CommentHeader({ comment }) {
+export default function CommentHeader({
+  comment,
+  isReplyingComment,
+  setIsReplyingComment,
+  isReplyingReply,
+  setIsReplyingReply,
+  isReply,
+}) {
+  function toggleReply() {
+    isReply
+      ? setIsReplyingReply(!isReplyingReply)
+      : setIsReplyingComment(!isReplyingComment);
+  }
+
   return (
     <CommentHeaderStyles>
       <Image
@@ -48,7 +65,15 @@ export default function CommentHeader({ comment }) {
         <p className="body-3">{comment.user.name}</p>
         <p className="body-3 username">{`@${comment.user.username}`}</p>
       </div>
-      <button>Reply</button>
+      <button onClick={toggleReply}>Reply</button>
     </CommentHeaderStyles>
   );
 }
+
+CommentHeader.defaultProps = {
+  isReply: false,
+  isReplyingComment: false,
+  setIsReplyingComment: () => {},
+  isReplyingReply: false,
+  setIsReplyingReply: () => {},
+};

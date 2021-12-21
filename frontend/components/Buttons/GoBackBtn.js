@@ -8,6 +8,10 @@ const BtnStyles = styled.button`
   p {
     color: ${({ light }) => (light ? "var(--white)" : "var(--text)")};
     margin-left: 1rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;
 

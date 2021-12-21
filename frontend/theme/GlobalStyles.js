@@ -128,16 +128,28 @@ const GlobalStyles = createGlobalStyle`
       &.blue {
         color: var(--white);
         background: var(--blue);
+
+        &:hover {
+          opacity: .75;
+        }
       }
 
       &.cancel {
         background: var(--darkBlue);
         color: var(--white);
+
+        &:hover {
+          opacity: .75;
+        }
       }
 
       &.delete {
         background: var(--delete);
         color: var(--white);
+
+        &:hover {
+          opacity: .75;
+        }
       }
     }
   

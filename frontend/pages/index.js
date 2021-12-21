@@ -69,7 +69,12 @@ export default function Home() {
   const renderedProducts =
     products &&
     products.map(product => (
-      <SuggestionCard product={product} key={product.id} id={product.id} />
+      <SuggestionCard
+        key={product.id}
+        product={product}
+        id={product.id}
+        clickable
+      />
     ));
   const mobileMenu = menuIsOpen && (
     <div className="black-out">

@@ -97,12 +97,14 @@ export default function Home() {
           key={product.id}
           statusView={statusView}
           roadmap
+          clickable
+          id={product.id}
         />
       ));
   return (
     <RoadMapStyles>
       <Head>
-        <title>Product Feedback | Home</title>
+        <title>Product Feedback | Roadmap</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

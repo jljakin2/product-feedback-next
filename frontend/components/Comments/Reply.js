@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import CommentHeader from "./CommentHeader";
+import AddReplyForm from "./AddReplyForm";
 
 const ReplyStyles = styled.div`
   padding: 1.5rem 0 0 1.5rem;
@@ -12,14 +13,20 @@ const ReplyStyles = styled.div`
   }
 `;
 
-export default function Reply({ reply }) {
+export default function Reply({ reply, isReplyingReply, setIsReplyingReply }) {
   return (
     <ReplyStyles>
-      <CommentHeader comment={reply} />
+      <CommentHeader
+        comment={reply}
+        isReplyingReply={isReplyingReply}
+        setIsReplyingReply={setIsReplyingReply}
+        isReply
+      />
       <p className="body-2">
         <span>{`@${reply.replyingTo.username} `}</span>
         {reply.content}
       </p>
+      {isReplyingReply && <AddReplyForm />}
     </ReplyStyles>
   );
 }

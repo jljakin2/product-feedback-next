@@ -13,7 +13,7 @@ import roadmapColors from "../lib/roadmapColors";
 const SuggestionCardStyles = styled.div`
   background: var(--white);
   border-radius: 0.625rem;
-  cursor: pointer;
+  cursor: ${({ clickable }) => (clickable ? "pointer" : "default")};
   overflow: hidden;
 
   display: grid;
@@ -29,7 +29,7 @@ const SuggestionCardStyles = styled.div`
   width: 100%;
 
   &:hover h4 {
-    color: var(--blue);
+    color: ${({ clickable }) => (clickable ? "var(--blue)" : "var(--text)")};
   }
 
   .top-border {
@@ -56,7 +56,6 @@ const SuggestionCardStyles = styled.div`
 
   .upvotes {
     grid-area: upvotes;
-    align-self: center;
   }
 
   .comments {
@@ -76,50 +75,59 @@ const SuggestionCardStyles = styled.div`
     }
   }
 `;
-{
-  /* <Link href={`/suggestion/${id}`} passHref></Link> */
-}
-export default function SuggestionCard({ product, roadmap, statusView, id }) {
+
+export default function SuggestionCard({
+  product,
+  roadmap,
+  clickable,
+  statusView,
+  id,
+}) {
   return (
-    <SuggestionCardStyles
-      roadmap={roadmap}
-      statusView={statusView}
-      colors={roadmapColors}>
-      {roadmap && <div className="top-border" />}
+    <Link href={clickable ? `/suggestion/${id}` : "#"} passHref>
+      <SuggestionCardStyles
+        roadmap={roadmap}
+        statusView={statusView}
+        clickable={clickable}
+        colors={roadmapColors}>
+        {roadmap && <div className="top-border" />}
 
-      <div className="main">
-        {roadmap && (
-          <div className="status-container">
-            <Dot statusView={statusView} />
-            <p className="body-2">{capitalize(product.status)}</p>
-          </div>
-        )}
+        <div className="main">
+          {roadmap && (
+            <div className="status-container">
+              <Dot statusView={statusView} />
+              <p className="body-2">{capitalize(product.status)}</p>
+            </div>
+          )}
 
-        <h4>{product.title}</h4>
-        <p className="body-1">{product.description}</p>
-        <Tag category={product.category} />
-      </div>
-      <div className="upvotes">
-        <UpVoteBtn votes={product.upvotes} />
-      </div>
+          <h4>{product.title}</h4>
+          <p className="body-1">{product.description}</p>
+          <Tag category={product.category} />
+        </div>
+        <div className="upvotes">
+          <UpVoteBtn votes={product.upvotes} />
+        </div>
 
-      <div className="comments">
-        <CommentsBtn
-          numOfComments={product.comments ? product.comments.length : 0} // check if comments exist, if not, hard code 0
-          id={product.id}
-        />
-      </div>
-    </SuggestionCardStyles>
+        <div className="comments">
+          <CommentsBtn
+            numOfComments={product.comments ? product.comments.length : 0} // check if comments exist, if not, hard code 0
+            id={product.id}
+          />
+        </div>
+      </SuggestionCardStyles>
+    </Link>
   );
 }
 
 SuggestionCard.defaultProps = {
-  roadmap: false,
-  statusView: "",
+  roadmap: false, // Is it being used in the roadmap page? Changes format from regular SuggestionCard
+  statusView: "", // Which status is the SuggestionCard? Changes colors and other styles based on status
+  clickable: false, // is the SuggestionCard being used with a link? Changes some styles to make SuggestionCard look more like a link
 };
 
 SuggestionCard.propTypes = {
   product: PropTypes.object,
   roadmap: PropTypes.bool,
   statusView: PropTypes.string,
+  clickable: PropTypes.bool,
 };
