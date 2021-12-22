@@ -1,7 +1,9 @@
+import { useState } from "react";
 import styled from "styled-components";
+import Image from "next/image";
 
-import CommentHeader from "./CommentHeader";
 import AddReplyForm from "./AddReplyForm";
+import CommentHeaderStyles from "../styles/CommentHeaderStyles";
 
 const ReplyStyles = styled.div`
   padding: 1.5rem 0 0 1.5rem;
@@ -13,20 +15,39 @@ const ReplyStyles = styled.div`
   }
 `;
 
-export default function Reply({ reply, isReplyingReply, setIsReplyingReply }) {
+export default function Reply({ reply }) {
+  const [replyToReply, setReplyToReply] = useState(false);
+
+  // callback function to allow the form to close when it is submitted
+  function closeReplyToReply() {
+    setReplyToReply(false);
+  }
+
   return (
     <ReplyStyles>
-      <CommentHeader
-        comment={reply}
-        isReplyingReply={isReplyingReply}
-        setIsReplyingReply={setIsReplyingReply}
-        isReply
-      />
+      <CommentHeaderStyles>
+        <Image
+          className="image"
+          src={reply.user.image}
+          alt={`${reply.user.name}'s profile pic`}
+          width={40}
+          height={40}
+        />
+        <div className="contact">
+          <p className="body-3">{reply.user.name}</p>
+          <p className="body-3 username">{`@${reply.user.username}`}</p>
+        </div>
+        <button onClick={() => setReplyToReply(!replyToReply)}>Reply</button>
+      </CommentHeaderStyles>
+
       <p className="body-2">
         <span>{`@${reply.replyingTo.username} `}</span>
         {reply.content}
       </p>
-      {isReplyingReply && <AddReplyForm />}
+
+      {replyToReply && (
+        <AddReplyForm closeReplyToReply={closeReplyToReply} reply />
+      )}
     </ReplyStyles>
   );
 }

@@ -1,79 +1,19 @@
-import styled from "styled-components";
-import Image from "next/image";
+// import styled from "styled-components";
 
-const CommentHeaderStyles = styled.div`
-  display: flex;
-  align-items: center;
+// import { useReply } from "../../lib/replyState";
 
-  margin-bottom: 1rem;
+// export default function CommentHeader({ comment, reply }) {
 
-  .image {
-    border-radius: 50%;
-  }
+//   return (
 
-  .contact {
-    margin-left: 1rem;
-  }
+//   );
+// }
 
-  .contact p:first-child {
-    margin-bottom: 0.25rem;
-  }
-
-  .username {
-    color: var(--greyBlue);
-    font-weight: 300;
-  }
-
-  button {
-    color: var(--blue);
-    font-size: 0.9rem;
-    font-weight: 700;
-    cursor: pointer;
-
-    margin-left: auto;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-`;
-
-export default function CommentHeader({
-  comment,
-  isReplyingComment,
-  setIsReplyingComment,
-  isReplyingReply,
-  setIsReplyingReply,
-  isReply,
-}) {
-  function toggleReply() {
-    isReply
-      ? setIsReplyingReply(!isReplyingReply)
-      : setIsReplyingComment(!isReplyingComment);
-  }
-
-  return (
-    <CommentHeaderStyles>
-      <Image
-        className="image"
-        src={comment.user.image}
-        alt={`${comment.user.name}'s profile pic`}
-        width={40}
-        height={40}
-      />
-      <div className="contact">
-        <p className="body-3">{comment.user.name}</p>
-        <p className="body-3 username">{`@${comment.user.username}`}</p>
-      </div>
-      <button onClick={toggleReply}>Reply</button>
-    </CommentHeaderStyles>
-  );
-}
-
-CommentHeader.defaultProps = {
-  isReply: false,
-  isReplyingComment: false,
-  setIsReplyingComment: () => {},
-  isReplyingReply: false,
-  setIsReplyingReply: () => {},
-};
+// CommentHeader.defaultProps = {
+//   reply: false, // is the component being used for a comment or reply component?
+//   // isReply: false,
+//   // isReplyingComment: false,
+//   // setIsReplyingComment: () => {},
+//   // isReplyingReply: false,
+//   // setIsReplyingReply: () => {},
+// };
