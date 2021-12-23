@@ -13,4 +13,10 @@ export const filterOptions = [
   "Least Comments",
 ];
 
-export const user = {};
+export const user = {
+  image:
+    "res.cloudinary.com/dpp64ouz9/image/upload/v1639702185/productFeedback/image-zena_t0xqs8.jpg",
+  name: "Zena Kelley",
+  username: "velvetround",
+  upvotes: [],
+};
