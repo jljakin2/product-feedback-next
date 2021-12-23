@@ -61,4 +61,13 @@ const FormStyles = styled.form`
   }
 `;
 
+const CustomDropdownStyles = styled.div`
+  .dropdown {
+    &-btn {
+      background: blue;
+    }
+  }
+`;
+
 export default FormStyles;
+export { CustomDropdownStyles };

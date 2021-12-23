@@ -5,7 +5,10 @@ import CancelBtn from "./Buttons/CancelBtn";
 import DeleteBtn from "./Buttons/DeleteBtn";
 
 import useForm from "../lib/useForm";
-import FormStyles from "./styles/FormStyles";
+import FormStyles, { CustomDropdownStyles } from "./styles/FormStyles";
+import DropdownMenu from "./DropdownMenu";
+
+import { categoryOptions, statusOptions } from "../lib/config";
 
 export default function SuggestionForm({ edit, product }) {
   // TODO: change disabled fieldset attribute to equal loading state
@@ -43,36 +46,36 @@ export default function SuggestionForm({ edit, product }) {
         </div>
 
         <div className="form-control">
-          <label htmlFor="category">Category</label>
+          <label>Category</label>
           <small>Choose a category for your feedback</small>
-          <select
-            className="input"
-            id="category"
-            name="category"
-            value={inputs.category}
-            onChange={handleChange}>
-            <option value="feature">Feature</option>
-            <option value="UI">UI</option>
-            <option value="UX">UX</option>
-            <option value="enhancement">Enhancement</option>
-            <option value="bug">Bug</option>
-          </select>
+          <CustomDropdownStyles>
+            <div className="dropdown-btn">
+              <DropdownMenu options={categoryOptions} dataName="category" />
+            </div>
+          </CustomDropdownStyles>
         </div>
 
         {edit && (
           <div className="form-control">
             <label htmlFor="status">Status</label>
             <small>Change feature state</small>
-            <select
-              className="input"
-              id="status"
-              name="status"
-              value={inputs.status}
-              onChange={handleChange}>
-              <option value="planned">Planned</option>
-              <option value="in-progress">In-Progress</option>
-              <option value="live">Live</option>
-            </select>
+            <CustomDropdownStyles>
+              <div className="dropdown-btn">
+                <DropdownMenu options={statusOptions} dataName="status" />
+              </div>
+            </CustomDropdownStyles>
+            {/* <div className="custom-select">
+              <select
+                className="input"
+                id="status"
+                name="status"
+                value={inputs.status}
+                onChange={handleChange}>
+                <option value="planned">Planned</option>
+                <option value="in-progress">In-Progress</option>
+                <option value="live">Live</option>
+              </select>
+            </div> */}
           </div>
         )}
 

@@ -3,7 +3,9 @@ import styled from "styled-components";
 
 import AddFeedbackBtn from "./Buttons/AddFeedbackBtn";
 import FilterBtn from "./Buttons/FilterBtn";
-import FilterMenu from "./filterMenu";
+import DropdownMenu from "./DropdownMenu";
+
+import { filterOptions } from "../lib/config";
 
 const MainMenuStyles = styled.div`
   background: var(--darkBlue);
@@ -24,6 +26,12 @@ const MainMenuStyles = styled.div`
   p {
     margin-right: 0.5rem;
   }
+
+  .dropdown {
+    position: absolute;
+    top: 4rem;
+    left: 5rem;
+  }
 `;
 
 export default function MainMenu() {
@@ -38,7 +46,11 @@ export default function MainMenu() {
           <FilterBtn />
         </div>
       </div>
-      {isOpen && <FilterMenu />}
+      {isOpen && (
+        <div className="dropdown">
+          <DropdownMenu options={filterOptions} />
+        </div>
+      )}
 
       <AddFeedbackBtn />
     </MainMenuStyles>
