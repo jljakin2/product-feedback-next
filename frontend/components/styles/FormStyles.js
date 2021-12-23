@@ -42,12 +42,15 @@ const FormStyles = styled.form`
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    color: var(--text);
 
     padding: 1rem;
   }
 
   textarea {
     resize: none;
+    font-size: inherit;
+    font-family: inherit;
 
     padding: 1.5rem;
   }
@@ -62,9 +65,22 @@ const FormStyles = styled.form`
 `;
 
 const CustomDropdownStyles = styled.div`
+  position: relative;
+
   .dropdown {
     &-btn {
-      background: blue;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &-content {
+      position: absolute;
+      top: 4rem;
+
+      width: 100%;
+
+      z-index: 100;
     }
   }
 `;

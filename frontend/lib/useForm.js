@@ -17,8 +17,8 @@ export default function useForm(initial = {}) {
   }
 
   function handleDropdownChange(e) {
-    let value = e.target.getAttribute("data-value");
-    let name = e.target.getAttribute("data-name");
+    let value = e.target.getAttribute("data-value"); // get the value of the clicked on dropdown item
+    let name = e.target.getAttribute("data-name"); // get the name of the clicked on dropdown item
 
     setInputs({
       // copy existing state

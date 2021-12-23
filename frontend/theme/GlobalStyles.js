@@ -65,20 +65,20 @@ const GlobalStyles = createGlobalStyle`
     letter-spacing: -0.19px;
   }
 
-  p.body-1 {
+  .body-1 {
     font-size: 1rem;
     font-weight: 400;
     letter-spacing: 0;
   }
 
-  p.body-2 {
+  .body-2 {
     font-size: 0.9375rem;
     font-weight: 400;
     letter-spacing: 0;
     line-height: 1.5;
   }
 
-  p.body-3 {
+  .body-3 {
     font-size: 0.8125rem;
     font-weight: 600;
     letter-spacing: 0;

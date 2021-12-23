@@ -1,11 +1,11 @@
-import { useState } from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 import Check from "./Icons/Check";
 
 import capitalize from "../lib/capitalize";
 
-const DropdownMenuStyles = styled.div`
+const DropdownMenuStyles = styled.ul`
   background: var(--white);
   border-radius: 0.625rem;
   color: var(--greyBlue);
@@ -31,50 +31,98 @@ const DropdownMenuStyles = styled.div`
       color: var(--purple);
     }
 
+    & .check {
+      display: none;
+    }
+
+    &:hover .check {
+      display: block;
+    }
+
     &:not(:last-child) {
       border-bottom: 1px solid var(--grey);
     }
   }
 
-  .check {
-    display: none;
-  }
-
   .check.active {
     display: block;
   }
+
+  .item.active {
+    color: var(--purple);
+  }
 `;
 
-export default function DropdownMenu({ options, dataName }) {
-  function toggleCheck(e) {
-    // helper function to toggle check icon when user hovers over dropdown item
-    e.target.lastElementChild.classList.toggle("active");
+export default function DropdownMenu({
+  form,
+  options,
+  dataName,
+  handleDropdownChange,
+  handleSelected,
+  closeDropdown,
+  currentVal,
+}) {
+  function handleSelection(e) {
+    if (form) {
+      handleDropdownChange(e);
+    } else {
+      handleSelected(e.target.getAttribute("data-name"));
+    }
+
+    closeDropdown();
   }
 
-  const renderedItems = options.map((option, index) => {
+  const renderedFormItems = options.map((option, index) => {
     return (
-      <div
+      <li
         key={index}
-        className="item"
+        className={option === currentVal ? "item active" : "item"}
         data-name={dataName}
         data-value={option}
-        onMouseEnter={toggleCheck}
-        onMouseLeave={toggleCheck}>
+        onClick={handleSelection}>
         <p>{capitalize(option)}</p>
-        <div className="check">
+        <div className={option === currentVal ? "check active" : "check"}>
           <Check />
         </div>
-      </div>
+      </li>
     );
   });
 
-  return <DropdownMenuStyles>{renderedItems}</DropdownMenuStyles>;
+  const renderedMenuItems = options.map((option, index) => {
+    return (
+      <li
+        key={index}
+        className={option === currentVal ? "item active" : "item"}
+        data-name={option}
+        onClick={handleSelection}>
+        <p data-name={option}>{option}</p>
+        <div className={option === currentVal ? "check active" : "check"}>
+          <Check />
+        </div>
+      </li>
+    );
+  });
+
+  return (
+    <DropdownMenuStyles>
+      {form ? renderedFormItems : renderedMenuItems}
+    </DropdownMenuStyles>
+  );
 }
 
 DropdownMenu.defaultProps = {
+  form: false,
   dataName: "",
+  currentVal: "",
+  options: [],
 };
 
-// DropdownMenu.propType = {
-//   options: PropType.array,
-// };
+DropdownMenu.propTypes = {
+  form: PropTypes.bool, // is the dropdown being used for a form? if it is, we will call the handleDropdownChange from the useForm hook
+  dataName: PropTypes.string, // name being used for data attribute so we can grab item based on e.target.getAttribute("data-name"). e.g. "category", "status", etc.
+  options: PropTypes.array, // list of options for the dropdown component. comes from the config file
+  handleDropdownChange: PropTypes.func, // function from useForm hook that updates the inputs state based on the dropdown selection
+  handleSelected: PropTypes.func, // passed from "index" page so it can be updated based on what item in the dropdown is clicked
+  closeDropdown: PropTypes.func, // updates local state for dropdown so when item is selected, the dropdown is closed
+  currentVal: PropTypes.string, // state for what is currently selected
+};

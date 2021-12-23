@@ -2,10 +2,10 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import AddFeedbackBtn from "./Buttons/AddFeedbackBtn";
-import FilterBtn from "./Buttons/FilterBtn";
 import DropdownMenu from "./DropdownMenu";
 
 import { filterOptions } from "../lib/config";
+import ArrowDown from "./Icons/ArrowDown";
 
 const MainMenuStyles = styled.div`
   background: var(--darkBlue);
@@ -34,8 +34,27 @@ const MainMenuStyles = styled.div`
   }
 `;
 
+const BtnStyles = styled.button`
+  background: transparent;
+  color: var(--white);
+  font-size: 1rem;
+
+  display: flex;
+  align-items: center;
+`;
+
 export default function MainMenu() {
   const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState("Most Upvotes");
+
+  function closeDropdown() {
+    // closes the dropdown menu when item is clicked
+    setIsOpen(false);
+  }
+  // ! will probably have to remove this function and add it to "index" page then pass through to dropdown via this component
+  function handleSelected(selection) {
+    setSelected(selection);
+  }
 
   // !TODO: update FilterMenu to reflect which state the data is in and filter the data appropriately
   return (
@@ -43,12 +62,20 @@ export default function MainMenu() {
       <div>
         <p>Sort by:</p>
         <div onClick={() => setIsOpen(!isOpen)}>
-          <FilterBtn />
+          <BtnStyles>
+            <p className="body-1">{selected}</p>
+            <ArrowDown color="#fff" />
+          </BtnStyles>
         </div>
       </div>
       {isOpen && (
         <div className="dropdown">
-          <DropdownMenu options={filterOptions} />
+          <DropdownMenu
+            options={filterOptions}
+            closeDropdown={closeDropdown}
+            handleSelected={handleSelected}
+            currentVal={selected}
+          />
         </div>
       )}
 

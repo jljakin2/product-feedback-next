@@ -3,7 +3,6 @@ import { ApolloProvider } from "@apollo/client";
 import apolloClient from "../lib/apollo";
 import Page from "../components/Page";
 import { MobileMenuStateProvider } from "../lib/mobileMenuState";
-import { ReplyStateProvider } from "../lib/replyState";
 
 // import "../components/styles/nprogress.css";
 // import withData from "../lib/withData";
@@ -16,13 +15,11 @@ import { ReplyStateProvider } from "../lib/replyState";
 function MyApp({ Component, pageProps }) {
   return (
     <ApolloProvider client={apolloClient}>
-      <ReplyStateProvider>
-        <MobileMenuStateProvider>
-          <Page>
-            <Component {...pageProps} />
-          </Page>
-        </MobileMenuStateProvider>
-      </ReplyStateProvider>
+      <MobileMenuStateProvider>
+        <Page>
+          <Component {...pageProps} />
+        </Page>
+      </MobileMenuStateProvider>
     </ApolloProvider>
   );
 }
