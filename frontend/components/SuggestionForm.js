@@ -5,7 +5,8 @@ import AddFeedbackBtn from "./Buttons/AddFeedbackBtn";
 import CancelBtn from "./Buttons/CancelBtn";
 import DeleteBtn from "./Buttons/DeleteBtn";
 
-import useForm from "../lib/useForm";
+import useForm from "../lib/hooks/useForm";
+import useCreateSingleSuggestion from "../lib/hooks/useCreateSingleSuggestion";
 import FormStyles, { CustomDropdownStyles } from "./styles/FormStyles";
 import DropdownMenu from "./DropdownMenu";
 
@@ -45,24 +46,34 @@ export default function SuggestionForm({ edit, product }) {
   const { inputs, handleChange, handleDropdownChange, resetForm } = useForm({
     // if this is being used for the "Edit" page, check to see if there is existing data and set it to the initial state
     title: edit ? product?.title : "",
-    category: edit ? product?.category : "Feature",
+    category: edit ? product?.category : "feature",
     status: edit ? product?.status : "",
     details: edit ? product?.description : "",
   });
 
-  // when user submits the form
-  function handleFeedbackForm(e) {
+  const { createSuggestion, loading, error } = useCreateSingleSuggestion(
+    inputs.title,
+    inputs.category,
+    inputs.details
+  );
+
+  // handle when user submits form
+  async function handleFeedbackForm(e) {
     e.preventDefault();
+    console.log(inputs);
+    const res = await createSuggestion();
     resetForm();
 
     console.log("feedback form has been submitted");
   }
 
-  // TODO: change disabled fieldset attribute to equal loading state
+  // TODO: handle error properly
+  error && console.log(error.message);
+
   return (
     <FormStyles onSubmit={handleFeedbackForm}>
       <h2>{edit ? `Editing '${product?.title}'` : "Create New Feedback"}</h2>
-      <fieldset disabled={false}>
+      <fieldset disabled={loading}>
         <div className="form-control">
           <label htmlFor="title">Feedback Title</label>
           <small>Add a short, descriptive headline</small>
