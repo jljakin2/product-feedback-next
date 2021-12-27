@@ -1,6 +1,6 @@
 import { useQuery, gql } from "@apollo/client";
 
-const GET_SINGLE_SUGGESTION = gql`
+export const GET_SINGLE_SUGGESTION = gql`
   query GetSuggestion($id: ID!) {
     Suggestion(where: { id: $id }) {
       id

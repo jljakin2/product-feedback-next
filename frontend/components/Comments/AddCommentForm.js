@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 import FormStyles from "../styles/FormStyles";
 import useForm from "../../lib/useForm";
+import useCreateComment from "../../lib/hooks/useCreateComment";
+import { useRouter } from "next/router";
 
 const Footer = styled.div`
   display: flex;
@@ -20,11 +22,21 @@ export default function AddCommentForm() {
     comment: "",
   });
 
+  // get the suggestion id by checking the current route
+  const router = useRouter();
+  const { id } = router.query;
+
+  // handlers for checking character maximum limit for comment
   const maxChar = 250; // maximum allowed characters for a comment
   const charLeft = maxChar - inputs.comment.length; // calculate how many characters are left before reaching the max
   const isOverCharMax = charLeft < 0; // checks if charCount is over the max set and is used as style prop to notify user when they are over the max
 
-  function handleCommentForm(e) {
+  const { createComment, loading, error } = useCreateComment(
+    id,
+    inputs.comment
+  ); // needs suggestion id and content. user is defaulted since there isn't an account function
+
+  async function handleCommentForm(e) {
     e.preventDefault();
 
     // handle the error when the user tries to submit a comment that is over the max character limit
@@ -33,7 +45,8 @@ export default function AddCommentForm() {
     }
 
     // submit the comment to the backend
-    console.log("add a comment successfully");
+    const res = await createComment().catch(console.log(error));
+    console.log("added a comment successfully");
 
     // reset the form once everything is complete
     resetForm();
@@ -42,7 +55,7 @@ export default function AddCommentForm() {
   return (
     <FormStyles onSubmit={handleCommentForm}>
       <h2>Add Comment</h2>
-      <fieldset>
+      <fieldset disabled={loading}>
         <div className="form-control">
           <textarea
             className="input"

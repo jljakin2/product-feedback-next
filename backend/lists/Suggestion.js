@@ -35,7 +35,7 @@ const suggestionFields = {
     },
     comments: {
       type: Relationship,
-      ref: "Comment",
+      ref: "Comment.suggestion",
       many: true,
     },
   },

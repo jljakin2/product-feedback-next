@@ -4,7 +4,7 @@ const commentFields = {
   fields: {
     suggestion: {
       type: Relationship,
-      ref: "Suggestion",
+      ref: "Suggestion.comments",
       many: false,
     },
     content: {
