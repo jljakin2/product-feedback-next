@@ -4,7 +4,7 @@ const replyFields = {
   fields: {
     comment: {
       type: Relationship,
-      ref: "Comment",
+      ref: "Comment.replies",
       many: false,
     },
     content: {

@@ -26,6 +26,8 @@ function useCreateComment(suggestion, content) {
         suggestion: { connect: { id: suggestion } },
         content,
       },
+      // need to refetch the query that gets a single suggestion in order to update the apollo cache.
+      // the refetchQueries API takes the latest variable that was used with the query
       refetchQueries: [GET_SINGLE_SUGGESTION],
     }
   );

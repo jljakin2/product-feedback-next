@@ -15,7 +15,7 @@ const ReplyStyles = styled.div`
   }
 `;
 
-export default function Reply({ reply }) {
+export default function Reply({ reply, commentId }) {
   const [replyToReply, setReplyToReply] = useState(false);
 
   // callback function to allow the form to close when it is submitted
@@ -46,7 +46,12 @@ export default function Reply({ reply }) {
       </p>
 
       {replyToReply && (
-        <AddReplyForm closeReplyToReply={closeReplyToReply} reply />
+        <AddReplyForm
+          closeReplyToReply={closeReplyToReply}
+          reply
+          replyingToId={reply.user.id}
+          commentId={commentId}
+        />
       )}
     </ReplyStyles>
   );

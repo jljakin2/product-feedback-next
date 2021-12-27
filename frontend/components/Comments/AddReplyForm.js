@@ -2,14 +2,17 @@ import styled from "styled-components";
 
 import useForm from "../../lib/useForm";
 import FormStyles from "../styles/FormStyles";
+import useCreateReply from "../../lib/hooks/useCreateReply";
 
 const AddReplyFormStyles = styled.div`
   form {
-    display: flex;
-    flex-direction: column;
-
     margin-top: 1rem;
     padding: 0;
+  }
+
+  fieldset {
+    display: flex;
+    flex-direction: column;
   }
 
   button {
@@ -21,13 +24,25 @@ export default function AddReplyForm({
   reply,
   closeReplyToComment,
   closeReplyToReply,
+  commentId,
+  replyingToId,
 }) {
   const { inputs, handleChange, resetForm } = useForm({
     reply: "",
   });
 
-  function handleReply(e) {
+  // hook to create reply mutation
+  const { createReply, loading, error } = useCreateReply(
+    commentId,
+    inputs.reply,
+    replyingToId
+  );
+
+  async function handleReply(e) {
     e.preventDefault();
+    // console.log({ commentId, replyingToId });
+    const res = await createReply();
+
     resetForm();
     reply ? closeReplyToReply() : closeReplyToComment();
 
@@ -37,14 +52,16 @@ export default function AddReplyForm({
   return (
     <AddReplyFormStyles>
       <FormStyles onSubmit={handleReply}>
-        <div className="form-control">
-          <textarea
-            className="input"
-            name="reply"
-            value={inputs.reply}
-            onChange={handleChange}></textarea>
-        </div>
-        <button className="btn purple">Post Reply</button>
+        <fieldset disabled={loading}>
+          <div className="form-control">
+            <textarea
+              className="input"
+              name="reply"
+              value={inputs.reply}
+              onChange={handleChange}></textarea>
+          </div>
+          <button className="btn purple">Post Reply</button>
+        </fieldset>
       </FormStyles>
     </AddReplyFormStyles>
   );

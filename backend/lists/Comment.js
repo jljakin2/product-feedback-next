@@ -18,7 +18,7 @@ const commentFields = {
     },
     replies: {
       type: Relationship,
-      ref: "Reply",
+      ref: "Reply.comment",
       many: true,
     },
   },

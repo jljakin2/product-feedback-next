@@ -26,7 +26,7 @@ export default function CommentItem({ comment }) {
   const renderedReplies =
     comment.replies &&
     comment.replies.map(reply => {
-      return <Reply key={reply.id} reply={reply} />;
+      return <Reply key={reply.id} reply={reply} commentId={comment.id} />;
     });
 
   // callback function to allow the form to close when it is submitted
@@ -57,7 +57,11 @@ export default function CommentItem({ comment }) {
 
       {/* only show reply form when the user clicks on the "reply" button */}
       {replyToComment && (
-        <AddReplyForm closeReplyToComment={closeReplyToComment} />
+        <AddReplyForm
+          closeReplyToComment={closeReplyToComment}
+          commentId={comment.id}
+          replyingToId={comment.user.id}
+        />
       )}
 
       {renderedReplies}

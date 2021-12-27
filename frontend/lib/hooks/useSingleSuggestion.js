@@ -13,6 +13,7 @@ export const GET_SINGLE_SUGGESTION = gql`
         id
         content
         user {
+          id
           image
           name
           username
@@ -20,10 +21,12 @@ export const GET_SINGLE_SUGGESTION = gql`
         replies {
           content
           replyingTo {
+            id
             image
             username
           }
           user {
+            id
             image
             name
             username
