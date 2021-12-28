@@ -1,5 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
-import { GET_SINGLE_SUGGESTION } from "../../lib/hooks/useSingleSuggestion";
+import { GET_ALL_SUGGESTIONS } from "../../lib/hooks/useSuggestions";
 
 const UPDATE_SUGGESTION = gql`
   mutation UPDATE_SUGGESTION(
@@ -36,7 +36,7 @@ function useUpdateSuggestion(id, title, category, status, description) {
       },
       // need to refetch the query that gets a single suggestion in order to update the apollo cache.
       // the refetchQueries API takes the latest variable that was used with the query
-      refetchQueries: [GET_SINGLE_SUGGESTION],
+      refetchQueries: [GET_ALL_SUGGESTIONS],
     }
   );
 
