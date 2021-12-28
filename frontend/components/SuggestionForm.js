@@ -16,6 +16,7 @@ import ArrowUp from "./Icons/ArrowUp";
 import capitalize from "../lib/capitalize";
 import useUpdateSuggestion from "../lib/hooks/useUpdateSuggestion";
 import { useRouter } from "next/router";
+import useDeleteSuggestion from "../lib/hooks/useDeleteSuggestion";
 
 export default function SuggestionForm({ edit, product }) {
   const [categoryDropdown, setCategoryDropdown] = useState(false);
@@ -69,18 +70,22 @@ export default function SuggestionForm({ edit, product }) {
     inputs.details
   );
 
+  const { deleteSuggestion, deleteLoading, deleteError } = useDeleteSuggestion(
+    product.id
+  );
+
   // handle when user submits form
   async function handleFeedbackForm(e) {
     e.preventDefault();
 
     if (edit) {
       const res = await updateSuggestion(); // if the form is being used for updating a suggestion
+      resetForm();
+      router.push("/"); // send the user to the main page to see their changes
     } else {
       const res = await createSuggestion(); // if the form is being used for creating a suggestion
+      resetForm();
     }
-    resetForm();
-
-    router.push("/"); // send the user to the main page to see their changes
   }
 
   // TODO: handle error properly
@@ -176,7 +181,15 @@ export default function SuggestionForm({ edit, product }) {
       <div className="button-container">
         <AddFeedbackBtn full submit />
         <CancelBtn />
-        {edit && <DeleteBtn />}
+        {edit && (
+          <div
+            onClick={() => {
+              deleteSuggestion();
+              router.push("/");
+            }}>
+            <DeleteBtn />
+          </div>
+        )}
       </div>
     </FormStyles>
   );

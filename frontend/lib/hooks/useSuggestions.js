@@ -1,6 +1,6 @@
 import { useQuery, gql } from "@apollo/client";
 
-const GET_ALL_SUGGESTIONS = gql`
+export const GET_ALL_SUGGESTIONS = gql`
   query {
     allSuggestions {
       id
