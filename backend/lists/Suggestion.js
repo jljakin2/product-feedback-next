@@ -11,6 +11,8 @@ const suggestionFields = {
       options: [
         { value: "enhancement", label: "Enhancement" },
         { value: "feature", label: "Feature" },
+        { value: "ui", label: "UI" },
+        { value: "ux", label: "UX" },
         { value: "bug", label: "Bug" },
       ],
       defaultView: "published",

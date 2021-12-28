@@ -40,5 +40,6 @@ export default function useForm(initial = {}) {
     handleChange,
     handleDropdownChange,
     resetForm,
+    setInputs,
   };
 }

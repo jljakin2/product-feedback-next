@@ -5,7 +5,7 @@ import AddFeedbackBtn from "./Buttons/AddFeedbackBtn";
 import CancelBtn from "./Buttons/CancelBtn";
 import DeleteBtn from "./Buttons/DeleteBtn";
 
-import useForm from "../lib/hooks/useForm";
+import useForm from "../lib/useForm";
 import useCreateSingleSuggestion from "../lib/hooks/useCreateSingleSuggestion";
 import FormStyles, { CustomDropdownStyles } from "./styles/FormStyles";
 import DropdownMenu from "./DropdownMenu";
@@ -14,10 +14,14 @@ import { categoryOptions, statusOptions } from "../lib/config"; // options for d
 import ArrowDown from "./Icons/ArrowDown";
 import ArrowUp from "./Icons/ArrowUp";
 import capitalize from "../lib/capitalize";
+import useUpdateSuggestion from "../lib/hooks/useUpdateSuggestion";
+import { useRouter } from "next/router";
 
 export default function SuggestionForm({ edit, product }) {
   const [categoryDropdown, setCategoryDropdown] = useState(false);
   const [statusDropdown, setStatusDropdown] = useState(false);
+
+  const router = useRouter();
 
   function handleCategoryDropdown() {
     setCategoryDropdown(!categoryDropdown); // toggle whether or not category dropdown is open
@@ -57,14 +61,26 @@ export default function SuggestionForm({ edit, product }) {
     inputs.details
   );
 
+  const { updateSuggestion, updateLoading, updateError } = useUpdateSuggestion(
+    product.id,
+    inputs.title,
+    inputs.category,
+    inputs.status,
+    inputs.details
+  );
+
   // handle when user submits form
   async function handleFeedbackForm(e) {
     e.preventDefault();
-    console.log(inputs);
-    const res = await createSuggestion();
+
+    if (edit) {
+      const res = await updateSuggestion(); // if the form is being used for updating a suggestion
+    } else {
+      const res = await createSuggestion(); // if the form is being used for creating a suggestion
+    }
     resetForm();
 
-    console.log("feedback form has been submitted");
+    router.push("/"); // send the user to the main page to see their changes
   }
 
   // TODO: handle error properly
@@ -73,7 +89,7 @@ export default function SuggestionForm({ edit, product }) {
   return (
     <FormStyles onSubmit={handleFeedbackForm}>
       <h2>{edit ? `Editing '${product?.title}'` : "Create New Feedback"}</h2>
-      <fieldset disabled={loading}>
+      <fieldset disabled={loading || updateLoading}>
         <div className="form-control">
           <label htmlFor="title">Feedback Title</label>
           <small>Add a short, descriptive headline</small>
@@ -103,7 +119,7 @@ export default function SuggestionForm({ edit, product }) {
                   form
                   options={categoryOptions}
                   dataName="category"
-                  handleDropdownChange={handleDropdownChange}
+                  dropdownSelection={handleDropdownChange}
                   closeDropdown={closeDropdown}
                   currentVal={inputs.category}
                 />
@@ -130,7 +146,7 @@ export default function SuggestionForm({ edit, product }) {
                     form
                     options={statusOptions}
                     dataName="status"
-                    handleDropdownChange={handleDropdownChange}
+                    dropdownSelection={handleDropdownChange}
                     closeDropdown={closeDropdown}
                     currentVal={inputs.status}
                   />

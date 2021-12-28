@@ -57,14 +57,15 @@ export default function DropdownMenu({
   form,
   options,
   dataName,
-  handleDropdownChange,
+  dropdownSelection,
   handleSelected,
   closeDropdown,
   currentVal,
 }) {
   function handleSelection(e) {
     if (form) {
-      handleDropdownChange(e);
+      dropdownSelection(e);
+      // handleDropdownChange(e);
     } else {
       handleSelected(e.target.getAttribute("data-name"));
     }
