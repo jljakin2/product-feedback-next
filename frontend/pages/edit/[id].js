@@ -4,7 +4,7 @@ import styled from "styled-components";
 import SuggestionForm from "../../components/SuggestionForm";
 import GoBackBtn from "../../components/Buttons/GoBackBtn";
 import { useRouter } from "next/router";
-import useSingleSuggestion from "../../lib/hooks/useSingleSuggestion";
+import useSingleSuggestion from "../../lib/hooks/queries/useSingleSuggestion";
 
 const PageStyles = styled.div`
   padding: 1.5rem 1.5rem;

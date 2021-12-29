@@ -6,7 +6,7 @@ import CancelBtn from "./Buttons/CancelBtn";
 import DeleteBtn from "./Buttons/DeleteBtn";
 
 import useForm from "../lib/useForm";
-import useCreateSingleSuggestion from "../lib/hooks/useCreateSingleSuggestion";
+import useCreateSingleSuggestion from "../lib/hooks/mutations/useCreateSingleSuggestion";
 import FormStyles, { CustomDropdownStyles } from "./styles/FormStyles";
 import DropdownMenu from "./DropdownMenu";
 
@@ -14,9 +14,9 @@ import { categoryOptions, statusOptions } from "../lib/config"; // options for d
 import ArrowDown from "./Icons/ArrowDown";
 import ArrowUp from "./Icons/ArrowUp";
 import capitalize from "../lib/capitalize";
-import useUpdateSuggestion from "../lib/hooks/useUpdateSuggestion";
+import useUpdateSuggestion from "../lib/hooks/mutations/useUpdateSuggestion";
 import { useRouter } from "next/router";
-import useDeleteSuggestion from "../lib/hooks/useDeleteSuggestion";
+import useDeleteSuggestion from "../lib/hooks/mutations/useDeleteSuggestion";
 
 export default function SuggestionForm({ edit, product }) {
   const [categoryDropdown, setCategoryDropdown] = useState(false);
