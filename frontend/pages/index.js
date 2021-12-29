@@ -55,14 +55,12 @@ const HomeStyles = styled.div`
 
 export default function Home() {
   const { menuIsOpen, closeMobileMenu } = useMobileMenu();
-  const { selected, sortSuggestions, filterSuggestions, tag } = useSortFilter();
+  const { selected, sortSuggestions, tag } = useSortFilter();
   const [products, setProducts] = useState();
 
   const { data, error, loading } = useSuggestions();
 
   useEffect(() => {
-    // let suggestions = sortSuggestions(data?.allSuggestions, selected);
-    // setProducts(suggestions);
     if (tag === "all") {
       setProducts(sortSuggestions(data?.allSuggestions, selected));
     } else {
@@ -71,13 +69,6 @@ export default function Home() {
       );
       setProducts(sortSuggestions(suggestions, selected));
     }
-    // console.log(
-    //   filterSuggestions(sortSuggestions(data?.allSuggestions, selected), tag)
-    // );
-    // console.log(tag);
-    // console.log(
-    //   data?.allSuggestions.filter(item => item.category === "feature")
-    // );
 
     return function cleanup() {
       closeMobileMenu();

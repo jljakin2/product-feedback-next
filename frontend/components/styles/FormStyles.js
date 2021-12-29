@@ -18,8 +18,14 @@ const FormStyles = styled.form`
   .form-control {
     display: flex;
     flex-direction: column;
+    position: relative;
 
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
+
+    & .input-error {
+      color: var(--delete);
+      bottom: -2.5rem;
+    }
   }
 
   label {
@@ -61,6 +67,10 @@ const FormStyles = styled.form`
 
   button:not(:last-child) {
     margin-bottom: 1rem;
+  }
+
+  .error {
+    border: 1px solid var(--delete);
   }
 `;
 
