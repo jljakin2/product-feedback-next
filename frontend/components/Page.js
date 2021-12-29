@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
-import { useMobileMenu } from "../lib/mobileMenuState";
+import { useMobileMenu } from "../lib/hooks/context/mobileMenuState";
 import GlobalStyles from "../theme/GlobalStyles";
+import { user } from "../lib/config";
 
 // The purpose of this component is to add the content that will be used as a template for all of the pages (e.g. nav, footer, etc.). Each individual page's content
 // will go in the {children} variable

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import FormStyles from "../styles/FormStyles";
 import useForm from "../../lib/useForm";
-import useCreateComment from "../../lib/hooks/useCreateComment";
+import useCreateComment from "../../lib/hooks/mutations/useCreateComment";
 import { useRouter } from "next/router";
 
 const Footer = styled.div`

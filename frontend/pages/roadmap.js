@@ -5,10 +5,9 @@ import styled from "styled-components";
 import SuggestionCard from "../components/SuggestionCard";
 import GoBackBtn from "../components/Buttons/GoBackBtn";
 import AddFeedbackBtn from "../components/Buttons/AddFeedbackBtn";
-import useSuggestions from "../lib/hooks/useSuggestions";
+import useSuggestions from "../lib/hooks/queries/useSuggestions";
 
 import roadmapColors from "../lib/roadmapColors";
-import data from "../lib/data.json";
 
 const RoadMapStyles = styled.div`
   header {
@@ -33,7 +32,7 @@ const RoadMapStyles = styled.div`
       margin-bottom: 0.5rem;
     }
 
-    & p {
+    & .body-2 {
       color: var(--greyBlue);
     }
   }

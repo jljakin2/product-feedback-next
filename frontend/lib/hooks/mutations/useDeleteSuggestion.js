@@ -1,5 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
-import { GET_ALL_SUGGESTIONS } from "../../lib/hooks/useSuggestions";
+import { GET_ALL_SUGGESTIONS } from "../queries/useSuggestions";
 
 const DELETE_SUGGESTION = gql`
   mutation DELETE_SUGGESTION($id: ID!) {

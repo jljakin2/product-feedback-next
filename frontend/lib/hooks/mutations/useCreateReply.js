@@ -1,5 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
-import { GET_SINGLE_SUGGESTION } from "../../lib/hooks/useSingleSuggestion";
+import { GET_SINGLE_SUGGESTION } from "../queries/useSingleSuggestion";
 
 const CREATE_REPLY = gql`
   mutation CREATE_REPLY(

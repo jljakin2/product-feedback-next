@@ -5,8 +5,8 @@ import Dot from "./Dot";
 
 import capitalize from "../lib/capitalize";
 import roadmapColors from "../lib/roadmapColors";
-import data from "../lib/data.json";
-import useSuggestions from "../lib/hooks/useSuggestions";
+
+import useSuggestions from "../lib/hooks/queries/useSuggestions";
 
 const RoadmapMenuStyles = styled.div`
   background: var(--white);

@@ -3,7 +3,7 @@ import Hamburger from "./Icons/Hamburger";
 import Close from "./Icons/Close";
 
 import backgroundMobile from "../public/suggestions/mobile/background-header.png";
-import { useMobileMenu } from "../lib/mobileMenuState";
+import { useMobileMenu } from "../lib/hooks/context/mobileMenuState";
 
 const LogoStyles = styled.div`
   background-image: url(${backgroundMobile.src});

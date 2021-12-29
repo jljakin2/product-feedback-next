@@ -4,12 +4,12 @@ import Logo from "../components/Logo";
 import MainMenu from "../components/MainMenu";
 import SuggestionCard from "../components/SuggestionCard";
 import styled from "styled-components";
-import useSuggestions from "../lib/hooks/useSuggestions";
+import useSuggestions from "../lib/hooks/queries/useSuggestions";
 
 import EmptyState from "../components/EmptyState";
 import TagMenu from "../components/TagMenu";
 import RoadmapMenu from "../components/RoadmapMenu";
-import { useMobileMenu } from "../lib/mobileMenuState";
+import { useMobileMenu } from "../lib/hooks/context/mobileMenuState";
 import { useEffect } from "react";
 
 const HomeStyles = styled.div`

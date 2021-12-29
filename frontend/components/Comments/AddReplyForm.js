@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import useForm from "../../lib/useForm";
 import FormStyles from "../styles/FormStyles";
-import useCreateReply from "../../lib/hooks/useCreateReply";
+import useCreateReply from "../../lib/hooks/mutations/useCreateReply";
 
 const AddReplyFormStyles = styled.div`
   form {

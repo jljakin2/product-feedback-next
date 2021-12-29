@@ -1,4 +1,10 @@
-const { Text, Url, Checkbox, Password } = require("@keystonejs/fields");
+const {
+  Text,
+  Url,
+  Checkbox,
+  Password,
+  Relationship,
+} = require("@keystonejs/fields");
 
 const userFields = {
   fields: {
@@ -19,6 +25,11 @@ const userFields = {
     },
     isAdmin: {
       type: Checkbox,
+    },
+    upvotes: {
+      type: Relationship,
+      ref: "Suggestion",
+      many: true,
     },
     // comments: {
     //   type: Relationship,

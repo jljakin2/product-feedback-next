@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import GoBackBtn from "../../components/Buttons/GoBackBtn";
 import EditFeedbackBtn from "../../components/Buttons/EditFeedbackBtn";
 import CommentsContainer from "../../components/Comments/CommentsContainer";
-import useSingleSuggestion from "../../lib/hooks/useSingleSuggestion";
+import useSingleSuggestion from "../../lib/hooks/queries/useSingleSuggestion";
 
 import SuggestionCard from "../../components/SuggestionCard";
 import AddCommentForm from "../../components/Comments/AddCommentForm";

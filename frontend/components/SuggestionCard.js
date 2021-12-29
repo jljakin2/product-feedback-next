@@ -105,7 +105,7 @@ export default function SuggestionCard({
           <Tag category={product.category} />
         </div>
         <div className="upvotes">
-          <UpVoteBtn votes={product.upvotes} />
+          <UpVoteBtn numOfVotes={product.upvotes} id={product.id} />
         </div>
 
         <div className="comments">
