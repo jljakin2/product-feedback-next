@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Check from "./Icons/Check";
 
 import capitalize from "../lib/capitalize";
+import { useSortFilter } from "../lib/hooks/context/sortFilter";
 
 const DropdownMenuStyles = styled.ul`
   background: var(--white);
@@ -62,12 +63,14 @@ export default function DropdownMenu({
   closeDropdown,
   currentVal,
 }) {
+  const { selected, setSelected } = useSortFilter();
+
   function handleSelection(e) {
     if (form) {
       dropdownSelection(e);
-      // handleDropdownChange(e);
     } else {
-      handleSelected(e.target.getAttribute("data-name"));
+      setSelected(e.target.getAttribute("data-name"));
+      // handleSelected(e.target.getAttribute("data-name"));
     }
 
     closeDropdown();
@@ -77,12 +80,15 @@ export default function DropdownMenu({
     return (
       <li
         key={index}
-        className={option === currentVal ? "item active" : "item"}
+        className={option === (currentVal || selected) ? "item active" : "item"}
         data-name={dataName}
         data-value={option}
         onClick={handleSelection}>
         <p>{capitalize(option)}</p>
-        <div className={option === currentVal ? "check active" : "check"}>
+        <div
+          className={
+            option === (currentVal || selected) ? "check active" : "check"
+          }>
           <Check />
         </div>
       </li>
@@ -93,11 +99,14 @@ export default function DropdownMenu({
     return (
       <li
         key={index}
-        className={option === currentVal ? "item active" : "item"}
+        className={option === (currentVal || selected) ? "item active" : "item"}
         data-name={option}
         onClick={handleSelection}>
         <p data-name={option}>{option}</p>
-        <div className={option === currentVal ? "check active" : "check"}>
+        <div
+          className={
+            option === (currentVal || selected) ? "check active" : "check"
+          }>
           <Check />
         </div>
       </li>

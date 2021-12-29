@@ -6,6 +6,7 @@ import DropdownMenu from "./DropdownMenu";
 
 import { filterOptions } from "../lib/config";
 import ArrowDown from "./Icons/ArrowDown";
+import { useSortFilter } from "../lib/hooks/context/sortFilter";
 
 const MainMenuStyles = styled.div`
   background: var(--darkBlue);
@@ -45,7 +46,8 @@ const BtnStyles = styled.button`
 
 export default function MainMenu() {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState("Most Upvotes");
+  const { selected } = useSortFilter();
+  // const [selected, setSelected] = useState("Most Upvotes");
 
   function closeDropdown() {
     // closes the dropdown menu when item is clicked

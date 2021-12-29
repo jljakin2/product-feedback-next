@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Head from "next/head";
 
 import Logo from "../components/Logo";
@@ -11,6 +12,7 @@ import TagMenu from "../components/TagMenu";
 import RoadmapMenu from "../components/RoadmapMenu";
 import { useMobileMenu } from "../lib/hooks/context/mobileMenuState";
 import { useEffect } from "react";
+import { useSortFilter } from "../lib/hooks/context/sortFilter";
 
 const HomeStyles = styled.div`
   header {
@@ -53,19 +55,38 @@ const HomeStyles = styled.div`
 
 export default function Home() {
   const { menuIsOpen, closeMobileMenu } = useMobileMenu();
+  const { selected, sortSuggestions, filterSuggestions, tag } = useSortFilter();
+  const [products, setProducts] = useState();
+
+  const { data, error, loading } = useSuggestions();
 
   useEffect(() => {
+    // let suggestions = sortSuggestions(data?.allSuggestions, selected);
+    // setProducts(suggestions);
+    if (tag === "all") {
+      setProducts(sortSuggestions(data?.allSuggestions, selected));
+    } else {
+      let suggestions = data?.allSuggestions.filter(
+        item => item.category === tag
+      );
+      setProducts(sortSuggestions(suggestions, selected));
+    }
+    // console.log(
+    //   filterSuggestions(sortSuggestions(data?.allSuggestions, selected), tag)
+    // );
+    // console.log(tag);
+    // console.log(
+    //   data?.allSuggestions.filter(item => item.category === "feature")
+    // );
+
     return function cleanup() {
       closeMobileMenu();
     };
-  }, []);
-
-  const { data, error, loading } = useSuggestions();
+  }, [data, selected, tag]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Oops, something went wrong {error.message}</p>;
 
-  const products = data?.allSuggestions;
   const renderedProducts =
     products &&
     products.map(product => (

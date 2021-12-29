@@ -3,7 +3,7 @@ import { ApolloProvider } from "@apollo/client";
 import apolloClient from "../lib/apollo";
 import Page from "../components/Page";
 import { MobileMenuStateProvider } from "../lib/hooks/context/mobileMenuState";
-import { CurrentUserStateProvider } from "../lib/hooks/context/currentUser";
+import { SortFilterStateProvider } from "../lib/hooks/context/sortFilter";
 
 // import "../components/styles/nprogress.css";
 // import withData from "../lib/withData";
@@ -16,13 +16,13 @@ import { CurrentUserStateProvider } from "../lib/hooks/context/currentUser";
 function MyApp({ Component, pageProps }) {
   return (
     <ApolloProvider client={apolloClient}>
-      <CurrentUserStateProvider>
+      <SortFilterStateProvider>
         <MobileMenuStateProvider>
           <Page>
             <Component {...pageProps} />
           </Page>
         </MobileMenuStateProvider>
-      </CurrentUserStateProvider>
+      </SortFilterStateProvider>
     </ApolloProvider>
   );
 }

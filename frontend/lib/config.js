@@ -1,4 +1,11 @@
-export const categoryOptions = ["feature", "UI", "UX", "enhancement", "bug"];
+export const categoryOptions = [
+  "all",
+  "feature",
+  "UI",
+  "UX",
+  "enhancement",
+  "bug",
+];
 export const statusOptions = [
   "suggestion",
   "planned",
