@@ -9,6 +9,7 @@ import ArrowUp from "../Icons/ArrowUp";
 // helpers
 import useUpdateUpvote from "../../lib/hooks/mutations/useUpdateUpvote";
 import useCurrentUser from "../../lib/hooks/queries/useCurrentUser";
+import { media } from "../../lib/config";
 
 // ===== STYLING =====
 const BtnStyles = styled.button`
@@ -27,6 +28,13 @@ const BtnStyles = styled.button`
   width: fit-content;
   padding: 0.5rem 1rem;
 
+  ${media.tablet} {
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 0.75rem 0.5rem;
+  }
+
   &:hover {
     background: ${({ isVoted }) =>
       isVoted ? "var(--blue)" : "var(--greyBlueLight2)"};
@@ -36,6 +44,10 @@ const BtnStyles = styled.button`
     color: ${({ isVoted }) => (isVoted ? "var(--white)" : "var(--text)")};
 
     margin-left: 0.5rem;
+
+    ${media.tablet} {
+      margin: 0.5rem 0 0 0;
+    }
   }
 `;
 // ===== END OF STYLING =====

@@ -22,7 +22,7 @@ const GlobalStyles = createGlobalStyle`
   
   html {
     box-sizing: border-box;
-    font-size: 100%;
+    font-size: 100%; // 16px
   }
 
   *, *::before, *::after {

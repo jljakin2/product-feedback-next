@@ -9,9 +9,14 @@ import useSingleSuggestion from "../../lib/hooks/queries/useSingleSuggestion";
 
 import SuggestionCard from "../../components/SuggestionCard";
 import AddCommentForm from "../../components/Comments/AddCommentForm";
+import { media } from "../../lib/config";
 
 const PageStyles = styled.div`
   padding: 1.5rem 1.5rem;
+
+  ${media.tablet} {
+    padding: 3.5rem 2.5rem 1.5rem 2.5rem;
+  }
 
   header {
     display: flex;

@@ -21,3 +21,15 @@ export const filterOptions = [
 ];
 
 export const user = "61ba6848fe09b43f32591efe";
+
+export const roadmapColors = {
+  planned: "var(--orange)",
+  inProgress: "var(--purple)",
+  live: "var(--lightBlue)",
+};
+
+export const media = {
+  tablet: "@media only screen and (min-width: 37.5em)", // 600px
+  laptop: "@media only screen and (min-width: 75em)", // 1200px
+  desktop: "@media only screen and (min-width: 93.75em)", // 1500px
+};

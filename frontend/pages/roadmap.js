@@ -7,7 +7,7 @@ import GoBackBtn from "../components/Buttons/GoBackBtn";
 import AddFeedbackBtn from "../components/Buttons/AddFeedbackBtn";
 import useSuggestions from "../lib/hooks/queries/useSuggestions";
 
-import roadmapColors from "../lib/roadmapColors";
+import { roadmapColors } from "../lib/config";
 
 const RoadMapStyles = styled.div`
   header {

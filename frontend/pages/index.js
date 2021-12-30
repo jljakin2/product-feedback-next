@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Head from "next/head";
+import { useMediaQuery } from "react-responsive";
 
 import Logo from "../components/Logo";
 import MainMenu from "../components/MainMenu";
@@ -13,14 +14,31 @@ import RoadmapMenu from "../components/RoadmapMenu";
 import { useMobileMenu } from "../lib/hooks/context/mobileMenuState";
 import { useEffect } from "react";
 import { useSortFilter } from "../lib/hooks/context/sortFilter";
+import { media } from "../lib/config";
 
 const HomeStyles = styled.div`
   header {
     position: relative;
+
+    ${media.tablet} {
+      display: flex;
+      column-gap: 1rem;
+
+      padding: 3.5rem 2.5rem 1.5rem 2.5rem;
+
+      & > * {
+        border-radius: 0.625rem;
+        flex: 1;
+      }
+    }
   }
 
   main {
     padding: 1rem 1.5rem;
+
+    ${media.tablet} {
+      padding: 1rem 2.5rem 2.5rem 2.5rem;
+    }
   }
 
   .black-out {
@@ -54,6 +72,11 @@ const HomeStyles = styled.div`
 `;
 
 export default function Home() {
+  // media query that looks to differentiate desktop vs table/mobile in order to show/hide hamburger in navbar
+  const isMobile = useMediaQuery({
+    query: "(max-width: 550px)",
+  });
+
   const { menuIsOpen, closeMobileMenu } = useMobileMenu(); // context state and helper function for opening and closing mobile menu
   const { selected, sortSuggestions, tag } = useSortFilter(); // context state and helper functions for tracking which sort and filter option is selected and sorting the suggestions
   const [products, setProducts] = useState(); // state to keep track of current suggestions to be shown to user. NOTE: i used "products" initially even though it is suggestions. will need to replace
@@ -106,6 +129,22 @@ export default function Home() {
     </div>
   );
 
+  const mobileHeader = (
+    <header>
+      <Logo />
+      {mobileMenu}
+      <MainMenu />
+    </header>
+  );
+
+  const tabletHeader = (
+    <header className="top">
+      <Logo />
+      <TagMenu />
+      <RoadmapMenu productRequests={products} />
+    </header>
+  );
+
   return (
     <HomeStyles>
       <Head>
@@ -113,13 +152,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header>
-        <Logo />
-        {mobileMenu}
-        <MainMenu />
-      </header>
+      {isMobile ? mobileHeader : tabletHeader}
+
       {/* // if products exist, render them, otherwise render the empty state */}
-      <main>{products ? renderedProducts : <EmptyState />}</main>
+      <main>
+        {!isMobile && <MainMenu numOfSuggestions={products?.length} />}
+        {products ? renderedProducts : <EmptyState />}
+      </main>
     </HomeStyles>
   );
 }

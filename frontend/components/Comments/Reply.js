@@ -2,6 +2,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
+import PropTypes from "prop-types";
 
 // components
 import AddReplyForm from "./AddReplyForm";

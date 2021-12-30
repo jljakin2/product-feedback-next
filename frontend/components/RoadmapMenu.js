@@ -8,7 +8,7 @@ import Dot from "./Dot";
 
 // helpers
 import capitalize from "../lib/capitalize";
-import roadmapColors from "../lib/roadmapColors";
+import { media, roadmapColors } from "../lib/config";
 
 // ===== STYLING =====
 const RoadmapMenuStyles = styled.div`
@@ -62,7 +62,7 @@ const RoadmapMenuStyles = styled.div`
 export default function RoadmapMenu({ productRequests }) {
   function getNumOfStatus(products, status) {
     // take all products and find the total number of suggestions that match the given status
-    return products.filter(product => product.status === status).length;
+    return products?.filter(product => product.status === status).length;
   }
 
   // MAP ROWS FOR STATUS OF EACH STATUS TYPE

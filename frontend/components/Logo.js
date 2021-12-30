@@ -1,13 +1,17 @@
 // third-party
 import styled from "styled-components";
+import { useMediaQuery } from "react-responsive";
 
 // components
 import Close from "./Icons/Close";
 import Hamburger from "./Icons/Hamburger";
 import backgroundMobile from "../public/suggestions/mobile/background-header.png";
+import backgroundTablet from "../public/suggestions/tablet/background-header.png";
+import backgroundDesktop from "../public/suggestions/desktop/background-header.png";
 
 // helpers
 import { useMobileMenu } from "../lib/hooks/context/mobileMenuState";
+import { media } from "../lib/config";
 
 // ==== STYLING =====
 const LogoStyles = styled.div`
@@ -25,6 +29,14 @@ const LogoStyles = styled.div`
 
   z-index: 1000;
 
+  ${media.tablet} {
+    background-image: url(${backgroundTablet.src});
+
+    align-items: flex-end;
+
+    padding: 1.5rem;
+  }
+
   h3 {
     margin-bottom: 0.25rem;
   }
@@ -32,6 +44,10 @@ const LogoStyles = styled.div`
 // ===== END OF STYLING =====
 
 export default function Logo() {
+  const isMobile = useMediaQuery({
+    query: "(max-width: 550px)",
+  });
+
   const { menuIsOpen, toggleMobileMenu } = useMobileMenu(); // context state to toggle mobile menu
 
   return (
@@ -40,9 +56,11 @@ export default function Logo() {
         <h3>Frontend Mentor</h3>
         <p>Feedback Board</p>
       </div>
-      <div onClick={toggleMobileMenu}>
-        {!menuIsOpen ? <Hamburger /> : <Close />}
-      </div>
+      {isMobile && (
+        <div onClick={toggleMobileMenu}>
+          {!menuIsOpen ? <Hamburger /> : <Close />}
+        </div>
+      )}
     </LogoStyles>
   );
 }

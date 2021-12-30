@@ -15,10 +15,10 @@ export default function ArrowUp({ light }) {
   );
 }
 
-ArrowLeft.defaultProps = {
+ArrowUp.defaultProps = {
   light: false,
 };
 
-ArrowLeft.propTypes = {
+ArrowUp.propTypes = {
   light: PropTypes.bool,
 };

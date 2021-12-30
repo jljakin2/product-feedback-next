@@ -1,15 +1,19 @@
 // third-party
 import { useState } from "react";
 import styled from "styled-components";
+import { useMediaQuery } from "react-responsive";
+import PropTypes from "prop-types";
 
 // components
 import AddFeedbackBtn from "./Buttons/AddFeedbackBtn";
 import DropdownMenu from "./DropdownMenu";
 import ArrowDown from "./Icons/ArrowDown";
+import SuggestionsIcon from "./Icons/SuggestionsIcon";
 
 // helpers
 import { filterOptions } from "../lib/config";
 import { useSortFilter } from "../lib/hooks/context/sortFilter";
+import { media } from "../lib/config";
 
 // ===== STYLING =====
 const MainMenuStyles = styled.div`
@@ -21,7 +25,25 @@ const MainMenuStyles = styled.div`
   align-items: center;
   position: relative;
 
-  padding: 0.5rem 1.5rem;
+  padding: 1rem 1.5rem;
+
+  ${media.tablet} {
+    border-radius: 0.625rem;
+
+    justify-content: flex-start;
+
+    & svg {
+      margin-right: 1rem;
+    }
+
+    & h3 {
+      margin-right: 2.25rem;
+    }
+
+    & button:not(:first-child) {
+      margin-left: auto;
+    }
+  }
 
   div {
     display: flex;
@@ -36,6 +58,10 @@ const MainMenuStyles = styled.div`
     position: absolute;
     top: 4rem;
     left: 5rem;
+
+    ${media.tablet} {
+      left: 15rem;
+    }
   }
 `;
 
@@ -49,7 +75,11 @@ const BtnStyles = styled.button`
 `;
 // ===== END OF STYLING =====
 
-export default function MainMenu() {
+export default function MainMenu({ numOfSuggestions }) {
+  const isMobile = useMediaQuery({
+    query: "(max-width: 550px)",
+  });
+
   const [isOpen, setIsOpen] = useState(false); // is the dropdown open or not
   const { selected } = useSortFilter(); // state context for which sort options is selected
 
@@ -60,6 +90,12 @@ export default function MainMenu() {
 
   return (
     <MainMenuStyles data-testid="menu">
+      {!isMobile && <SuggestionsIcon />}
+      {!isMobile && (
+        <h3>{`${numOfSuggestions ? numOfSuggestions : 0} ${
+          numOfSuggestions === 1 ? "Suggestion" : "Suggestions"
+        }`}</h3>
+      )}
       <div>
         <p>Sort by:</p>
         <div onClick={() => setIsOpen(!isOpen)}>

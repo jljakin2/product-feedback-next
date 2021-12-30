@@ -12,6 +12,7 @@ import Dot from "./Dot";
 // helpers
 import capitalize from "../lib/capitalize";
 import roadmapColors from "../lib/roadmapColors";
+import { media } from "../lib/config";
 
 // ===== STYLING =====
 const SuggestionCardStyles = styled.div`
@@ -31,6 +32,14 @@ const SuggestionCardStyles = styled.div`
   padding: 1.5rem;
   margin-top: 1rem;
   width: 100%;
+
+  ${media.tablet} {
+    grid:
+      "upvotes main comments" 1fr
+      / 1fr 7fr 1fr;
+
+    padding: 1.75rem 2rem;
+  }
 
   &:hover h4 {
     color: ${({ clickable }) => (clickable ? "var(--blue)" : "var(--text)")};
