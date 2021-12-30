@@ -1,10 +1,13 @@
+// third-party
 import { useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 
+// components
 import AddReplyForm from "./AddReplyForm";
 import CommentHeaderStyles from "../styles/CommentHeaderStyles";
 
+// ===== STYLING =====
 const ReplyStyles = styled.div`
   padding: 1.5rem 0 0 1.5rem;
 
@@ -14,9 +17,10 @@ const ReplyStyles = styled.div`
     font-weight: 800;
   }
 `;
+// ===== END OF STYLING =====
 
 export default function Reply({ reply, commentId }) {
-  const [replyToReply, setReplyToReply] = useState(false);
+  const [replyToReply, setReplyToReply] = useState(false); // toggle reply form
 
   // callback function to allow the form to close when it is submitted
   function closeReplyToReply() {
@@ -56,3 +60,8 @@ export default function Reply({ reply, commentId }) {
     </ReplyStyles>
   );
 }
+
+Reply.propTypes = {
+  reply: PropTypes.object,
+  commentId: PropTypes.string,
+};

@@ -1,9 +1,12 @@
-import PropTypes from "prop-types";
+// third-party
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
+// helpers
 import capitalize from "../lib/capitalize";
 import { useSortFilter } from "../lib/hooks/context/sortFilter";
 
+// ===== STYLING =====
 const TagStyles = styled.div`
   background: ${({ active }) => (active ? "var(--blue)" : "var(--grey)")};
   border-radius: 0.625rem;
@@ -26,6 +29,7 @@ const TagStyles = styled.div`
         : "var(--grey)"};
   }
 `;
+// ===== END OF STYLING =====
 
 const Tag = ({ category, isClickable, active }) => {
   const { setTag } = useSortFilter();

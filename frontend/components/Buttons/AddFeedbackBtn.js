@@ -1,9 +1,9 @@
+// third-party
 import Link from "next/link";
 import PropTypes from "prop-types";
-import Plus from "../Icons/Plus";
 
-// use submit prop to use the AddFeedbackBtn as a form submit button.
-// otherwise defaults to Link version of btn that takes user to form page
+// components
+import Plus from "../Icons/Plus";
 export default function AddFeedbackBtn({ full, submit }) {
   return submit ? (
     <button type="submit" className={`btn purple ${full && "full"}`}>
@@ -26,6 +26,6 @@ AddFeedbackBtn.defaultProps = {
 };
 
 AddFeedbackBtn.prototypes = {
-  full: PropTypes.bool,
-  submit: PropTypes.bool,
+  full: PropTypes.bool, // does the button need to span across its entire parent?
+  submit: PropTypes.bool, // is the button being used to actually submit a form or to send the user to the form?
 };

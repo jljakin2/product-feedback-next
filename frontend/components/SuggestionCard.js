@@ -1,15 +1,19 @@
+// third-party
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import Link from "next/link";
 
+// components
 import UpVoteBtn from "./Buttons/UpVoteBtn";
 import Tag from "./Tag";
 import CommentsBtn from "./Buttons/CommentsBtn";
 import Dot from "./Dot";
 
+// helpers
 import capitalize from "../lib/capitalize";
 import roadmapColors from "../lib/roadmapColors";
 
+// ===== STYLING =====
 const SuggestionCardStyles = styled.div`
   background: var(--white);
   border-radius: 0.625rem;
@@ -75,6 +79,7 @@ const SuggestionCardStyles = styled.div`
     }
   }
 `;
+// ===== END OF STYLING =====
 
 export default function SuggestionCard({
   product,
@@ -84,6 +89,7 @@ export default function SuggestionCard({
   id,
 }) {
   return (
+    // if the component isn't supposed to be clickable we set the Link href to # so if the user does click on it they won't go anywhere
     <Link href={clickable ? `/suggestion/${id}` : "#"} passHref>
       <SuggestionCardStyles
         roadmap={roadmap}
@@ -128,6 +134,7 @@ SuggestionCard.defaultProps = {
 SuggestionCard.propTypes = {
   product: PropTypes.object,
   roadmap: PropTypes.bool,
-  statusView: PropTypes.string,
   clickable: PropTypes.bool,
+  statusView: PropTypes.string,
+  id: PropTypes.string,
 };

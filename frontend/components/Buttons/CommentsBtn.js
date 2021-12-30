@@ -1,8 +1,13 @@
+// third-party
 import styled from "styled-components";
+import PropTypes from "prop-types";
 import Link from "next/link";
 
+// components
 import CommentsIcon from "../Icons/CommentsIcon";
+import Comments from "../Icons/CommentsIcon";
 
+// ===== STYLING =====
 const BtnStyles = styled.button`
   background: transparent;
 
@@ -14,6 +19,7 @@ const BtnStyles = styled.button`
     margin-left: 0.5rem;
   }
 `;
+// ===== END OF STYLING =====
 
 export default function CommentsBtn({ numOfComments, id }) {
   return (
@@ -25,3 +31,8 @@ export default function CommentsBtn({ numOfComments, id }) {
     </Link>
   );
 }
+
+Comments.propTypes = {
+  numOfComments: PropTypes.number,
+  id: PropTypes.string,
+};

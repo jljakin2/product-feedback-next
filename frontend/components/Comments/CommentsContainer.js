@@ -1,7 +1,11 @@
+// third-party
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
+// components
 import CommentItem from "./CommentItem";
 
+// ===== STYLING =====
 const CommentsContainerStyles = styled.div`
   background: var(--white);
   border-radius: 0.625rem;
@@ -9,8 +13,10 @@ const CommentsContainerStyles = styled.div`
   margin: 1.5rem 0 -1.5rem 0;
   padding: 1.5rem;
 `;
+// ===== END OF STYLING =====
 
 export default function CommentsContainer({ comments }) {
+  // MAP COMMENTS
   const renderedComments = comments.map(comment => {
     return <CommentItem key={comment.id} comment={comment} />;
   });
@@ -24,3 +30,7 @@ export default function CommentsContainer({ comments }) {
     </CommentsContainerStyles>
   );
 }
+
+CommentsContainer.propTypes = {
+  comments: PropTypes.array,
+};

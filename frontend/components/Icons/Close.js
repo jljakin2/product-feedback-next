@@ -1,8 +1,11 @@
+// third-party
 import styled from "styled-components";
 
+// ===== STYLING =====
 const CloseStyles = styled.svg`
   cursor: pointer;
 `;
+// ===== END OF STYLING =====
 
 export default function Close() {
   return (

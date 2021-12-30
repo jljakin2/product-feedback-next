@@ -1,9 +1,12 @@
+// third-party
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 
+// components
 import ArrowLeft from "../Icons/ArrowLeft";
 
+// ===== STYLING =====
 const BtnStyles = styled.button`
   p {
     color: ${({ light }) => (light ? "var(--white)" : "var(--text)")};
@@ -14,6 +17,7 @@ const BtnStyles = styled.button`
     }
   }
 `;
+// ===== END OF STYLING =====
 
 export default function GoBackBtn({ light }) {
   const router = useRouter();

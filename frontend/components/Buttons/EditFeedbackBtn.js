@@ -1,4 +1,6 @@
+// third-party
 import Link from "next/link";
+import PropTypes from "prop-types";
 
 export default function EditFeedbackBtn({ id }) {
   return (
@@ -7,3 +9,7 @@ export default function EditFeedbackBtn({ id }) {
     </Link>
   );
 }
+
+EditFeedbackBtn.propTypes = {
+  id: PropTypes.string,
+};

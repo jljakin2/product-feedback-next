@@ -54,16 +54,18 @@ const HomeStyles = styled.div`
 `;
 
 export default function Home() {
-  const { menuIsOpen, closeMobileMenu } = useMobileMenu();
-  const { selected, sortSuggestions, tag } = useSortFilter();
-  const [products, setProducts] = useState();
+  const { menuIsOpen, closeMobileMenu } = useMobileMenu(); // context state and helper function for opening and closing mobile menu
+  const { selected, sortSuggestions, tag } = useSortFilter(); // context state and helper functions for tracking which sort and filter option is selected and sorting the suggestions
+  const [products, setProducts] = useState(); // state to keep track of current suggestions to be shown to user. NOTE: i used "products" initially even though it is suggestions. will need to replace
 
-  const { data, error, loading } = useSuggestions();
+  const { data, error, loading } = useSuggestions(); // call api to get the data
 
   useEffect(() => {
     if (tag === "all") {
+      // if the tag is equal to "all" we don't need to do any filtering before running the sorting and setting the sorted suggestions to the product state
       setProducts(sortSuggestions(data?.allSuggestions, selected));
     } else {
+      // otherwise, filter the suggestions first then do the sorting
       let suggestions = data?.allSuggestions.filter(
         item => item.category === tag
       );
@@ -71,13 +73,16 @@ export default function Home() {
     }
 
     return function cleanup() {
+      // clean up function to make sure the mobile menu closes whenever the page changes or a filter/sort is selected
       closeMobileMenu();
     };
-  }, [data, selected, tag]);
+  }, [data, selected, tag]); // keeping track of the following variables to the filtering and sorting happen dynamically
 
+  // TODO: handle loading and errors properly
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Oops, something went wrong {error.message}</p>;
 
+  // MAP OVER SUGGESTIONS
   const renderedProducts =
     products &&
     products.map(product => (
@@ -88,11 +93,13 @@ export default function Home() {
         clickable
       />
     ));
+
+  // MOBILE MENU
   const mobileMenu = menuIsOpen && (
     <div className="black-out">
       <div className="mobile-menu">
         <div className="tags">
-          <TagMenu productRequests={products} />
+          <TagMenu />
         </div>
         <RoadmapMenu productRequests={products} />
       </div>

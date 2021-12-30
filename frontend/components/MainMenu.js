@@ -1,13 +1,17 @@
+// third-party
 import { useState } from "react";
 import styled from "styled-components";
 
+// components
 import AddFeedbackBtn from "./Buttons/AddFeedbackBtn";
 import DropdownMenu from "./DropdownMenu";
-
-import { filterOptions } from "../lib/config";
 import ArrowDown from "./Icons/ArrowDown";
+
+// helpers
+import { filterOptions } from "../lib/config";
 import { useSortFilter } from "../lib/hooks/context/sortFilter";
 
+// ===== STYLING =====
 const MainMenuStyles = styled.div`
   background: var(--darkBlue);
   color: var(--white);
@@ -43,22 +47,17 @@ const BtnStyles = styled.button`
   display: flex;
   align-items: center;
 `;
+// ===== END OF STYLING =====
 
 export default function MainMenu() {
-  const [isOpen, setIsOpen] = useState(false);
-  const { selected } = useSortFilter();
-  // const [selected, setSelected] = useState("Most Upvotes");
+  const [isOpen, setIsOpen] = useState(false); // is the dropdown open or not
+  const { selected } = useSortFilter(); // state context for which sort options is selected
 
   function closeDropdown() {
     // closes the dropdown menu when item is clicked
     setIsOpen(false);
   }
-  // ! will probably have to remove this function and add it to "index" page then pass through to dropdown via this component
-  function handleSelected(selection) {
-    setSelected(selection);
-  }
 
-  // !TODO: update FilterMenu to reflect which state the data is in and filter the data appropriately
   return (
     <MainMenuStyles data-testid="menu">
       <div>
@@ -75,7 +74,6 @@ export default function MainMenu() {
           <DropdownMenu
             options={filterOptions}
             closeDropdown={closeDropdown}
-            handleSelected={handleSelected}
             currentVal={selected}
           />
         </div>

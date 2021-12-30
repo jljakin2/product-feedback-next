@@ -1,12 +1,18 @@
+// third-party
 import { useState } from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
-import useForm from "../../lib/useForm";
+// components
 import FormStyles from "../styles/FormStyles";
-import useCreateReply from "../../lib/hooks/mutations/useCreateReply";
-import { validateReplyForm } from "../../lib/validateForms";
 import InputError from "../InputError";
 
+// helpers
+import useForm from "../../lib/useForm";
+import useCreateReply from "../../lib/hooks/mutations/useCreateReply";
+import { validateReplyForm } from "../../lib/validateForms";
+
+// ===== STYLING =====
 const AddReplyFormStyles = styled.div`
   form {
     margin-top: 1rem;
@@ -22,6 +28,7 @@ const AddReplyFormStyles = styled.div`
     align-self: flex-end;
   }
 `;
+// ===== END OF STYLING =====
 
 export default function AddReplyForm({
   reply,
@@ -30,10 +37,11 @@ export default function AddReplyForm({
   commentId,
   replyingToId,
 }) {
+  // use form helper function to keep track of everything related to the form
   const { inputs, handleChange, resetForm } = useForm({
     reply: "",
   });
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({}); // keep track of any errors returned from the validation helper
 
   // hook to create reply mutation
   const { createReply, loading, error } = useCreateReply(
@@ -45,14 +53,16 @@ export default function AddReplyForm({
   async function handleReply(e) {
     e.preventDefault();
 
+    // check if there are any errors and update the errors state if there are any
     const formErrors = validateReplyForm(inputs);
     setErrors(formErrors);
 
+    // as long as there aren't any errors
     if (Object.keys(formErrors).length === 0) {
       const res = await createReply();
 
       resetForm();
-      reply ? closeReplyToReply() : closeReplyToComment();
+      reply ? closeReplyToReply() : closeReplyToComment(); // this component is being used for replying to comments and replies so the function to close them are different
     }
   }
 
@@ -66,6 +76,7 @@ export default function AddReplyForm({
               name="reply"
               value={inputs.reply}
               onChange={handleChange}
+              // ux choice to remove errors for this field whenever there is a keydown in the field
               onKeyDown={() => setErrors({ ...errors, reply: "" })}></textarea>
             {errors.reply && <InputError>{errors.reply}</InputError>}
           </div>
@@ -78,4 +89,12 @@ export default function AddReplyForm({
 
 AddReplyForm.defaultProps = {
   reply: false, // is the component being used for a reply to reply form or a reply to comment form? Toggles which callback function is used to close the form when submitted
+};
+
+AddReplyForm.propTypes = {
+  reply: PropTypes.bool, // is the component being used for a reply to a reply?
+  closeReplyToComment: PropTypes.func, // callback function to close the reply form when replying to a comment
+  closeReplyToReply: PropTypes.func, // callback function to close the reply form when replying to a reply
+  commentId: PropTypes.string, // which comment is being replied to?
+  replyingToId: PropTypes.string, // who is being replied to?
 };

@@ -1,14 +1,16 @@
+// third-party
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
+// components
 import ArrowUp from "../Icons/ArrowUp";
-import useUpdateUpvote from "../../lib/hooks/mutations/useUpdateUpvote";
 
+// helpers
+import useUpdateUpvote from "../../lib/hooks/mutations/useUpdateUpvote";
 import useCurrentUser from "../../lib/hooks/queries/useCurrentUser";
 
-// import { useUser } from "../../lib/hooks/context/currentUser";
-
+// ===== STYLING =====
 const BtnStyles = styled.button`
   background: ${({ isVoted }) => (isVoted ? "var(--blue)" : "var(--grey)")};
   border-radius: 0.625rem;
@@ -36,23 +38,24 @@ const BtnStyles = styled.button`
     margin-left: 0.5rem;
   }
 `;
+// ===== END OF STYLING =====
 
 export default function UpVoteBtn({ numOfVotes, id }) {
-  // const { user, addUpvote, checkIfVoted } = useUser();
-  // const userUpvotes = JSON.parse(localStorage.getItem("user")).upvotes;
+  const { data, userLoading, userError } = useCurrentUser(); // get the current user so we can update their upvotes
+  const userId = data?.allUsers[0].id; // look complicated but just gets the id from the returned data object. it is a very nested piece of data
+  const rawUpvotes = data?.allUsers[0].upvotes; // same silly complicated mess but just gets the upvotes
+  const upvotes = rawUpvotes?.map(vote => vote.id); // upvotes had some extra garbage attached to them so this just gets the final integer
 
-  const { data, userLoading, userError } = useCurrentUser();
-  const userId = data?.allUsers[0].id;
-  const rawUpvotes = data?.allUsers[0].upvotes;
-  const upvotes = rawUpvotes?.map(vote => vote.id);
+  const [isVoted, setIsVoted] = useState(upvotes?.includes(id)); // has the button been clicked by the current user already? initial state checks if the suggestion id is in the user's list of upvotes
 
-  const [isVoted, setIsVoted] = useState(upvotes?.includes(id));
   useEffect(() => {
+    // whenever the upvotes variable changes, let's rerun the isVoted state to update whether or not the button appears as voted or not
     setIsVoted(upvotes?.includes(id));
   }, [upvotes]);
 
   // handle creation of new upvote
   const newUpvoteAmount = numOfVotes + 1;
+  // TODO: properly handle loading and error
   const { updateUpvote, loading, error } = useUpdateUpvote(
     id,
     newUpvoteAmount,
@@ -65,7 +68,7 @@ export default function UpVoteBtn({ numOfVotes, id }) {
     // as long as the user hasn't already upvoted the suggestion
     if (!isVoted) {
       updateUpvote(); // call mutation that adds 1 to the upvote count
-      setIsVoted(true);
+      setIsVoted(true); // we know for sure the user has upvoted this button so we set isVoted to true
     }
   }
 

@@ -1,13 +1,16 @@
+// third-party
 import Link from "next/link";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
+// components
 import Dot from "./Dot";
 
+// helpers
 import capitalize from "../lib/capitalize";
 import roadmapColors from "../lib/roadmapColors";
 
-import useSuggestions from "../lib/hooks/queries/useSuggestions";
-
+// ===== STYLING =====
 const RoadmapMenuStyles = styled.div`
   background: var(--white);
   border-radius: 0.625rem;
@@ -54,6 +57,7 @@ const RoadmapMenuStyles = styled.div`
     }
   }
 `;
+// ===== END OF STYLING =====
 
 export default function RoadmapMenu({ productRequests }) {
   function getNumOfStatus(products, status) {
@@ -61,6 +65,7 @@ export default function RoadmapMenu({ productRequests }) {
     return products.filter(product => product.status === status).length;
   }
 
+  // MAP ROWS FOR STATUS OF EACH STATUS TYPE
   const renderedStatusContent = Object.keys(roadmapColors).map((key, index) => {
     return (
       <div key={index} className="content-row">
@@ -84,3 +89,7 @@ export default function RoadmapMenu({ productRequests }) {
     </RoadmapMenuStyles>
   );
 }
+
+RoadmapMenu.propTypes = {
+  productRequests: PropTypes.array,
+};

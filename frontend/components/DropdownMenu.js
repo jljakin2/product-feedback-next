@@ -1,11 +1,15 @@
+// third-party
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
+// components
 import Check from "./Icons/Check";
 
+// helpers
 import capitalize from "../lib/capitalize";
 import { useSortFilter } from "../lib/hooks/context/sortFilter";
 
+// ===== STYLING =====
 const DropdownMenuStyles = styled.ul`
   background: var(--white);
   border-radius: 0.625rem;
@@ -53,29 +57,29 @@ const DropdownMenuStyles = styled.ul`
     color: var(--purple);
   }
 `;
+// ===== END OF STYLING =====
 
 export default function DropdownMenu({
   form,
   options,
   dataName,
   dropdownSelection,
-  handleSelected,
   closeDropdown,
   currentVal,
 }) {
-  const { selected, setSelected } = useSortFilter();
+  const { selected, setSelected } = useSortFilter(); // context state for dropdown selection and setting that selection
 
   function handleSelection(e) {
     if (form) {
-      dropdownSelection(e);
+      dropdownSelection(e); // reference to helper function from useForm that takes in the event and grabs the name and value from the [data-] attributes
     } else {
-      setSelected(e.target.getAttribute("data-name"));
-      // handleSelected(e.target.getAttribute("data-name"));
+      setSelected(e.target.getAttribute("data-name")); // uses the context api to set the selected to the [data-name] attribute. this is used only for non-form dropdowns
     }
 
     closeDropdown();
   }
 
+  // MAP DROPDOWN ITEMS FOR FORMS
   const renderedFormItems = options.map((option, index) => {
     return (
       <li
@@ -95,6 +99,7 @@ export default function DropdownMenu({
     );
   });
 
+  // MAP DROPDOWN ITEMS FOR NON-FORMS
   const renderedMenuItems = options.map((option, index) => {
     return (
       <li
@@ -132,7 +137,6 @@ DropdownMenu.propTypes = {
   dataName: PropTypes.string, // name being used for data attribute so we can grab item based on e.target.getAttribute("data-name"). e.g. "category", "status", etc.
   options: PropTypes.array, // list of options for the dropdown component. comes from the config file
   handleDropdownChange: PropTypes.func, // function from useForm hook that updates the inputs state based on the dropdown selection
-  handleSelected: PropTypes.func, // passed from "index" page so it can be updated based on what item in the dropdown is clicked
   closeDropdown: PropTypes.func, // updates local state for dropdown so when item is selected, the dropdown is closed
   currentVal: PropTypes.string, // state for what is currently selected
 };

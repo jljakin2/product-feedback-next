@@ -1,8 +1,11 @@
+// third-party
 import styled from "styled-components";
 
+// components
 import EmptyStateIcon from "./Icons/EmptyStateIcon";
 import AddFeedbackBtn from "./Buttons/AddFeedbackBtn";
 
+// ===== STYLING =====
 const EmptyStateStyles = styled.div`
   background: var(--white);
   text-align: center;
@@ -26,6 +29,7 @@ const EmptyStateStyles = styled.div`
     margin-bottom: 2rem;
   }
 `;
+// ===== END OF STYLING =====
 
 export default function EmptyState() {
   return (

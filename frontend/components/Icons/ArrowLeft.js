@@ -1,3 +1,4 @@
+// third-party
 import PropTypes from "prop-types";
 
 export default function ArrowLeft({ light }) {

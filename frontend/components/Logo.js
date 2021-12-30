@@ -1,10 +1,15 @@
+// third-party
 import styled from "styled-components";
-import Hamburger from "./Icons/Hamburger";
-import Close from "./Icons/Close";
 
+// components
+import Close from "./Icons/Close";
+import Hamburger from "./Icons/Hamburger";
 import backgroundMobile from "../public/suggestions/mobile/background-header.png";
+
+// helpers
 import { useMobileMenu } from "../lib/hooks/context/mobileMenuState";
 
+// ==== STYLING =====
 const LogoStyles = styled.div`
   background-image: url(${backgroundMobile.src});
   background-size: cover;
@@ -24,9 +29,10 @@ const LogoStyles = styled.div`
     margin-bottom: 0.25rem;
   }
 `;
+// ===== END OF STYLING =====
 
 export default function Logo() {
-  const { menuIsOpen, toggleMobileMenu } = useMobileMenu();
+  const { menuIsOpen, toggleMobileMenu } = useMobileMenu(); // context state to toggle mobile menu
 
   return (
     <LogoStyles data-testid="logo">

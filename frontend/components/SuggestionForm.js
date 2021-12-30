@@ -1,31 +1,33 @@
+// third-party
 import { useState } from "react";
+import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 
+// components
 import AddFeedbackBtn from "./Buttons/AddFeedbackBtn";
 import CancelBtn from "./Buttons/CancelBtn";
 import DeleteBtn from "./Buttons/DeleteBtn";
-
-import useForm from "../lib/useForm";
-import useCreateSingleSuggestion from "../lib/hooks/mutations/useCreateSingleSuggestion";
-import FormStyles, { CustomDropdownStyles } from "./styles/FormStyles";
 import DropdownMenu from "./DropdownMenu";
 import InputError from "./InputError";
-
-import { categoryOptions, statusOptions } from "../lib/config"; // options for dropdown menus
 import ArrowDown from "./Icons/ArrowDown";
 import ArrowUp from "./Icons/ArrowUp";
+import FormStyles, { CustomDropdownStyles } from "./styles/FormStyles";
+
+// helpers
+import useForm from "../lib/useForm";
+import useCreateSingleSuggestion from "../lib/hooks/mutations/useCreateSingleSuggestion";
+import { categoryOptions, statusOptions } from "../lib/config"; // options for dropdown menus
 import capitalize from "../lib/capitalize";
 import useUpdateSuggestion from "../lib/hooks/mutations/useUpdateSuggestion";
-import { useRouter } from "next/router";
 import useDeleteSuggestion from "../lib/hooks/mutations/useDeleteSuggestion";
 import { validateSuggestionForm } from "../lib/validateForms";
 
 export default function SuggestionForm({ edit, product }) {
-  const [categoryDropdown, setCategoryDropdown] = useState(false);
-  const [statusDropdown, setStatusDropdown] = useState(false);
-  const [errors, setErrors] = useState({});
+  const [categoryDropdown, setCategoryDropdown] = useState(false); // keeps track of what is shown for the custom category dropdown
+  const [statusDropdown, setStatusDropdown] = useState(false); // keeps track of what is shown for the custom status dropdown
+  const [errors, setErrors] = useState({}); // keeps track of any form errors
 
-  const router = useRouter();
+  const router = useRouter(); // create router variable to be used to push the user to different pages after they submit the form
 
   function handleCategoryDropdown() {
     setCategoryDropdown(!categoryDropdown); // toggle whether or not category dropdown is open
@@ -59,12 +61,16 @@ export default function SuggestionForm({ edit, product }) {
     details: edit ? product?.description : "",
   });
 
+  // TODO: properly handle loading and error
+  // call to hook which calls api to create the suggestion
   const { createSuggestion, loading, error } = useCreateSingleSuggestion(
     inputs.title,
     inputs.category,
     inputs.details
   );
 
+  // TODO: properly handle loading and error
+  // call to hook which calls api to update the suggestion
   const { updateSuggestion, updateLoading, updateError } = useUpdateSuggestion(
     product.id,
     inputs.title,
@@ -73,6 +79,8 @@ export default function SuggestionForm({ edit, product }) {
     inputs.details
   );
 
+  // TODO: properly handle loading and error
+  // call to hook which calls api to delete the suggestion
   const { deleteSuggestion, deleteLoading, deleteError } = useDeleteSuggestion(
     product.id
   );
@@ -81,9 +89,11 @@ export default function SuggestionForm({ edit, product }) {
   async function handleFeedbackForm(e) {
     e.preventDefault();
 
+    // check for errors and update the errors state if there are any
     const formErrors = validateSuggestionForm(inputs);
     setErrors(formErrors);
 
+    // as long as there aren't any errors
     if (Object.keys(formErrors).length === 0) {
       if (edit) {
         const res = await updateSuggestion(); // if the form is being used for updating a suggestion

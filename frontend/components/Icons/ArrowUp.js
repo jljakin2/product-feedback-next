@@ -1,3 +1,6 @@
+// third-party
+import PropTypes from "prop-types";
+
 export default function ArrowUp({ light }) {
   return (
     <svg width="10" height="7" xmlns="http://www.w3.org/2000/svg">
@@ -11,3 +14,11 @@ export default function ArrowUp({ light }) {
     </svg>
   );
 }
+
+ArrowLeft.defaultProps = {
+  light: false,
+};
+
+ArrowLeft.propTypes = {
+  light: PropTypes.bool,
+};

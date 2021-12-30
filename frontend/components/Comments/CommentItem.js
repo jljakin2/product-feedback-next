@@ -1,11 +1,15 @@
+// third-party
 import { useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
+import PropTypes from "prop-types";
 
+// components
 import AddReplyForm from "./AddReplyForm";
 import Reply from "./Reply";
 import CommentHeaderStyles from "../styles/CommentHeaderStyles";
 
+// ===== STYLING =====
 const CommentItemStyles = styled.div`
   width: 100%;
   padding-top: 1.5rem;
@@ -19,10 +23,12 @@ const CommentItemStyles = styled.div`
     color: var(--greyBlue);
   }
 `;
+// ===== END OF STYLING =====
 
 export default function CommentItem({ comment }) {
-  const [replyToComment, setReplyToComment] = useState(false);
+  const [replyToComment, setReplyToComment] = useState(false); // toggles whether or not the reply form is open
 
+  // MAP REPLIES
   const renderedReplies =
     comment.replies &&
     comment.replies.map(reply => {
@@ -68,3 +74,7 @@ export default function CommentItem({ comment }) {
     </CommentItemStyles>
   );
 }
+
+CommentItem.propTypes = {
+  comment: PropTypes.object,
+};

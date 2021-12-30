@@ -1,8 +1,11 @@
+// third-party
 import styled from "styled-components";
 
+// ===== STYLING =====
 const StyledSvg = styled.svg`
   margin-right: 0.5rem;
 `;
+// ===== END OF STYLING =====
 
 export default function Plus() {
   return (
