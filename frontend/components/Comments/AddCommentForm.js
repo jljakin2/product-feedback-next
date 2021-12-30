@@ -1,10 +1,12 @@
-import React from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
 import FormStyles from "../styles/FormStyles";
 import useForm from "../../lib/useForm";
 import useCreateComment from "../../lib/hooks/mutations/useCreateComment";
 import { useRouter } from "next/router";
+import { validateCommentForm } from "../../lib/validateForms";
+import InputError from "../InputError";
 
 const Footer = styled.div`
   display: flex;
@@ -21,6 +23,7 @@ export default function AddCommentForm() {
   const { inputs, handleChange, resetForm } = useForm({
     comment: "",
   });
+  const [errors, setErrors] = useState({});
 
   // get the suggestion id by checking the current route
   const router = useRouter();
@@ -39,17 +42,13 @@ export default function AddCommentForm() {
   async function handleCommentForm(e) {
     e.preventDefault();
 
-    // handle the error when the user tries to submit a comment that is over the max character limit
-    if (isOverCharMax) {
-      throw new Error("you are over the character limit");
+    const formErrors = validateCommentForm(inputs);
+    setErrors(formErrors);
+
+    if (Object.keys(formErrors).length === 0) {
+      const res = await createComment(); // submit the comment to the backend
+      resetForm(); // reset the form once everything is complete
     }
-
-    // submit the comment to the backend
-    const res = await createComment().catch(console.log(error));
-    console.log("added a comment successfully");
-
-    // reset the form once everything is complete
-    resetForm();
   }
 
   return (
@@ -58,12 +57,14 @@ export default function AddCommentForm() {
       <fieldset disabled={loading}>
         <div className="form-control">
           <textarea
-            className="input"
+            className={errors.comment ? "input error" : "input"}
             rows="4"
             placeholder="Type your comment here"
             name="comment"
             value={inputs.comment}
-            onChange={handleChange}></textarea>
+            onChange={handleChange}
+            onKeyDown={() => setErrors({ ...errors, comment: "" })}></textarea>
+          {errors.comment && <InputError>{errors.comment}</InputError>}
         </div>
       </fieldset>
 

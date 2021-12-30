@@ -1,4 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
+import { GET_SINGLE_SUGGESTION } from "../queries/useSingleSuggestion";
+import { GET_ALL_SUGGESTIONS } from "../queries/useSuggestions";
 
 const CREATE_SINGLE_SUGGESTION = gql`
   mutation CREATE_SINGLE_SUGGESTION(
@@ -29,6 +31,7 @@ function useCreateSingleSuggestion(title, category, description) {
         category,
         description,
       },
+      refetchQueries: [GET_SINGLE_SUGGESTION, GET_ALL_SUGGESTIONS], // !Need to fix: cache isn't updating when adding new suggestion
     }
   );
 

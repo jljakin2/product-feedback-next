@@ -18,7 +18,7 @@ import capitalize from "../lib/capitalize";
 import useUpdateSuggestion from "../lib/hooks/mutations/useUpdateSuggestion";
 import { useRouter } from "next/router";
 import useDeleteSuggestion from "../lib/hooks/mutations/useDeleteSuggestion";
-import validateForm from "../lib/validateForm";
+import { validateSuggestionForm } from "../lib/validateForms";
 
 export default function SuggestionForm({ edit, product }) {
   const [categoryDropdown, setCategoryDropdown] = useState(false);
@@ -81,9 +81,8 @@ export default function SuggestionForm({ edit, product }) {
   async function handleFeedbackForm(e) {
     e.preventDefault();
 
-    const formErrors = validateForm(inputs);
+    const formErrors = validateSuggestionForm(inputs);
     setErrors(formErrors);
-    console.log(formErrors);
 
     if (Object.keys(formErrors).length === 0) {
       if (edit) {

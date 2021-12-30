@@ -1,8 +1,11 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 import useForm from "../../lib/useForm";
 import FormStyles from "../styles/FormStyles";
 import useCreateReply from "../../lib/hooks/mutations/useCreateReply";
+import { validateReplyForm } from "../../lib/validateForms";
+import InputError from "../InputError";
 
 const AddReplyFormStyles = styled.div`
   form {
@@ -30,6 +33,7 @@ export default function AddReplyForm({
   const { inputs, handleChange, resetForm } = useForm({
     reply: "",
   });
+  const [errors, setErrors] = useState({});
 
   // hook to create reply mutation
   const { createReply, loading, error } = useCreateReply(
@@ -40,13 +44,16 @@ export default function AddReplyForm({
 
   async function handleReply(e) {
     e.preventDefault();
-    // console.log({ commentId, replyingToId });
-    const res = await createReply();
 
-    resetForm();
-    reply ? closeReplyToReply() : closeReplyToComment();
+    const formErrors = validateReplyForm(inputs);
+    setErrors(formErrors);
 
-    console.log("i'm replying, baby!");
+    if (Object.keys(formErrors).length === 0) {
+      const res = await createReply();
+
+      resetForm();
+      reply ? closeReplyToReply() : closeReplyToComment();
+    }
   }
 
   return (
@@ -55,10 +62,12 @@ export default function AddReplyForm({
         <fieldset disabled={loading}>
           <div className="form-control">
             <textarea
-              className="input"
+              className={errors.reply ? "input error" : "input"}
               name="reply"
               value={inputs.reply}
-              onChange={handleChange}></textarea>
+              onChange={handleChange}
+              onKeyDown={() => setErrors({ ...errors, reply: "" })}></textarea>
+            {errors.reply && <InputError>{errors.reply}</InputError>}
           </div>
           <button className="btn purple">Post Reply</button>
         </fieldset>
