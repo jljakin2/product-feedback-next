@@ -77,7 +77,7 @@ const BtnStyles = styled.button`
 
 export default function MainMenu({ numOfSuggestions }) {
   const isMobile = useMediaQuery({
-    query: "(max-width: 550px)",
+    query: `(max-width: ${media.sizes.tablet})`,
   });
 
   const [isOpen, setIsOpen] = useState(false); // is the dropdown open or not

@@ -45,7 +45,7 @@ const LogoStyles = styled.div`
 
 export default function Logo() {
   const isMobile = useMediaQuery({
-    query: "(max-width: 550px)",
+    query: `(max-width: ${media.sizes.tablet})`,
   });
 
   const { menuIsOpen, toggleMobileMenu } = useMobileMenu(); // context state to toggle mobile menu

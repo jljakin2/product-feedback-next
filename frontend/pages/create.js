@@ -3,9 +3,14 @@ import styled from "styled-components";
 
 import GoBackBtn from "../components/Buttons/GoBackBtn";
 import SuggestionForm from "../components/SuggestionForm";
+import { media } from "../lib/config";
 
 const PageStyles = styled.div`
   padding: 1.5rem 1.5rem;
+
+  ${media.tablet} {
+    padding: 2.5rem 7.125rem;
+  }
 `;
 
 export default function CreatePage() {

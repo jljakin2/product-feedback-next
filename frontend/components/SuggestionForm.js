@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
+import { useMediaQuery } from "react-responsive";
 
 // components
 import AddFeedbackBtn from "./Buttons/AddFeedbackBtn";
@@ -12,6 +13,8 @@ import InputError from "./InputError";
 import ArrowDown from "./Icons/ArrowDown";
 import ArrowUp from "./Icons/ArrowUp";
 import FormStyles, { CustomDropdownStyles } from "./styles/FormStyles";
+import EditFeedbackIcon from "./Icons/EditFeedbackIcon";
+import FormPlus from "./Icons/FormPlus";
 
 // helpers
 import useForm from "../lib/useForm";
@@ -21,8 +24,13 @@ import capitalize from "../lib/capitalize";
 import useUpdateSuggestion from "../lib/hooks/mutations/useUpdateSuggestion";
 import useDeleteSuggestion from "../lib/hooks/mutations/useDeleteSuggestion";
 import { validateSuggestionForm } from "../lib/validateForms";
+import { media } from "../lib/config";
 
 export default function SuggestionForm({ edit, product }) {
+  const isMobile = useMediaQuery({
+    query: `(max-width: ${media.sizes.tablet})`,
+  });
+
   const [categoryDropdown, setCategoryDropdown] = useState(false); // keeps track of what is shown for the custom category dropdown
   const [statusDropdown, setStatusDropdown] = useState(false); // keeps track of what is shown for the custom status dropdown
   const [errors, setErrors] = useState({}); // keeps track of any form errors
@@ -112,6 +120,7 @@ export default function SuggestionForm({ edit, product }) {
 
   return (
     <FormStyles onSubmit={handleFeedbackForm}>
+      {!isMobile && (!edit ? <FormPlus /> : <EditFeedbackIcon />)}
       <h2>{edit ? `Editing '${product?.title}'` : "Create New Feedback"}</h2>
       <fieldset disabled={loading || updateLoading}>
         <div className="form-control">
@@ -202,14 +211,15 @@ export default function SuggestionForm({ edit, product }) {
         </div>
       </fieldset>
       <div className="button-container">
-        <AddFeedbackBtn full submit />
-        <CancelBtn />
+        <AddFeedbackBtn full={isMobile} submit />
+        <CancelBtn full={isMobile} />
         {edit && (
           <div
             onClick={() => {
               deleteSuggestion();
               router.push("/");
-            }}>
+            }}
+            id="delete">
             <DeleteBtn />
           </div>
         )}

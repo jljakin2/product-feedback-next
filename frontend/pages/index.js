@@ -74,7 +74,7 @@ const HomeStyles = styled.div`
 export default function Home() {
   // media query that looks to differentiate desktop vs table/mobile in order to show/hide hamburger in navbar
   const isMobile = useMediaQuery({
-    query: "(max-width: 550px)",
+    query: `(max-width: ${media.sizes.tablet})`,
   });
 
   const { menuIsOpen, closeMobileMenu } = useMobileMenu(); // context state and helper function for opening and closing mobile menu

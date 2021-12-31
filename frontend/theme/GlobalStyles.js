@@ -1,5 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
+import { media } from "../lib/config";
+
 const GlobalStyles = createGlobalStyle`
   :root{
     --purple: #AD1FEA;
@@ -105,9 +107,15 @@ const GlobalStyles = createGlobalStyle`
     font-size: 0.8125rem;
     cursor: pointer;
 
+}
+
     &.btn {
       border-radius: 0.625rem;
-      padding: 0.65625rem 1rem;
+      padding: 0.65625em 1em;
+
+      ${media.tablet} {
+        padding: .75em 1.5em;
+      }
 
       &.full {
           display: flex;
