@@ -34,11 +34,12 @@ const SuggestionCardStyles = styled.div`
   width: 100%;
 
   ${media.tablet} {
-    grid:
-      "upvotes main comments" 1fr
-      / 1fr 7fr 1fr;
+    grid: ${({ roadmap }) =>
+      roadmap
+        ? "'main main' 3fr 'upvotes comments' 1fr / 1fr 1fr"
+        : "'upvotes main comments' 1fr / 1fr 7fr 1fr"};
 
-    padding: 1.75rem 2rem;
+    padding: ${({ roadmap }) => (roadmap ? "1.25rem" : "1.75rem 2rem")};
   }
 
   &:hover h4 {
