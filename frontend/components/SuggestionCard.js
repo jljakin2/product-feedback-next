@@ -37,7 +37,7 @@ const SuggestionCardStyles = styled.div`
     grid: ${({ roadmap }) =>
       roadmap
         ? "'main main' 3fr 'upvotes comments' 1fr / 1fr 1fr"
-        : "'upvotes main comments' 1fr / 1fr 7fr 1fr"};
+        : "'upvotes main comments' 1fr / 1fr 8fr 1fr"};
 
     padding: ${({ roadmap }) => (roadmap ? "1.25rem" : "1.75rem 2rem")};
   }

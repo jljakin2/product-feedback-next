@@ -41,7 +41,7 @@ const HomeStyles = styled.div`
     }
 
     ${media.laptop} {
-      padding: 5rem 0 1.5rem 0;
+      padding: 3rem 0 1.5rem 0;
     }
   }
 
@@ -53,7 +53,7 @@ const HomeStyles = styled.div`
     }
 
     ${media.laptop} {
-      padding: 5rem 0 2.5rem 0;
+      padding: 3rem 0 2.5rem 0;
     }
   }
 

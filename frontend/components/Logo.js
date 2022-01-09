@@ -39,6 +39,8 @@ const LogoStyles = styled.div`
 
   ${media.laptop} {
     background-image: url(${backgroundDesktop.src});
+
+    padding: 4rem 1.5rem 1.5rem 1.5rem;
   }
 
   h3 {

@@ -19,12 +19,15 @@ const PageStyles = styled.div`
   }
 
   ${media.laptop} {
-    max-width: fit-content;
+    max-width: 80vw;
     display: flex;
     flex-direction: column;
 
     margin: 0 auto;
-    padding: 3.5rem 0;
+  }
+
+  ${media.desktop} {
+    max-width: 60vw;
   }
 
   header {

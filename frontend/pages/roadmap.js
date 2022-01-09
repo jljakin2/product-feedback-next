@@ -18,11 +18,11 @@ const RoadMapStyles = styled.div`
   }
 
   ${media.laptop} {
-    padding: 4.875rem 10.3125rem;
+    padding: 3rem 10.3125rem;
   }
 
   ${media.desktop} {
-    padding: 4.875rem 20rem;
+    padding: 3rem 20rem;
   }
 
   header {
@@ -210,6 +210,7 @@ export default function Home() {
 
       <main>
         {isMobile ? (
+          // roadmap for mobile screens
           <>
             <StatusFilterStyles statusView={statusView} colors={colors}>
               <div
@@ -242,7 +243,7 @@ export default function Home() {
             </div>
           </>
         ) : (
-          // !STOPPED HERE: NEED TO FIGURE OUT HOW TO INTEGRATE SUGGESTION CARDS AS A MOBILE VERSION WHEN USING THEM IN THE ROADMAP VS. EVERYWHERE ELSE FOR LARGER SCREEN SIZES
+          // roadmap for screen sizes that are not mobile
           <LargeStatusFilterStyles>
             <div>
               <p className="body-3">Planned ({renderedPlanned?.length})</p>

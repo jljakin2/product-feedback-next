@@ -5,6 +5,9 @@ import PropTypes from "prop-types";
 // components
 import CommentItem from "./CommentItem";
 
+// helpers
+import { media } from "../../lib/config";
+
 // ===== STYLING =====
 const CommentsContainerStyles = styled.div`
   background: var(--white);
@@ -12,6 +15,10 @@ const CommentsContainerStyles = styled.div`
 
   margin: 1.5rem 0 -1.5rem 0;
   padding: 1.5rem;
+
+  ${media.laptop} {
+    padding: 2rem;
+  }
 `;
 // ===== END OF STYLING =====
 

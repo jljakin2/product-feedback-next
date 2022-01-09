@@ -32,6 +32,12 @@ const AddReplyFormStyles = styled.div`
 
       width: 100%;
     }
+
+    & .form-control {
+      flex: 2;
+
+      margin-right: 1rem;
+    }
   }
 
   button {

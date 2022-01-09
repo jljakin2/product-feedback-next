@@ -16,7 +16,7 @@ const PageStyles = styled.div`
     max-width: fit-content;
 
     margin: 0 auto;
-    padding: 5.75rem 0;
+    padding: 3rem 0;
   }
 
   ${media.desktop} {
