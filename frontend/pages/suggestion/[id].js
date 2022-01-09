@@ -18,6 +18,15 @@ const PageStyles = styled.div`
     padding: 3.5rem 2.5rem 1.5rem 2.5rem;
   }
 
+  ${media.laptop} {
+    max-width: fit-content;
+    display: flex;
+    flex-direction: column;
+
+    margin: 0 auto;
+    padding: 3.5rem 0;
+  }
+
   header {
     display: flex;
     justify-content: space-between;

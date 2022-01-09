@@ -37,6 +37,10 @@ const LogoStyles = styled.div`
     padding: 1.5rem;
   }
 
+  ${media.laptop} {
+    background-image: url(${backgroundDesktop.src});
+  }
+
   h3 {
     margin-bottom: 0.25rem;
   }
@@ -54,7 +58,7 @@ export default function Logo() {
     <LogoStyles data-testid="logo">
       <div>
         <h3>Frontend Mentor</h3>
-        <p>Feedback Board</p>
+        <p className="body-2">Feedback Board</p>
       </div>
       {isMobile && (
         <div onClick={toggleMobileMenu}>

@@ -29,10 +29,10 @@ const BtnStyles = styled.button`
   padding: 0.5rem 1rem;
 
   ${media.tablet} {
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: ${({ roadmap }) => (roadmap ? "row" : "column")};
+    justify-content: ${({ roadmap }) => (roadmap ? "space-between" : "center")};
 
-    padding: 0.75rem 0.5rem;
+    padding: ${({ roadmap }) => (roadmap ? "0.5rem 1rem" : "0.75rem 0.5rem")};
   }
 
   &:hover {
@@ -46,13 +46,13 @@ const BtnStyles = styled.button`
     margin-left: 0.5rem;
 
     ${media.tablet} {
-      margin: 0.5rem 0 0 0;
+      margin: ${({ roadmap }) => (roadmap ? "0 0 0 0.5rem" : "0.5rem 0 0 0")};
     }
   }
 `;
 // ===== END OF STYLING =====
 
-export default function UpVoteBtn({ numOfVotes, id }) {
+export default function UpVoteBtn({ numOfVotes, id, roadmap }) {
   const { data, userLoading, userError } = useCurrentUser(); // get the current user so we can update their upvotes
   const userId = data?.allUsers[0].id; // look complicated but just gets the id from the returned data object. it is a very nested piece of data
   const rawUpvotes = data?.allUsers[0].upvotes; // same silly complicated mess but just gets the upvotes
@@ -85,14 +85,23 @@ export default function UpVoteBtn({ numOfVotes, id }) {
   }
 
   return (
-    <BtnStyles onClick={handleUpvote} isVoted={isVoted} disabled={loading}>
+    <BtnStyles
+      onClick={handleUpvote}
+      isVoted={isVoted}
+      roadmap={roadmap}
+      disabled={loading}>
       <ArrowUp light={isVoted} />
       <p>{numOfVotes}</p>
     </BtnStyles>
   );
 }
 
+UpVoteBtn.defaultProps = {
+  roadmap: false,
+};
+
 UpVoteBtn.propTypes = {
   numOfVotes: PropTypes.number, // use the number of upvotes in order to update the upvote amount in the mutation
   id: PropTypes.string, // need the suggestion id to call mutation on correct suggestion
+  roadmap: PropTypes.bool, // is the upvote button being used on the roadmap page
 };

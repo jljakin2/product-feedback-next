@@ -11,21 +11,35 @@ import InputError from "../InputError";
 import useForm from "../../lib/useForm";
 import useCreateReply from "../../lib/hooks/mutations/useCreateReply";
 import { validateReplyForm } from "../../lib/validateForms";
+import { media } from "../../lib/config";
 
 // ===== STYLING =====
 const AddReplyFormStyles = styled.div`
   form {
     margin-top: 1rem;
     padding: 0;
+
+    width: 100%;
   }
 
   fieldset {
     display: flex;
     flex-direction: column;
+
+    ${media.laptop} {
+      flex-direction: row;
+      justify-content: stretch;
+
+      width: 100%;
+    }
   }
 
   button {
     align-self: flex-end;
+
+    ${media.laptop} {
+      align-self: flex-start;
+    }
   }
 `;
 // ===== END OF STYLING =====

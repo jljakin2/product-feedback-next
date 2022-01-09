@@ -17,6 +17,14 @@ import { useSortFilter } from "../lib/hooks/context/sortFilter";
 import { media } from "../lib/config";
 
 const HomeStyles = styled.div`
+  ${media.laptop} {
+    display: flex;
+    justify-content: center;
+    column-gap: 1.875rem;
+
+    width: 100vw;
+  }
+
   header {
     position: relative;
 
@@ -31,6 +39,10 @@ const HomeStyles = styled.div`
         flex: 1;
       }
     }
+
+    ${media.laptop} {
+      padding: 5rem 0 1.5rem 0;
+    }
   }
 
   main {
@@ -38,6 +50,10 @@ const HomeStyles = styled.div`
 
     ${media.tablet} {
       padding: 1rem 2.5rem 2.5rem 2.5rem;
+    }
+
+    ${media.laptop} {
+      padding: 5rem 0 2.5rem 0;
     }
   }
 
@@ -67,6 +83,29 @@ const HomeStyles = styled.div`
 
     & .tags {
       margin-bottom: 1.5rem;
+    }
+  }
+
+  .top {
+    ${media.laptop} {
+      display: flex;
+      flex-direction: column;
+
+      height: 50vh;
+
+      & > * {
+        width: 20vw;
+      }
+
+      & > *:not(:last-child) {
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    ${media.desktop} {
+      & > * {
+        width: 15vw;
+      }
     }
   }
 `;

@@ -60,6 +60,10 @@ const SuggestionCardStyles = styled.div`
     margin-bottom: 1rem;
   }
 
+  h4 + .body-1 {
+    color: var(--greyBlue);
+  }
+
   .body-1 {
     margin-bottom: 1rem;
   }
@@ -121,7 +125,11 @@ export default function SuggestionCard({
           <Tag category={product.category} />
         </div>
         <div className="upvotes">
-          <UpVoteBtn numOfVotes={product.upvotes} id={product.id} />
+          <UpVoteBtn
+            numOfVotes={product.upvotes}
+            id={product.id}
+            roadmap={roadmap}
+          />
         </div>
 
         <div className="comments">

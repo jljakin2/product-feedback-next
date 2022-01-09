@@ -17,6 +17,14 @@ const RoadMapStyles = styled.div`
     padding: 3.5rem 2.5rem;
   }
 
+  ${media.laptop} {
+    padding: 4.875rem 10.3125rem;
+  }
+
+  ${media.desktop} {
+    padding: 4.875rem 20rem;
+  }
+
   header {
     background: var(--darkBlue);
     color: var(--white);

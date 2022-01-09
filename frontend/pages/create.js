@@ -11,6 +11,17 @@ const PageStyles = styled.div`
   ${media.tablet} {
     padding: 2.5rem 7.125rem;
   }
+
+  ${media.laptop} {
+    max-width: fit-content;
+
+    margin: 0 auto;
+    padding: 5.75rem 0;
+  }
+
+  ${media.desktop} {
+    max-width: 40vw;
+  }
 `;
 
 export default function CreatePage() {

@@ -5,9 +5,21 @@ import SuggestionForm from "../../components/SuggestionForm";
 import GoBackBtn from "../../components/Buttons/GoBackBtn";
 import { useRouter } from "next/router";
 import useSingleSuggestion from "../../lib/hooks/queries/useSingleSuggestion";
+import { media } from "../../lib/config";
 
 const PageStyles = styled.div`
   padding: 1.5rem 1.5rem;
+
+  ${media.laptop} {
+    max-width: fit-content;
+
+    margin: 0 auto;
+    padding: 5.75rem 0;
+  }
+
+  ${media.desktop} {
+    max-width: 40vw;
+  }
 `;
 
 export default function CreatePage() {
