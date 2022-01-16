@@ -10,21 +10,19 @@ const DELETE_SUGGESTION = gql`
 `;
 
 function useDeleteSuggestion(id) {
-  const [deleteSuggestion, { error, data, loading }] = useMutation(
-    DELETE_SUGGESTION,
-    {
+  const [deleteSuggestion, { deleteError, deleteData, deleteLoading }] =
+    useMutation(DELETE_SUGGESTION, {
       variables: {
         id,
       },
       refetchQueries: [GET_ALL_SUGGESTIONS],
-    }
-  );
+    });
 
   return {
     deleteSuggestion,
-    error,
-    data,
-    loading,
+    deleteError,
+    deleteData,
+    deleteLoading,
   };
 }
 

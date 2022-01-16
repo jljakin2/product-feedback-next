@@ -7,7 +7,7 @@ export default function CancelBtn({ full }) {
 
   return (
     <button
-      className={full ? "btn full cancel" : "btn cancel"}
+      className="btn btn--size cancel"
       type="button"
       onClick={() => router.back()}>
       Cancel

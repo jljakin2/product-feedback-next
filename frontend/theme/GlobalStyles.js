@@ -19,6 +19,9 @@ const GlobalStyles = createGlobalStyle`
     --text: #3a4374;
     --delete: #D73737;
 
+    --success: #A4CFA2;
+    --error: #D73737;
+
     --bs: 0 0.625rem 2.5rem -0.4375rem rgba(55,63,104,0.35);
   }
   
@@ -39,6 +42,9 @@ const GlobalStyles = createGlobalStyle`
     background: var(--lightgrey);
     color: var(--text);
     font-family: "Jost", --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    overflow-x: hidden;
+
+    position: relative;
   }
 
 /* ===== text styles ===== */
@@ -106,7 +112,6 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 700;
     font-size: 0.8125rem;
     cursor: pointer;
-
 }
 
     &.btn {
@@ -117,12 +122,23 @@ const GlobalStyles = createGlobalStyle`
         padding: .75em 1.5em;
       }
 
-      &.full {
+      &.btn--size {
+        display: flex;
+        justify-content: center;
+
+        width: 100%;
+
+        ${media.tablet} {
+          width: auto;
+        }
+      }
+
+      /* &.full {
           display: flex;
           justify-content: center;
 
           width: 100%;
-        }
+        } */
       
       &.purple {
         color: var(--white);

@@ -25,11 +25,14 @@ import useUpdateSuggestion from "../lib/hooks/mutations/useUpdateSuggestion";
 import useDeleteSuggestion from "../lib/hooks/mutations/useDeleteSuggestion";
 import { validateSuggestionForm } from "../lib/validateForms";
 import { media } from "../lib/config";
+import { useToast } from "../lib/hooks/context/showToast";
 
 export default function SuggestionForm({ edit, product }) {
   const isMobile = useMediaQuery({
     query: `(max-width: ${media.sizes.tablet})`,
   });
+
+  // console.log(isMobile);
 
   const [categoryDropdown, setCategoryDropdown] = useState(false); // keeps track of what is shown for the custom category dropdown
   const [statusDropdown, setStatusDropdown] = useState(false); // keeps track of what is shown for the custom status dropdown
@@ -93,6 +96,8 @@ export default function SuggestionForm({ edit, product }) {
     product.id
   );
 
+  const { handleToastContent } = useToast();
+
   // handle when user submits form
   async function handleFeedbackForm(e) {
     e.preventDefault();
@@ -107,16 +112,27 @@ export default function SuggestionForm({ edit, product }) {
         const res = await updateSuggestion(); // if the form is being used for updating a suggestion
         resetForm();
         router.push("/"); // send the user to the main page to see their changes
+        handleToastContent(
+          // show a successful toast with the following content
+          "success",
+          "Your suggestion was updated successfully."
+        );
       } else {
         const res = await createSuggestion(); // if the form is being used for creating a suggestion
         resetForm();
         router.push("/"); // send the user to the main page to see their addition
+        handleToastContent(
+          // show a successful toast with the following content
+          "success",
+          "Your suggestion was created successfully."
+        );
       }
     }
   }
 
-  // TODO: handle error properly
-  error && console.log(error.message);
+  error && handleToastContent("error", error.message);
+  updateError && handleToastContent("error", updateError.message);
+  deleteError && handleToastContent("error", deleteError.message);
 
   return (
     <FormStyles onSubmit={handleFeedbackForm}>
@@ -211,13 +227,17 @@ export default function SuggestionForm({ edit, product }) {
         </div>
       </fieldset>
       <div className="button-container">
-        <AddFeedbackBtn full={isMobile} submit />
-        <CancelBtn full={isMobile} />
+        <AddFeedbackBtn submit />
+        <CancelBtn />
         {edit && (
           <div
             onClick={() => {
               deleteSuggestion();
               router.push("/");
+              handleToastContent(
+                "success",
+                "Your suggestion was successfully deleted."
+              );
             }}
             id="delete">
             <DeleteBtn />

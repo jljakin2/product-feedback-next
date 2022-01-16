@@ -3,9 +3,12 @@ import styled from "styled-components";
 
 import GoBackBtn from "../components/Buttons/GoBackBtn";
 import SuggestionForm from "../components/SuggestionForm";
+
 import { media } from "../lib/config";
 
 const PageStyles = styled.div`
+  position: relative;
+
   padding: 1.5rem 1.5rem;
 
   ${media.tablet} {
@@ -26,19 +29,21 @@ const PageStyles = styled.div`
 
 export default function CreatePage() {
   return (
-    <PageStyles>
-      <Head>
-        <title>Product Feedback | Create New Suggestion</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <>
+      <PageStyles>
+        <Head>
+          <title>Product Feedback | Create New Suggestion</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
 
-      <header>
-        <GoBackBtn />
-      </header>
+        <header>
+          <GoBackBtn />
+        </header>
 
-      <main>
-        <SuggestionForm />
-      </main>
-    </PageStyles>
+        <main>
+          <SuggestionForm />
+        </main>
+      </PageStyles>
+    </>
   );
 }

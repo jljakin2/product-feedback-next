@@ -6,13 +6,13 @@ import PropTypes from "prop-types";
 import Plus from "../Icons/Plus";
 export default function AddFeedbackBtn({ full, submit }) {
   return submit ? (
-    <button type="submit" className={`btn purple ${full && "full"}`}>
+    <button type="submit" className="btn purple btn--size">
       <Plus />
       Add Feedback
     </button>
   ) : (
     <Link href="/create" passHref>
-      <button className={`btn purple ${full && "full"}`}>
+      <button className="btn purple">
         <Plus />
         Add Feedback
       </button>

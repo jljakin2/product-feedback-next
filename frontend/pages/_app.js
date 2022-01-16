@@ -4,6 +4,7 @@ import apolloClient from "../lib/apollo";
 import Page from "../components/Page";
 import { MobileMenuStateProvider } from "../lib/hooks/context/mobileMenuState";
 import { SortFilterStateProvider } from "../lib/hooks/context/sortFilter";
+import { ToastStateProvider } from "../lib/hooks/context/showToast";
 
 // import "../components/styles/nprogress.css";
 // import withData from "../lib/withData";
@@ -16,13 +17,15 @@ import { SortFilterStateProvider } from "../lib/hooks/context/sortFilter";
 function MyApp({ Component, pageProps }) {
   return (
     <ApolloProvider client={apolloClient}>
-      <SortFilterStateProvider>
-        <MobileMenuStateProvider>
-          <Page>
-            <Component {...pageProps} />
-          </Page>
-        </MobileMenuStateProvider>
-      </SortFilterStateProvider>
+      <ToastStateProvider>
+        <SortFilterStateProvider>
+          <MobileMenuStateProvider>
+            <Page>
+              <Component {...pageProps} />
+            </Page>
+          </MobileMenuStateProvider>
+        </SortFilterStateProvider>
+      </ToastStateProvider>
     </ApolloProvider>
   );
 }

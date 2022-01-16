@@ -2,7 +2,7 @@
   "name": "product-feedback-frontend",
   "private": true,
   "scripts": {
-    "dev": "next -p 7777",
+    "dev": "next -p 8000",
     "build": "next build",
     "start": "next start -p 7777",
     "test": "jest"
