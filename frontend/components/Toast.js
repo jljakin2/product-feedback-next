@@ -74,18 +74,10 @@ export default function Toast() {
 
   return (
     <ToastStyles showToast={showToast}>
-      {/* <div className="border" />
+      <div className="border" />
       <div>
         <h4>{header[toastContent.type]}</h4>
         <p className="body-2">{toastContent.message}</p>
-      </div>
-      <p className="close" onClick={closeToast}>
-        &times;
-      </p> */}
-      <div className="border" />
-      <div>
-        <h4>Hooray!</h4>
-        <p className="body-2">Your request has been successfully created.</p>
       </div>
       <p className="close" onClick={closeToast}>
         &times;

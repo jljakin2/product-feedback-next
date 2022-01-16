@@ -26,8 +26,6 @@ const FormStyles = styled.form`
 
   fieldset {
     border: none;
-    margin: 0;
-    padding: 0;
   }
 
   .form-control {
@@ -61,10 +59,11 @@ const FormStyles = styled.form`
   .input {
     background: var(--lightgrey);
     border: none;
-    border-radius: 5px;
+    border-radius: 0.3125rem;
     cursor: pointer;
     color: var(--text);
 
+    width: 100%;
     padding: 1rem;
   }
 
@@ -115,6 +114,8 @@ const FormStyles = styled.form`
 
 const CustomDropdownStyles = styled.div`
   position: relative;
+
+  width: 100%;
 
   .dropdown {
     &-btn {
