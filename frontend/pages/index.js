@@ -7,6 +7,7 @@ import MainMenu from "../components/MainMenu";
 import SuggestionCard from "../components/SuggestionCard";
 import styled from "styled-components";
 import useSuggestions from "../lib/hooks/queries/useSuggestions";
+import SuggestionCardSkeleton from "../components/Skeleton/SuggestionCardSkeleton";
 
 import EmptyState from "../components/EmptyState";
 import TagMenu from "../components/TagMenu";
@@ -196,6 +197,7 @@ export default function Home() {
       {/* // if products exist, render them, otherwise render the empty state */}
       <main>
         {!isMobile && <MainMenu numOfSuggestions={products?.length} />}
+        <SuggestionCardSkeleton />
         {products ? renderedProducts : <EmptyState />}
       </main>
     </HomeStyles>

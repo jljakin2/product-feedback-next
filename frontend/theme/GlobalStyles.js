@@ -101,6 +101,7 @@ const GlobalStyles = createGlobalStyle`
   }
 /* ========== */
 
+/* ===== button styles ===== */
   button {
     background: transparent;
     border: none;
@@ -112,7 +113,6 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 700;
     font-size: 0.8125rem;
     cursor: pointer;
-}
 
     &.btn {
       border-radius: 0.625rem;
@@ -132,13 +132,6 @@ const GlobalStyles = createGlobalStyle`
           width: auto;
         }
       }
-
-      /* &.full {
-          display: flex;
-          justify-content: center;
-
-          width: 100%;
-        } */
       
       &.purple {
         color: var(--white);
@@ -176,8 +169,66 @@ const GlobalStyles = createGlobalStyle`
         }
       }
     }
-  
   }
+/* ========== */
+
+/* ===== skeleton styles ===== */
+  .skeleton {
+    /* background-color: var(--grey); */
+
+    animation: skeleton-loading 1s linear infinite alternate;
+  }
+
+  .skeleton-header {
+    border-radius: 0.25rem;
+
+    width: 25%;
+    height: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .skeleton-text {
+    border-radius: 0.25rem;
+
+    width: 100%;
+    height: .5rem;
+  }
+
+  .skeleton-avatar {
+      
+  }
+
+  .skeleton-tag {
+    border-radius: 0.25rem;
+
+    width: 4rem;
+    height: 1.5rem;
+  }
+
+  .skeleton-upvote {
+    border-radius: 0.25rem;
+
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .skeleton-comment {
+    border-radius: 50%;
+
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  @keyframes skeleton-loading {
+    0% {
+      background-color: var(---greyBlue);
+    }
+    
+    100% {
+      background-color: var(--greyBlueLight2);
+    }
+  }
+/* ========== */
 
   textarea {
     font-family: "Jost", --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
