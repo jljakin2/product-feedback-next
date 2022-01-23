@@ -1,6 +1,8 @@
 // import Router from "next/router";
+import { useState, useEffect } from "react";
 import { ApolloProvider } from "@apollo/client";
-import apolloClient from "../lib/apollo";
+import apolloClient, { useApollo } from "../lib/apollo";
+import Router from "next/router";
 import Page from "../components/Page";
 import { MobileMenuStateProvider } from "../lib/hooks/context/mobileMenuState";
 import { SortFilterStateProvider } from "../lib/hooks/context/sortFilter";
@@ -15,6 +17,8 @@ import { ToastStateProvider } from "../lib/hooks/context/showToast";
 
 // This _app file is what will be used for the layout template for all of the other pages. The content for what goes in the template comes from the Page component
 function MyApp({ Component, pageProps }) {
+  const apolloClient = useApollo(pageProps.initialApolloState);
+
   return (
     <ApolloProvider client={apolloClient}>
       <ToastStateProvider>

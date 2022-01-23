@@ -17,6 +17,9 @@ import { useEffect } from "react";
 import { useSortFilter } from "../lib/hooks/context/sortFilter";
 import { media } from "../lib/config";
 
+import { initializeApollo } from "../lib/apollo";
+import { GET_ALL_SUGGESTIONS } from "../lib/hooks/queries/useSuggestions";
+
 const HomeStyles = styled.div`
   ${media.laptop} {
     display: flex;
@@ -109,6 +112,10 @@ const HomeStyles = styled.div`
       }
     }
   }
+
+  .skeleton-header {
+    margin-bottom: 1rem;
+  }
 `;
 
 export default function Home() {
@@ -122,7 +129,7 @@ export default function Home() {
   const [products, setProducts] = useState(); // state to keep track of current suggestions to be shown to user. NOTE: i used "products" initially even though it is suggestions. will need to replace
 
   const { data, error, loading } = useSuggestions(); // call api to get the data
-
+  console.log({ products, loading });
   useEffect(() => {
     if (tag === "all") {
       // if the tag is equal to "all" we don't need to do any filtering before running the sorting and setting the sorted suggestions to the product state
@@ -139,10 +146,8 @@ export default function Home() {
       // clean up function to make sure the mobile menu closes whenever the page changes or a filter/sort is selected
       closeMobileMenu();
     };
-  }, [data, selected, tag]); // keeping track of the following variables to the filtering and sorting happen dynamically
+  }, [data, selected, tag, closeMobileMenu, sortSuggestions]); // keeping track of the following variables to the filtering and sorting happen dynamically
 
-  // TODO: handle loading and errors properly
-  if (loading) return <p>Loading...</p>;
   if (error) return <p>Oops, something went wrong {error.message}</p>;
 
   // MAP OVER SUGGESTIONS
@@ -157,6 +162,10 @@ export default function Home() {
       />
     ));
 
+  const renderedSkeletonLoading = [1, 2, 3, 4, 5].map(num => {
+    return <SuggestionCardSkeleton key={num} />;
+  });
+
   // MOBILE MENU
   const mobileMenu = menuIsOpen && (
     <div className="black-out">
@@ -164,7 +173,7 @@ export default function Home() {
         <div className="tags">
           <TagMenu />
         </div>
-        <RoadmapMenu productRequests={products} />
+        <RoadmapMenu productRequests={products} loading={!products} />
       </div>
     </div>
   );
@@ -173,7 +182,7 @@ export default function Home() {
     <header>
       <Logo />
       {mobileMenu}
-      <MainMenu />
+      <MainMenu loading={loading} />
     </header>
   );
 
@@ -181,7 +190,7 @@ export default function Home() {
     <header className="top">
       <Logo />
       <TagMenu />
-      <RoadmapMenu productRequests={products} />
+      <RoadmapMenu productRequests={products} loading={!products} />
     </header>
   );
 
@@ -194,12 +203,44 @@ export default function Home() {
 
       {isMobile ? mobileHeader : tabletHeader}
 
-      {/* // if products exist, render them, otherwise render the empty state */}
       <main>
-        {!isMobile && <MainMenu numOfSuggestions={products?.length} />}
-        <SuggestionCardSkeleton />
-        {products ? renderedProducts : <EmptyState />}
+        {!isMobile && (
+          <MainMenu numOfSuggestions={products?.length} loading={!products} />
+        )}
+
+        {/* {loading && !products && renderedSkeletonLoading}
+        {products ? renderedProducts : <EmptyState />} */}
+        {!products ? renderedSkeletonLoading : renderedProducts}
+        {products === 0 && <EmptyState />}
       </main>
     </HomeStyles>
   );
 }
+
+// export async function getServerSideProps(context) {
+//   const GET_ALL_SUGGESTIONS = gql`
+//   query GET_ALL_SUGGESTIONS {
+//     allSuggestions {
+//       id
+//       title
+//       category
+//       upvotes
+//       status
+//       description
+//       comments {
+//         id
+//       }
+//     }
+//   }
+// `;
+
+// const { error, data, loading } = await useQuery(GET_ALL_SUGGESTIONS);
+// }
+
+export const getStaticProps = async () => {
+  const apolloClient = initializeApollo();
+  await apolloClient.query({
+    query: GET_ALL_SUGGESTIONS,
+  });
+  return { props: { initialApolloState: apolloClient.cache.extract() } };
+};

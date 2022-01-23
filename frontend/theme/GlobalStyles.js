@@ -174,17 +174,14 @@ const GlobalStyles = createGlobalStyle`
 
 /* ===== skeleton styles ===== */
   .skeleton {
-    /* background-color: var(--grey); */
-
     animation: skeleton-loading 1s linear infinite alternate;
   }
 
   .skeleton-header {
     border-radius: 0.25rem;
 
-    width: 25%;
+    width: 7rem;
     height: 1rem;
-    margin-bottom: 1rem;
   }
 
   .skeleton-text {

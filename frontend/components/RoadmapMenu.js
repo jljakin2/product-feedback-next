@@ -57,10 +57,14 @@ const RoadmapMenuStyles = styled.div`
       color: var(--lightBlue);
     }
   }
+
+  .skeleton-text:not(:last-child) {
+    margin-bottom: 1rem;
+  }
 `;
 // ===== END OF STYLING =====
 
-export default function RoadmapMenu({ productRequests }) {
+export default function RoadmapMenu({ productRequests, loading }) {
   function getNumOfStatus(products, status) {
     // take all products and find the total number of suggestions that match the given status
     return products?.filter(product => product.status === status).length;
@@ -77,6 +81,12 @@ export default function RoadmapMenu({ productRequests }) {
     );
   });
 
+  const skeletonLoadingContent = Object.keys(roadmapColors).map(
+    (key, index) => {
+      return <div key={index} className="skeleton skeleton-text" />;
+    }
+  );
+
   return (
     <RoadmapMenuStyles>
       <div className="header">
@@ -86,7 +96,7 @@ export default function RoadmapMenu({ productRequests }) {
         </Link>
       </div>
 
-      <div>{renderedStatusContent}</div>
+      <div>{loading ? skeletonLoadingContent : renderedStatusContent}</div>
     </RoadmapMenuStyles>
   );
 }

@@ -45,6 +45,10 @@ const MainMenuStyles = styled.div`
     }
   }
 
+  ${media.laptop} {
+    width: 50vw;
+  }
+
   div {
     display: flex;
     align-items: center;
@@ -63,6 +67,12 @@ const MainMenuStyles = styled.div`
       left: 15rem;
     }
   }
+
+  .skeleton {
+    display: block;
+
+    margin-right: 1rem;
+  }
 `;
 
 const BtnStyles = styled.button`
@@ -75,7 +85,7 @@ const BtnStyles = styled.button`
 `;
 // ===== END OF STYLING =====
 
-export default function MainMenu({ numOfSuggestions }) {
+export default function MainMenu({ numOfSuggestions, loading }) {
   const isMobile = useMediaQuery({
     query: `(max-width: ${media.sizes.tablet})`,
   });
@@ -91,11 +101,14 @@ export default function MainMenu({ numOfSuggestions }) {
   return (
     <MainMenuStyles data-testid="menu">
       {!isMobile && <SuggestionsIcon />}
-      {!isMobile && (
-        <h3>{`${numOfSuggestions ? numOfSuggestions : 0} ${
-          numOfSuggestions === 1 ? "Suggestion" : "Suggestions"
-        }`}</h3>
-      )}
+      {!isMobile &&
+        (loading ? (
+          <div className="skeleton skeleton-header" />
+        ) : (
+          <h3>{`${numOfSuggestions ? numOfSuggestions : 0} ${
+            numOfSuggestions === 1 ? "Suggestion" : "Suggestions"
+          }`}</h3>
+        ))}
       <div>
         <p>Sort by:</p>
         <div onClick={() => setIsOpen(!isOpen)}>
