@@ -6,11 +6,20 @@ import { useMediaQuery } from "react-responsive";
 import SuggestionCard from "../components/SuggestionCard";
 import GoBackBtn from "../components/Buttons/GoBackBtn";
 import AddFeedbackBtn from "../components/Buttons/AddFeedbackBtn";
-import useSuggestions from "../lib/hooks/queries/useSuggestions";
+import useSuggestions, {
+  GET_ALL_SUGGESTIONS,
+} from "../lib/hooks/queries/useSuggestions";
 import capitalize from "../lib/capitalize";
 import { media } from "../lib/config";
+import { initializeApollo } from "../lib/apollo";
 
 import { roadmapColors } from "../lib/config";
+import SuggestionCardSkeleton from "../components/Skeleton/SuggestionCardSkeleton";
+
+//! Start here:
+//!   1. Create server side props functions for all pages
+//!   2. For this page specifically, once server side props function is set up, create new "loading" state
+//!      prop that checks if there are any products as the conditional. Then show loading skeleton component
 
 const RoadMapStyles = styled.div`
   ${media.tablet} {
@@ -124,11 +133,8 @@ export default function Home() {
     live: "var(--lightBlue)",
   };
 
-  const { data, loading, error } = useSuggestions();
+  const { data, error } = useSuggestions();
 
-  {
-    loading && <p>Loading...</p>;
-  }
   {
     error && <p>something went wrong...{error.message}</p>;
   }
@@ -194,6 +200,11 @@ export default function Home() {
           id={product.id}
         />
       ));
+
+  const renderedSkeletonLoading = [1, 2, 3].map((item, index) => {
+    return <SuggestionCardSkeleton key={index} roadmap />;
+  });
+
   return (
     <RoadMapStyles>
       <Head>
@@ -246,26 +257,44 @@ export default function Home() {
           // roadmap for screen sizes that are not mobile
           <LargeStatusFilterStyles>
             <div>
-              <p className="body-3">Planned ({renderedPlanned?.length})</p>
+              {!products ? (
+                <div className="skeleton skeleton-header" />
+              ) : (
+                <p className="body-3">Planned ({renderedPlanned?.length})</p>
+              )}
               <p className="body-2">{descriptions["planned"]}</p>
 
-              <div className="card-container">{renderedPlanned}</div>
+              <div className="card-container">
+                {!products ? renderedSkeletonLoading : renderedPlanned}
+              </div>
             </div>
 
             <div>
-              <p className="body-3">
-                In-Progress ({renderedInProgress?.length})
-                <p className="body-2">{descriptions["inProgress"]}</p>
-              </p>
+              {!products ? (
+                <div className="skeleton skeleton-header" />
+              ) : (
+                <p className="body-3">
+                  In-Progress ({renderedInProgress?.length})
+                </p>
+              )}
+              <p className="body-2">{descriptions["inProgress"]}</p>
 
-              <div className="card-container">{renderedInProgress}</div>
+              <div className="card-container">
+                {!products ? renderedSkeletonLoading : renderedInProgress}
+              </div>
             </div>
 
             <div>
-              <p className="body-3">Live ({renderedLive?.length})</p>
+              {!products ? (
+                <div className="skeleton skeleton-header" />
+              ) : (
+                <p className="body-3">Live ({renderedLive?.length})</p>
+              )}
               <p className="body-2">{descriptions["live"]}</p>
 
-              <div className="card-container">{renderedLive}</div>
+              <div className="card-container">
+                {!products ? renderedSkeletonLoading : renderedLive}
+              </div>
             </div>
           </LargeStatusFilterStyles>
         )}
@@ -273,3 +302,11 @@ export default function Home() {
     </RoadMapStyles>
   );
 }
+
+export const getStaticProps = async () => {
+  const apolloClient = initializeApollo();
+  await apolloClient.query({
+    query: GET_ALL_SUGGESTIONS,
+  });
+  return { props: { initialApolloState: apolloClient.cache.extract() } };
+};

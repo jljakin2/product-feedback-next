@@ -10,7 +10,7 @@ import Reply from "./Reply";
 import CommentHeaderStyles from "../styles/CommentHeaderStyles";
 
 // ===== STYLING =====
-const CommentItemStyles = styled.div`
+export const CommentItemStyles = styled.div`
   width: 100%;
   padding-top: 1.5rem;
 

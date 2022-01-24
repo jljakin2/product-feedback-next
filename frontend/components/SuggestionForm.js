@@ -27,6 +27,12 @@ import { validateSuggestionForm } from "../lib/validateForms";
 import { media } from "../lib/config";
 import { useToast } from "../lib/hooks/context/showToast";
 
+//! ADD SPINNER TO BUTTON WHEN USER IS ADDING OR UPDATING
+//! SPINNER ALSO NEEDS TO BE DONE FOR:
+//!   - DELETE SUGGESTION
+//!   - ADD COMMENT
+//!   - ADD REPLY
+//!   - UPVOTE
 export default function SuggestionForm({ edit, product }) {
   const isMobile = useMediaQuery({
     query: `(max-width: ${media.sizes.tablet})`,
@@ -138,7 +144,7 @@ export default function SuggestionForm({ edit, product }) {
     <FormStyles onSubmit={handleFeedbackForm}>
       {!isMobile && (!edit ? <FormPlus /> : <EditFeedbackIcon />)}
       <h2>{edit ? `Editing '${product?.title}'` : "Create New Feedback"}</h2>
-      <fieldset disabled={loading || updateLoading}>
+      <fieldset disabled={!product || loading || updateLoading}>
         <div className="form-control">
           <label htmlFor="title">Feedback Title</label>
           <small>Add a short, descriptive headline</small>

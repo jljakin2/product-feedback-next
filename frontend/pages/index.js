@@ -128,8 +128,8 @@ export default function Home() {
   const { selected, sortSuggestions, tag } = useSortFilter(); // context state and helper functions for tracking which sort and filter option is selected and sorting the suggestions
   const [products, setProducts] = useState(); // state to keep track of current suggestions to be shown to user. NOTE: i used "products" initially even though it is suggestions. will need to replace
 
-  const { data, error, loading } = useSuggestions(); // call api to get the data
-  console.log({ products, loading });
+  const { data, error } = useSuggestions(); // call api to get the data
+
   useEffect(() => {
     if (tag === "all") {
       // if the tag is equal to "all" we don't need to do any filtering before running the sorting and setting the sorted suggestions to the product state
@@ -162,6 +162,7 @@ export default function Home() {
       />
     ));
 
+  // CREATE 5 LOADING SKELETON CARDS
   const renderedSkeletonLoading = [1, 2, 3, 4, 5].map(num => {
     return <SuggestionCardSkeleton key={num} />;
   });
@@ -182,7 +183,7 @@ export default function Home() {
     <header>
       <Logo />
       {mobileMenu}
-      <MainMenu loading={loading} />
+      <MainMenu loading={!products} />
     </header>
   );
 

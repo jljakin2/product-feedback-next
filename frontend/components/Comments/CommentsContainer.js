@@ -9,7 +9,7 @@ import CommentItem from "./CommentItem";
 import { media } from "../../lib/config";
 
 // ===== STYLING =====
-const CommentsContainerStyles = styled.div`
+export const CommentsContainerStyles = styled.div`
   background: var(--white);
   border-radius: 0.625rem;
 
