@@ -2,6 +2,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import { TailSpin } from "react-loader-spinner";
 
 // components
 import FormStyles from "../styles/FormStyles";
@@ -46,6 +47,15 @@ const AddReplyFormStyles = styled.div`
     ${media.laptop} {
       align-self: flex-start;
     }
+  }
+`;
+
+const ButtonStyles = styled.button`
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-left: 0.5rem;
   }
 `;
 // ===== END OF STYLING =====
@@ -100,7 +110,10 @@ export default function AddReplyForm({
               onKeyDown={() => setErrors({ ...errors, reply: "" })}></textarea>
             {errors.reply && <InputError>{errors.reply}</InputError>}
           </div>
-          <button className="btn purple">Post Reply</button>
+          <ButtonStyles className="btn purple">
+            Post Reply{" "}
+            {loading && <TailSpin color="#FFF" height={16} width={16} />}
+          </ButtonStyles>
         </fieldset>
       </FormStyles>
     </AddReplyFormStyles>

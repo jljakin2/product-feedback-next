@@ -2,6 +2,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
+import { TailSpin } from "react-loader-spinner";
 
 // components
 import FormStyles from "../styles/FormStyles";
@@ -22,6 +23,15 @@ const Footer = styled.div`
 const CharCountStyles = styled.p`
   color: ${({ isOverCharMax }) =>
     isOverCharMax ? "var(--delete)" : "var(--greyBlue)"};
+`;
+
+const ButtonStyles = styled.button`
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-left: 0.5rem;
+  }
 `;
 // ===== END OF STYLING =====
 
@@ -84,7 +94,10 @@ export default function AddCommentForm() {
           isOverCharMax={isOverCharMax}>{`${charLeft} ${
           charLeft === 1 ? "Character" : "Characters"
         } left`}</CharCountStyles>
-        <button className="btn purple">Add Comment</button>
+        <ButtonStyles className="btn purple">
+          Add Comment{" "}
+          {loading && <TailSpin color="#FFF" height={16} width={16} />}
+        </ButtonStyles>
       </Footer>
     </FormStyles>
   );

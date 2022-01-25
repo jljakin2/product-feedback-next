@@ -31,7 +31,7 @@ function useCreateSingleSuggestion(title, category, description) {
         category,
         description,
       },
-      refetchQueries: [GET_SINGLE_SUGGESTION, GET_ALL_SUGGESTIONS], // !Need to fix: cache isn't updating when adding new suggestion
+      refetchQueries: [GET_SINGLE_SUGGESTION, GET_ALL_SUGGESTIONS],
     }
   );
 

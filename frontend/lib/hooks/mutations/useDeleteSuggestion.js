@@ -1,4 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
+import { GET_SINGLE_SUGGESTION } from "../queries/useSingleSuggestion";
 import { GET_ALL_SUGGESTIONS } from "../queries/useSuggestions";
 
 const DELETE_SUGGESTION = gql`
@@ -15,7 +16,7 @@ function useDeleteSuggestion(id) {
       variables: {
         id,
       },
-      refetchQueries: [GET_ALL_SUGGESTIONS],
+      refetchQueries: [GET_ALL_SUGGESTIONS, "GET_ALL_SUGGESTIONS"], // you can reference previously refetched queries by using the unique name of the query in quotes
     });
 
   return {

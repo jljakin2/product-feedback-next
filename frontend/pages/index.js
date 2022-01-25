@@ -126,7 +126,7 @@ export default function Home() {
 
   const { menuIsOpen, closeMobileMenu } = useMobileMenu(); // context state and helper function for opening and closing mobile menu
   const { selected, sortSuggestions, tag } = useSortFilter(); // context state and helper functions for tracking which sort and filter option is selected and sorting the suggestions
-  const [products, setProducts] = useState(); // state to keep track of current suggestions to be shown to user. NOTE: i used "products" initially even though it is suggestions. will need to replace
+  const [products, setProducts] = useState([]); // state to keep track of current suggestions to be shown to user. NOTE: i used "products" initially even though it is suggestions. will need to replace
 
   const { data, error } = useSuggestions(); // call api to get the data
 
@@ -209,34 +209,12 @@ export default function Home() {
           <MainMenu numOfSuggestions={products?.length} loading={!products} />
         )}
 
-        {/* {loading && !products && renderedSkeletonLoading}
-        {products ? renderedProducts : <EmptyState />} */}
         {!products ? renderedSkeletonLoading : renderedProducts}
         {products === 0 && <EmptyState />}
       </main>
     </HomeStyles>
   );
 }
-
-// export async function getServerSideProps(context) {
-//   const GET_ALL_SUGGESTIONS = gql`
-//   query GET_ALL_SUGGESTIONS {
-//     allSuggestions {
-//       id
-//       title
-//       category
-//       upvotes
-//       status
-//       description
-//       comments {
-//         id
-//       }
-//     }
-//   }
-// `;
-
-// const { error, data, loading } = await useQuery(GET_ALL_SUGGESTIONS);
-// }
 
 export const getStaticProps = async () => {
   const apolloClient = initializeApollo();

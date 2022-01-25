@@ -29,8 +29,8 @@ const authStrategy = keystone.createAuthStrategy({
   type: PasswordAuthStrategy,
   list: "User",
   config: {
-    identityField: "username", // velvetround
-    secretField: "password", // 12345678
+    identityField: "username",
+    secretField: "password",
   },
 });
 
@@ -41,10 +41,7 @@ module.exports = {
     new AdminUIApp({
       name: PROJECT_NAME,
       enableDefaultRoute: true,
-      // authStrategy,
-      // isAccessAllowed: ({ authentication: { item: user } }) => {
-      //   return !!user && !!user.isAdmin;
-      // },
+      authStrategy,
     }),
   ],
 };

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import { useMediaQuery } from "react-responsive";
+2;
 
 // components
 import AddFeedbackBtn from "./Buttons/AddFeedbackBtn";
@@ -27,18 +28,10 @@ import { validateSuggestionForm } from "../lib/validateForms";
 import { media } from "../lib/config";
 import { useToast } from "../lib/hooks/context/showToast";
 
-//! ADD SPINNER TO BUTTON WHEN USER IS ADDING OR UPDATING
-//! SPINNER ALSO NEEDS TO BE DONE FOR:
-//!   - DELETE SUGGESTION
-//!   - ADD COMMENT
-//!   - ADD REPLY
-//!   - UPVOTE
 export default function SuggestionForm({ edit, product }) {
   const isMobile = useMediaQuery({
     query: `(max-width: ${media.sizes.tablet})`,
   });
-
-  // console.log(isMobile);
 
   const [categoryDropdown, setCategoryDropdown] = useState(false); // keeps track of what is shown for the custom category dropdown
   const [statusDropdown, setStatusDropdown] = useState(false); // keeps track of what is shown for the custom status dropdown
@@ -233,7 +226,11 @@ export default function SuggestionForm({ edit, product }) {
         </div>
       </fieldset>
       <div className="button-container">
-        <AddFeedbackBtn submit />
+        <AddFeedbackBtn
+          submit
+          updateLoading={updateLoading}
+          addLoading={loading}
+        />
         <CancelBtn />
         {edit && (
           <div
@@ -246,7 +243,7 @@ export default function SuggestionForm({ edit, product }) {
               );
             }}
             id="delete">
-            <DeleteBtn />
+            <DeleteBtn loading={deleteLoading} />
           </div>
         )}
       </div>
@@ -261,5 +258,5 @@ SuggestionForm.defaultProps = {
 
 SuggestionForm.propTypes = {
   edit: PropTypes.bool,
-  product: PropTypes.obj,
+  // product: PropTypes.obj,
 };
