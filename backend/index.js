@@ -20,10 +20,22 @@ const keystone = new Keystone({
   cookieSecret: process.env.COOKIE_SECRET,
 });
 
-keystone.createList("Suggestion", SuggestionSchema);
-keystone.createList("Comment", CommentSchema);
+keystone.createList("Suggestion", {
+  fields: SuggestionSchema.fields,
+  access: true,
+});
+
+keystone.createList("Comment", {
+  fields: CommentSchema.fields,
+  access: true,
+});
+
 keystone.createList("User", UserSchema);
-keystone.createList("Reply", ReplySchema);
+
+keystone.createList("Reply", {
+  fields: ReplySchema.fields,
+  access: true,
+});
 
 const authStrategy = keystone.createAuthStrategy({
   type: PasswordAuthStrategy,
@@ -41,7 +53,7 @@ module.exports = {
     new AdminUIApp({
       name: PROJECT_NAME,
       enableDefaultRoute: true,
-      authStrategy,
+      // authStrategy,
     }),
   ],
   configureExpress: app => {
