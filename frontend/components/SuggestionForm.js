@@ -235,7 +235,7 @@ export default function SuggestionForm({ edit, product }) {
           <div
             onClick={() => {
               deleteSuggestion();
-              // router.push("/");
+              router.push("/");
               handleToastContent(
                 "success",
                 "Your suggestion was successfully deleted."
