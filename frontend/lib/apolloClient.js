@@ -7,7 +7,7 @@ function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
     link: new HttpLink({
-      uri: process.env.API,
+      uri: process.env.NEXT_PUBLIC_API,
     }),
     cache: new InMemoryCache(),
   });
