@@ -16,12 +16,7 @@ function useDeleteSuggestion(id) {
       variables: {
         id,
       },
-      // refetchQueries: [GET_ALL_SUGGESTIONS, GET_SINGLE_SUGGESTION], // you can reference previously refetched queries by using the unique name of the query in quotes
-      update(cache) {
-        const normalizedId = cache.identify({ id, __typename: "Suggestion" });
-        cache.evict({ id: normalizedId });
-        cache.gc();
-      },
+      refetchQueries: [GET_ALL_SUGGESTIONS], // you can reference previously refetched queries by using the unique name of the query in quotes: ;
     });
 
   // , "GET_ALL_SUGGESTIONS"

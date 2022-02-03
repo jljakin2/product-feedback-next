@@ -150,7 +150,7 @@ SuggestionCard.defaultProps = {
 };
 
 SuggestionCard.propTypes = {
-  product: PropTypes.object,
+  // product: PropTypes.object,
   roadmap: PropTypes.bool,
   clickable: PropTypes.bool,
   statusView: PropTypes.string,

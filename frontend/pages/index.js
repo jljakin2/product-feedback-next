@@ -151,16 +151,16 @@ export default function Home() {
   if (error) return <p>Oops, something went wrong {error.message}</p>;
 
   // MAP OVER SUGGESTIONS
-  const renderedProducts =
-    products &&
-    products.map(product => (
-      <SuggestionCard
-        key={product.id}
-        product={product}
-        id={product.id}
-        clickable
-      />
-    ));
+  const renderedProducts = products
+    ? products.map(product => (
+        <SuggestionCard
+          key={product?.id}
+          product={product}
+          id={product?.id}
+          clickable
+        />
+      ))
+    : [];
 
   // CREATE 5 LOADING SKELETON CARDS
   const renderedSkeletonLoading = [1, 2, 3, 4, 5].map(num => {
