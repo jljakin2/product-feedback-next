@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import { useMediaQuery } from "react-responsive";
-2;
 
 // components
 import AddFeedbackBtn from "./Buttons/AddFeedbackBtn";
