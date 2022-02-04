@@ -217,7 +217,7 @@ export default function Home() {
   );
 }
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const apolloClient = initializeApollo();
   await apolloClient.query({
     query: GET_ALL_SUGGESTIONS,
