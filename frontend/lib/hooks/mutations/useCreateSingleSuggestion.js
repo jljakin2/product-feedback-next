@@ -31,12 +31,8 @@ function useCreateSingleSuggestion(title, category, description) {
         category,
         description,
       },
-      refetchQueries: [
-        GET_SINGLE_SUGGESTION,
-        GET_ALL_SUGGESTIONS,
-        "GET_SINGLE_SUGGESTION",
-        "GET_ALL_SUGGESTIONS",
-      ],
+      refetchQueries: [{ query: GET_SINGLE_SUGGESTION }],
+      awaitRefetchQueries: true,
     }
   );
 
