@@ -16,10 +16,8 @@ function useDeleteSuggestion(id) {
       variables: {
         id,
       },
-      refetchQueries: ["GET_ALL_SUGGESTIONS"], // you can reference previously refetched queries by using the unique name of the query in quotes: ;
+      refetchQueries: [GET_ALL_SUGGESTIONS, "GET_ALL_SUGGESTIONS"], // you can reference previously refetched queries by using the unique name of the query in quotes
     });
-
-  // , "GET_ALL_SUGGESTIONS"
 
   return {
     deleteSuggestion,
