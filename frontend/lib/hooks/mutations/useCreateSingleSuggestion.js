@@ -31,8 +31,7 @@ function useCreateSingleSuggestion(title, category, description) {
         category,
         description,
       },
-      refetchQueries: [{ query: GET_SINGLE_SUGGESTION }],
-      awaitRefetchQueries: true,
+      refetchQueries: [GET_SINGLE_SUGGESTION, "GET_ALL_SUGGESTIONS"],
     }
   );
 

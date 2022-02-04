@@ -145,6 +145,7 @@ export default function Home() {
     return function cleanup() {
       // clean up function to make sure the mobile menu closes whenever the page changes or a filter/sort is selected
       closeMobileMenu();
+      setProducts([]);
     };
   }, [data, selected, tag, closeMobileMenu, sortSuggestions]); // keeping track of the following variables to the filtering and sorting happen dynamically
 
