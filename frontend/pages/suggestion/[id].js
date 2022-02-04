@@ -86,7 +86,7 @@ export default function SuggestionPage() {
   );
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const { id } = context.params;
 
   const apolloClient = initializeApollo();
