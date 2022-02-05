@@ -31,7 +31,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./public/screenshot.png)
+![](./screenshot.png)
 
 ### Links
 
@@ -58,10 +58,10 @@ Users should be able to:
 
 There were a lot of firsts for me in this project. I really wanted to push my comfort zone in terms of testing out new tech. It was my first time using a headless CMS, Next.js, and GraphQL/Apollo Client. There was a lot of tinkering and testing out best practices for the needs of the project.
 
-**What I liked**
+**What I liked**:
 I liked using the GraphQL APIs mostly because of how simple the syntax was and how much control you have over what data comes back from the API. I also really liked using Next.js. The simplified routing and image handling made things super easy. I also liked the flexibility to generate static and server side props depending on your needs. Next.js will be my go-to tech moving forward.
 
-**What I didn't like**
+**What I didn't like**:
 I'm not sure if it was because Keystone.js v6 didn't have support for MongoDB yet but I didn't like working with Keystone. I had to use v5 because I wanted to use MongoDB and the documentation wasn't always the easiest to follow/implement. I relied more on Googling to solve problems vs. using the documentation. In the future, when I need a headless CMS, I will be looking into other options.
 
 Overall, I feel that I have gained a significant understanding into a ton of new tech and have a better understanding for the pros and cons of each. I also increased my problem solving and research abilities due to having to rely on documentation and Googling to solve problems within the scope of all of this new tech. I couldn't rely on my previous experience and notes from using tech that I was comfortable with.
