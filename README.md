@@ -31,7 +31,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.png)
+![](./frontend/public/screenshot.png)
 
 ### Links
 
