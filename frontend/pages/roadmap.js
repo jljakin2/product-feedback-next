@@ -144,8 +144,8 @@ export default function Home() {
     // if products exist, render them, otherwise render the empty state
     products &&
     products
-      .filter(product => product.status === statusView)
-      .map(product => (
+      .filter((product) => product.status === statusView)
+      .map((product) => (
         <SuggestionCard
           product={product}
           key={product.id}
@@ -159,8 +159,8 @@ export default function Home() {
   const renderedPlanned =
     products &&
     products
-      .filter(product => product.status === "planned")
-      .map(product => (
+      .filter((product) => product.status === "planned")
+      .map((product) => (
         <SuggestionCard
           product={product}
           key={product.id}
@@ -174,8 +174,8 @@ export default function Home() {
   const renderedInProgress =
     products &&
     products
-      .filter(product => product.status === "inProgress")
-      .map(product => (
+      .filter((product) => product.status === "inProgress")
+      .map((product) => (
         <SuggestionCard
           product={product}
           key={product.id}
@@ -189,8 +189,8 @@ export default function Home() {
   const renderedLive =
     products &&
     products
-      .filter(product => product.status === "live")
-      .map(product => (
+      .filter((product) => product.status === "live")
+      .map((product) => (
         <SuggestionCard
           product={product}
           key={product.id}
@@ -228,7 +228,8 @@ export default function Home() {
                 className={
                   statusView === "planned" ? "status active" : "status"
                 }
-                onClick={() => setStatusView("planned")}>
+                onClick={() => setStatusView("planned")}
+              >
                 <p className="body-3">Planned</p>
               </div>
 
@@ -236,13 +237,15 @@ export default function Home() {
                 className={
                   statusView === "inProgress" ? "status active" : "status"
                 }
-                onClick={() => setStatusView("inProgress")}>
+                onClick={() => setStatusView("inProgress")}
+              >
                 <p className="body-3">In Progress</p>
               </div>
 
               <div
                 className={statusView === "live" ? "status active" : "status"}
-                onClick={() => setStatusView("live")}>
+                onClick={() => setStatusView("live")}
+              >
                 <p className="body-3">Live</p>
               </div>
             </StatusFilterStyles>
@@ -304,9 +307,16 @@ export default function Home() {
 }
 
 export const getStaticProps = async () => {
-  const apolloClient = initializeApollo();
-  await apolloClient.query({
-    query: GET_ALL_SUGGESTIONS,
-  });
-  return { props: { initialApolloState: apolloClient.cache.extract() } };
+  try {
+    const apolloClient = initializeApollo();
+    await apolloClient.query({
+      query: GET_ALL_SUGGESTIONS,
+    });
+    return { props: { initialApolloState: apolloClient.cache.extract() } };
+  } catch (error) {
+    // Log the error to console for debugging
+    console.error("Error during getStaticProps", error);
+    // Return empty props or error state
+    return { props: { errors: error.message } };
+  }
 };
