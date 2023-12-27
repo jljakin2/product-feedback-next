@@ -4,14 +4,16 @@ This is a solution to the [Product feedback app challenge on Frontend Mentor](ht
 
 ## Table of contents
 
-- [Overview](#overview)
-  - [The challenge](#the-challenge)
-  - [Screenshot](#screenshot)
-  - [Links](#links)
-- [My process](#my-process)
-  - [Built with](#built-with)
-  - [What I learned](#what-i-learned)
-- [Author](#author)
+- [Frontend Mentor - Product feedback app solution](#frontend-mentor---product-feedback-app-solution)
+  - [Table of contents](#table-of-contents)
+  - [Overview](#overview)
+    - [The challenge](#the-challenge)
+    - [Screenshot](#screenshot)
+    - [Links](#links)
+  - [My process](#my-process)
+    - [Built with](#built-with)
+    - [What I learned](#what-i-learned)
+  - [Author](#author)
 
 ## Overview
 
@@ -56,7 +58,7 @@ Users should be able to:
 
 ### What I learned
 
-There were a lot of firsts for me in this project. I really wanted to push my comfort zone in terms of testing out new tech. It was my first time using a headless CMS, Next.js, and GraphQL/Apollo Client. There was a lot of tinkering and testing out best practices for the needs of the project.
+There were a lot of firsts for me in this project. I really wanted to push my comfort zone in terms of testing out new tech. It was my first time using a headless CMS, Next.js, and GraphQL/Apollo Client. There was a lot of tinkering and testing best practices for the needs of the project.
 
 **What I liked**:
 I liked using the GraphQL APIs mostly because of how simple the syntax was and how much control you have over what data comes back from the API. I also really liked using Next.js. The simplified routing and image handling made things super easy. I also liked the flexibility to generate static and server side props depending on your needs. Next.js will be my go-to tech moving forward.
