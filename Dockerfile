@@ -7,6 +7,10 @@ WORKDIR /backend
 # Copy the package.json and package-lock.json from your backend directory.
 COPY backend/package*.json ./
 
+# Set environment variables
+ARG COOKIE_SECRET
+ENV COOKIE_SECRET=${COOKIE_SECRET}
+
 # Install any dependencies.
 RUN npm install
 
