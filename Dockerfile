@@ -15,7 +15,7 @@ COPY backend/ ./
 
 # If your backend has a build step, include it here.
 # For example, if you're using TypeScript:
-# RUN npm run build
+RUN npm run build
 
 # Specify the command to run your app.
 CMD [ "node", "index.js" ]
